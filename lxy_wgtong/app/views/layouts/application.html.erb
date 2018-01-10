@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head >
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="zh-CN" />
+  <meta name="robots" content="INDEX,FOLLOW" />
+  <meta name="author" content="tanmer.com" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LxyWgtong</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="container-bgcolor">
+  <div class="container-fulid " >
+    <%= yield %>
+    <script>
+    $(function(){
+              $("#myCarousel").carousel({
+                interval:2000
+              });
+        });
+    </script>
+  </body>
+</html>

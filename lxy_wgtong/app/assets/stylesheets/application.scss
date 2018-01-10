@@ -1,0 +1,236 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ *{
+     list-style: none
+ }
+ .container-bgcolor{
+     background-color: rgba(250, 245, 245, 0.966);
+ }
+ .topbar{
+    width:100%;
+    height:52.984px;
+    margin-bottom:30px;
+    background-color:#e81a1b;  
+}
+.nav-img{
+    position:absolute;
+    top:10px;
+    left:15px
+}
+.text-top{
+    position:absolute;
+    top:15px;
+}
+.white-text{
+    color: #fff
+}
+.text-top a:hover{
+    text-decoration:none;
+    color: #fff 
+}
+.topbar-right{
+    position:relative;
+    left:200px ;
+}
+.topbaruser{
+    position: relative;
+    top:15px;
+    font-weight: 700;
+}
+.topbaruser-dropdown {
+    height: 90px;
+    display: inline-block;
+}
+.topbaruser a{
+    text-decoration:none;
+    color: #fff 
+}
+.dropdown-menu{
+    background-color: #e81a1b;
+    position:absolute ;
+    top:35px;
+    left:-15px;
+    height:110%;
+    padding-top: 0px;
+}
+.dropdown-menu a span:hover{
+ color: red
+}
+.dropdown-menu li{
+    border-top:1px solid #fff; 
+}
+.dropdown-menu a span{
+ text-align: center;
+ line-height:42px 
+}
+.login-text{
+    text-align: center;
+    line-height: 45px
+}
+.hidden-nav .login-text a:hover{
+    text-decoration:none;
+    color: #fff 
+}
+.searchNlogin{
+    width:70% ;
+    // height:45px ;
+    position: absolute;
+    top:5px;
+    left:100px ;
+}
+.topbar-ul{
+    width:100% ; 
+}
+.topbar-ul li{
+    width:25% ; 
+    float: left;
+    border-left:1px solid rgb(122, 121, 121)
+}
+.topbar-ul li a:hover{
+    text-decoration:none;
+    color: #fff 
+}
+.content-body .container{
+  
+}
+
+.content-left{
+    width:195px;
+    height:561px ;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 25px 10px;
+}
+.content-left .list-group .list-group-item{
+    border: none;
+    margin-top: 7px;
+    text-align:center;
+    font-size: 15px;
+}
+.active{
+    background-color: #e81a1b !important;
+
+}
+.content-left .list-group .list-group-item:hover{
+    background-color: #e81a1b;
+    border-radius: 5px;
+    color:#fff 
+}
+.contenMiddle{
+    width:100%;
+    margin-left:10px 
+}
+.contenMiddle-top{
+    width:100%;
+    height:449px;
+    border-radius: 5px;
+}
+.contenMiddle-top .picture{
+    width:100%;
+    height:90%;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.carousel-indicators{
+    width:100% ;
+    height:49px ;
+    position: absolute;
+    top:335px;
+    left:189px ;
+    z-index:100; 
+    
+}
+.carousel-indicators li{
+    width:80px;
+    height:49px;
+    border:none;
+    background-color:rgba(250, 245, 245, 0.397) ;
+    opacity:0.3 ;
+    
+}
+.carousel-indicators li img{
+    border-radius:5px; 
+    
+}
+.carousel-indicators .active{ 
+    width:80px;
+    height:49px;
+    z-index:1000;
+    background-color: rgba(250, 245, 245, 0)!important;
+    opacity:1 ;
+}
+.carousel-inner {
+    
+    position:relative; 
+    top:-10px; 
+}
+.carousel-inner .a-bar{
+    width:100% ;
+    height:30px;
+    text-decoration:none;
+    display: block;
+    background-color: #444;
+    color: #fff !important;  
+}
+.carousel-inner .active{
+    background-color:#444 !important; 
+}
+.contenMiddle-buttom{
+    width:100%;
+    height:100%; 
+    padding:15px;
+    margin-top:-10px; 
+    background-color:#fff;
+    border-radius:5px; 
+}
+.contenMiddle-buttom h4 a{
+    color:black;
+    font-weight:bold;  
+
+}
+.contenMiddle-buttom h4 a:hover{
+    color:#e81a1b;
+    text-decoration:none; 
+}
+.contenMiddle-buttom .img1{
+    width:145.63px ;
+    height:100px;
+}
+ .contenMiddle-buttom .row{
+    padding-left:15px;
+    padding-right:15px;
+ }
+  .contenMiddle-buttom .row-padding{
+    padding-left:5px;
+    padding-right:5px;
+
+  }
+.list-text a{
+    text-decoration: none;
+    color:#666 ;
+    font-size: 12px;
+}
+.contenMiddle-buttom .row-line{
+    border-bottom: 1px solid  #eee ;
+    padding-bottom:7px; 
+}
+.contenMiddle-buttom .row-margin{
+    margin:10px 0px;
+}
