@@ -16,14 +16,17 @@
   </head>
 
   <body class="container-bgcolor">
-  <div class="container-fulid " >
-    <%= yield %>
-    <script>
-    $(function(){
-              $("#myCarousel").carousel({
-                interval:2000
+        <div class="container-fulid " >
+          <%= yield %>
+          <script>
+          $(function(){
+                    $("#myCarousel").carousel({
+                      interval:2000
+                    });
               });
-        });
-    </script>
+          </script>
+
+          
+    
   </body>
 </html>
