@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20180111084545) do
     t.text "pic3"
     t.text "pic4"
     t.text "title"
-    t.time "time"
+    t.text "time"
     t.text "place"
     t.text "company"
-    t.text "type"
+    t.text "kind"
     t.text "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

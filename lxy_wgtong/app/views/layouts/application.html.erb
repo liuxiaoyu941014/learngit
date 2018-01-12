@@ -20,13 +20,29 @@
           <%= yield %>
           <script>
           $(function(){
-                    $("#myCarousel").carousel({
+           $("#myCarousel").carousel({
                       interval:2000
                     });
+
+          var $contentLeft=$(".content-left");
+           var offset=$contentLeft.offset();
+           var scrollTop=$(window).scrollTop();
+          
+          $(window).scroll(function(){
+         
+         
+          if(offset.top<scrollTop){
+            $contentLeft.addClass("fixed");            
+                }else{
+                  $contentLeft.removeClass("fixed");            
+                 }
+            }); 
+
+           
               });
           </script>
 
           
-    
+          
   </body>
 </html>

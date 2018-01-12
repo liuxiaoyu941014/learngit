@@ -6,10 +6,10 @@ class CreateCultures < ActiveRecord::Migration[5.1]
       t.text :pic3
       t.text :pic4
       t.text :title
-      t.time :time
+      t.text :time
       t.text :place
       t.text :company
-      t.text :type
+      t.text :kind
       t.text :price
 
       t.timestamps
