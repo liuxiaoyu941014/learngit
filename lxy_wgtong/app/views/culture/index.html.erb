@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-md-2">
             <!--内容左边部分 -->
-                <div class="content-left">
+                <div class="content-left" id="content_left">
                     <ul class="list-group"> 
                     <a href="#" class="list-group-item active">推荐</a>
                     <a href="#" class="list-group-item">演出</a>
@@ -118,57 +118,56 @@
                      <!--内容中间文化内容部分 -->
                      <div class="contenMiddle-buttom">
                      <!--内容中间文化内容部分-第一种展示格式 -->
-                     <% @culture.each do |culture| %>
-                          <div class="row ">
+                     
+                                 
+                        <% @message.each do |message| %>
+                            <% if Picture.where(message_id: message.id).count>=4 %> 
+                            <div class="row ">
                                <div class="col-md-12 row-padding">
-                                   <h4><a href="#"><%=culture.title%></a></h4>
+                                   <h4><a href="#"><%=message.title%></a></h4>
                                </div>
-                               
-                               <div class="row ">                              
+                               <div class="row ">   
+                                 <% Picture.where(message_id: message.id).each do |picture| %>                    
                                     <div class="col-md-3 row-padding">
-                                        <a href="#" title="<%=culture.title%> "><img src="<%=culture.pic1%>"  class="img1"></a>
+                                        <a href="#" title="<%=message.title%> "><img src="<%=picture.pic%>"  class="img1"></a>
                                     </div>
-                                    <div class="col-md-3  row-padding">
-                                        <a href="#" title="<%=culture.title%>"><img src="<%=culture.pic2%>" class="img1"></a>
-                                    </div>
-                                    <div class="col-md-3  row-padding">
-                                    <a href="#" title="<%=culture.title%>"><img src="<%=culture.pic3%>" class="img1"></a>
-                                    </div>
-                                    <div class="col-md-3  row-padding">
-                                    <a href="#" title="<%=culture.title%>"><img src="<%=culture.pic4%>" class="img1"></a>
-                                    </div>
+                                   <% end %>
                                </div>
                                <div class="col-md-12 row-padding">
                                      <div class="list-text">
-                                         <a class="" href="http://www.wgtong.cn/fontend/sites/78" title="<%=culture.company%>"> <%=culture.company%>&nbsp</a> · 
-                                         <a class="" href="javascript:;" title="<%=culture.kind%>">&nbsp<%=culture.kind%>&nbsp</a> · 
-                                         <a class="" href="javascript:;" title="<%=culture.time%>"> &nbsp<%=culture.time%>&nbsp</a> · 
-                                         <a class="" href="javascript:;" title="<%=culture.price%>">&nbsp<%=culture.price%>&nbsp</a>
+                                         <a class="" href="http://www.wgtong.cn/fontend/sites/78" title="<%=message.company%>"> <%=message.company%>&nbsp</a> · 
+                                         <a class="" href="javascript:;" title="<%=message.kind%>">&nbsp<%=message.kind%>&nbsp</a> · 
+                                         <a class="" href="javascript:;" title="<%=message.time%>"> &nbsp<%=message.time%>&nbsp</a> · 
+                                         <a class="" href="javascript:;" title="<%=message.price%>">&nbsp<%=message.price%>&nbsp</a>
                                      </div>
                                </div>
                           </div>
-                          <hr class='content-line'></hr>
-                         <% end %>
+                            <hr class='content-line'></hr>
+                          
+                       <% else %>
                          <!--内容中间文化内容部分-第二种展示格式 -->
-                            <% @culture1.find_each do |culture| %>
-                                <div class="row row-margin row-padding0" >
+                            
+                             <div class="row row-margin row-padding0" >
+                                <% Picture.where(message_id: message.id).each do |picture| %>   
                                 <div class="col-md-3  row-padding">
-                                <a href="#" ><img src="<%=culture.pic1%>"  class="img1 "></a>
+                                <a href="#" ><img src="<%=picture.pic%>"  class="img1 "></a>
                                  </div>
+                                <%end%>
                                 <div class="col-md-9"> 
-                                     <h4><a href="#" title="<%=culture.title%>"><%=culture.title%></a></h4>  
+                                     <h4><a href="#" title="<%=message.title%>"><%=message.title%></a></h4>  
                                      <div class="list-text">
                                      <a class="" href="javascript:;" title="2018-1-19"> &nbsp2018-1-19&nbsp</a> · 
-                                     <a class="" href="http://www.wgtong.cn/fontend/sites/78" title="<%=culture.place%>"><%=culture.place%>&nbsp</a>  
+                                     <a class="" href="http://www.wgtong.cn/fontend/sites/78" title="<%=message.place%>"><%=message.place%>&nbsp</a>  
                                      <br>
-                                     <a class="" href="javascript:;" title="<%=culture.company%>">&nbsp<%=culture.company%>&nbsp</a> · 
-                                     <a class="" href="javascript:;" title="<%=culture.kind%>">&nbsp<%=culture.kind%>&nbsp</a>  ·    
-                                     <a class="" href="javascript:;" title="<%=culture.price%>">&nbsp<%=culture.price%>&nbsp</a> 
+                                     <a class="" href="javascript:;" title="<%=message.company%>">&nbsp<%=message.company%>&nbsp</a> · 
+                                     <a class="" href="javascript:;" title="<%=message.kind%>">&nbsp<%=message.kind%>&nbsp</a>  ·    
+                                     <a class="" href="javascript:;" title="<%=message.price%>">&nbsp<%=message.price%>&nbsp</a> 
                                     </div>
                                 </div>
                            </div>
                            <hr class='content-line'></hr>
-                         <% end %>                     
+                           <%end%>
+                       <% end %>                
                     </div>
                 </div>            
             </div>
@@ -190,16 +189,18 @@
                      </div>
                      <!--内容右边部分文化列表1 -->
                      <div class="contentRight-culturelist">
-                       <% @culture2.find_each do |culture| %>
+                       <% @message.limit(3).find_each do |message| %>                          
                            <div class="row">
+                             <% Picture.where(message_id: message.id).limit(1).each do |picture| %>  
                                 <div class="col-md-6">
-                                    <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=culture.title%>"><img src="<%=culture.pic1%>"  class="img2"></a>
+                                    <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%>"><img src="<%=picture.pic%>"  class="img2"></a>
                                 </div>
+                                <% end %>
                                 <div class="col-md-6">
-                                    <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=culture.title%>" class="text-color"><%=culture.title%></a>
+                                    <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%>" class="text-color"><%=message.title%></a>
                                 </div>
                            </div>
-                           <hr class='content-line'></hr>
+                           <hr class='content-line'></hr>           
                        <% end %>
                      </div>
                      <!--内容右边部分广告2 -->
@@ -210,15 +211,17 @@
                      </div>
                      <!--内容右边部分文化列表2 -->
                      <div class="contentRight-culturelist">
-                         <% @culture3.find_each do |culture| %>
+                         <% @message.offset(3).find_each do |message| %>
                             <div class="row ">
+                            
                                 <div class="col-md-6">
-                                <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=culture.title%>" class="text-color"><%=culture.title%></a>
+                                <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%>" class="text-color"><%=message.title%></a>
                                 </div>
+                                <% Picture.where(message_id: message.id).limit(1).each do |picture| %> 
                                 <div class="col-md-6">
-                                        <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=culture.title%> " ><img src="<%=culture.pic1%>" class="img2"></a>
+                                        <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%> " ><img src="<%=picture.pic%>" class="img2"></a>
                                 </div>
-                                
+                                <%end%>
                             </div>
                             <hr class='content-line'></hr>
                             <% end %>
@@ -288,8 +291,6 @@
                <p class="foot-link">© 2017 <a href="javascript;:">公众文化大数据</a>. 电子邮件: <a href="mailto.tang@wgtong.cn">tang@wgtong.cn</a> </p>
           </div>
      </div>
-     <!--文化底部内容--留言部分 -->
-     <div class="chat-box">
-         
-     </div>  
+
+   
 </div>

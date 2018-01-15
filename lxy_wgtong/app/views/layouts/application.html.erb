@@ -20,26 +20,38 @@
           <%= yield %>
           <script>
           $(function(){
-           $("#myCarousel").carousel({
-                      interval:2000
-                    });
+              $("#myCarousel").carousel({
+                          interval:2000
+                        });
 
-          var $contentLeft=$(".content-left");
-           var offset=$contentLeft.offset();
-           var scrollTop=$(window).scrollTop();
+          var $contentLeft=$("#content_left");
           
-          $(window).scroll(function(){
-         
-         
-          if(offset.top<scrollTop){
-            $contentLeft.addClass("fixed");            
-                }else{
-                  $contentLeft.removeClass("fixed");            
-                 }
-            }); 
+           $(window).scroll(function(){
+             var windowHeight=$(window).scrollTop();
+             var sideHeight=$(".contenMiddle").height()-$("#content_left").height();
+             if(windowHeight>100 && windowHeight<sideHeight+100){
+              $("#content_left").css({
+                position:"absolute",
+                
+                top:windowHeight-100+"px"
+              });
+             }else if(windowHeight<=100){
+              $("#content_left").css({
+                position:"absolute",  
+                top:0
+              })
+             }
+           })
+           window.onload=function(){
+            $(window).trigger('scroll');
+            };
+            $(window).resize(function(){
+            $(window).trigger('scroll');
+            })
 
            
-              });
+           });
+      
           </script>
 
           
