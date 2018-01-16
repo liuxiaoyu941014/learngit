@@ -24,10 +24,10 @@
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation" >
-                                <a href="#" ><span class="white-text login-text">登录</span></a>
+                                <a href="users/sign_in" ><span class="white-text login-text">登录</span></a>
                             </li>
                             <li role="presentation" >
-                                <a href="#" ><span class="white-text login-text">注册</span></a>
+                                <a href="users/sign_up" ><span class="white-text login-text">注册</span></a>
                             </li>
                             </ul>
                         </div>
@@ -35,7 +35,7 @@
                     <div class="searchNlogin">
                             <ul class="topbar-ul">
                                 <li class="topbar-li login-text">
-                                    <a href="/admin/sign_in" title="文广通发布新活动" class="white-text">发布新活动</a>
+                                    <a href="http://www.wgtong.cn/admin/sign_in" title="文广通发布新活动" class="white-text">发布新活动</a>
                                 </li>
                                 <li class="topbar-li login-text">
                                 <a href="http://www.wgtong.cn/complaints" title="文广通侵权说明" target="_blank" class="white-text">侵权说明</a>
@@ -58,25 +58,25 @@
 <div class="content-body">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-12">
             <!--内容左边部分 -->
                 <div class="content-left" id="content_left">
                     <ul class="list-group"> 
-                    <a href="#" class="list-group-item active">推荐</a>
-                    <a href="#" class="list-group-item">演出</a>
-                    <a href="#" class="list-group-item">赛事</a>
-                    <a href="#" class="list-group-item">培训</a>
-                    <a href="#" class="list-group-item">讲座</a>
-                    <a href="#" class="list-group-item">展览</a>
-                    <a href="#" class="list-group-item">亲子</a>
-                    <a href="#" class="list-group-item">文遗</a>
-                    <a href="#" class="list-group-item">公益</a>
-                    <a href="#" class="list-group-item">其他</a>
-                    <a href="#" class="list-group-item">咨询</a>
+                    <a href="/" class="list-group-item active">推荐</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/7" class="list-group-item">演出</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/10" class="list-group-item">赛事</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/46" class="list-group-item">培训</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/67" class="list-group-item">讲座</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/9" class="list-group-item">展览</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/12" class="list-group-item">亲子</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/68" class="list-group-item">文遗</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/62" class="list-group-item">公益</a>
+                    <a href="http://www.wgtong.cn/frontend/product_catalogs/63" class="list-group-item">其他</a>
+                    <a href="http://www.wgtong.cn/news" class="list-group-item">资讯</a>
                     </ul>
                 </div> 
            </div>
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-12">
                <!--内容中间部分 -->
                 <div class="contenMiddle">
                    <!--内容中间轮播图部分 -->
@@ -117,18 +117,16 @@
                      </div>
                      <!--内容中间文化内容部分 -->
                      <div class="contenMiddle-buttom">
-                     <!--内容中间文化内容部分-第一种展示格式 -->
-                     
-                                 
+                     <!--内容中间文化内容部分-第一种展示格式 -->                          
                         <% @message.each do |message| %>
                             <% if Picture.where(message_id: message.id).count>=4 %> 
-                            <div class="row ">
+                        <div class="row ">
                                <div class="col-md-12 row-padding">
                                    <h4><a href="#"><%=message.title%></a></h4>
                                </div>
-                               <div class="row ">   
+                               <div class="row  clearfix">   
                                  <% Picture.where(message_id: message.id).each do |picture| %>                    
-                                    <div class="col-md-3 row-padding">
+                                    <div class="col-md-3 col-sm-3 row-padding">
                                         <a href="#" title="<%=message.title%> "><img src="<%=picture.pic%>"  class="img1"></a>
                                     </div>
                                    <% end %>
@@ -141,19 +139,19 @@
                                          <a class="" href="javascript:;" title="<%=message.price%>">&nbsp<%=message.price%>&nbsp</a>
                                      </div>
                                </div>
-                          </div>
-                            <hr class='content-line'></hr>
+                        </div>
+                        <hr class='content-line'></hr>
                           
                        <% else %>
                          <!--内容中间文化内容部分-第二种展示格式 -->
                             
                              <div class="row row-margin row-padding0" >
                                 <% Picture.where(message_id: message.id).each do |picture| %>   
-                                <div class="col-md-3  row-padding">
+                                <div class="col-md-3  col-sm-3 row-padding">
                                 <a href="#" ><img src="<%=picture.pic%>"  class="img1 "></a>
                                  </div>
                                 <%end%>
-                                <div class="col-md-9"> 
+                                <div class="col-md-9 col-sm-9"> 
                                      <h4><a href="#" title="<%=message.title%>"><%=message.title%></a></h4>  
                                      <div class="list-text">
                                      <a class="" href="javascript:;" title="2018-1-19"> &nbsp2018-1-19&nbsp</a> · 
@@ -172,8 +170,8 @@
                 </div>            
             </div>
             <!--内容右边部分 -->
-            <div class="col-md-3 row-padding5">
-                 <div class="contentRight clearfix">
+            <div class="col-md-3 col-sm-12 row-padding5">
+                 <div class="contentRight">
                  <!--内容右边部分搜索 -->
                      <div class="contentRight-search">
                           <%= form_tag("/search",method:"get") do %>
@@ -192,11 +190,11 @@
                        <% @message.limit(3).find_each do |message| %>                          
                            <div class="row">
                              <% Picture.where(message_id: message.id).limit(1).each do |picture| %>  
-                                <div class="col-md-6">
+                                <div class="col-md-6 ">
                                     <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%>"><img src="<%=picture.pic%>"  class="img2"></a>
                                 </div>
                                 <% end %>
-                                <div class="col-md-6">
+                                <div class="col-md-6 ">
                                     <a href="https://www.wgtong.cn/frontend/pruducts/640" title="<%=message.title%>" class="text-color"><%=message.title%></a>
                                 </div>
                            </div>
@@ -294,3 +292,42 @@
 
    
 </div>
+<script>
+var documentHeight = 0;
+var topPadding = -5;
+$(function(){
+    var offset = $("#content_left").offset();
+    documentHeight = $(document).height();
+    $(window).scroll(function() {
+        var sideBarHeight = $("#content_left").height();
+        if ($(window).scrollTop() > offset.top) {
+            var newPosition = ($(window).scrollTop() - offset.top) + topPadding;
+            var maxPosition = documentHeight - (sideBarHeight + 348);
+            if (newPosition > maxPosition) {
+                newPosition = maxPosition;
+            }
+            $("#content_left").css({
+                marginTop: newPosition
+            });
+        } else {
+            $("#content_left").css({
+                marginTop: 0
+            });
+        };
+    });         
+})
+</script>
+<script type='text/javascript'>
+(function(m, ei, q, i, a, j, s) {
+    m[i] = m[i] || function() {
+        (m[i].a = m[i].a || []).push(arguments)
+    };
+    j = ei.createElement(q),
+        s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.charset = 'UTF-8';
+    j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+    s.parentNode.insertBefore(j, s);
+})(window, document, 'script', '_MEIQIA');
+_MEIQIA('entId', 95893);
+</script>
