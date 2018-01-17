@@ -1,0 +1,78 @@
+       <div class="login-content">
+             <div class="login-left">
+                  <div class="login-left-img">
+                      <img data-id="login-cover-image" src="http://song-dev.qiniudn.com/g1.jpg" style="min-width:100%;max-height:100%">
+                  </div>
+                  <div class="login-left-content">
+                       <h4 class="content-title">
+                          <i class="fa fa-diamond text-success">© Wgtong All Right Reserved 2017</i>
+                       </h4>
+                       <p>© Wgtong All Right Reserved 2017</p>
+                  </div>
+             </div>
+            <div class="login-right">
+                <div class="login-right-top">
+                     <div class="top-left">
+                         <span class="logo"></span>文广通
+                         
+                     </div>
+                     <small>一个综合公共文化大数据平台</small>
+                     <div class="top-icon">
+                         <i class="fa fa-sign-in"></i>
+                     </div>
+                <div>
+                <div class="login-right-buttom">
+                    <div class="buttom-content">
+                    <button class="btn btn-success btn-block btn-lg" data-target="#phone_login_model" data-toggle="modal">手机登录</button>
+                    <button class="btn btn-primary btn-block btn-lg" id="wenxin-login" onclick="weixinLogin()">微信扫码登录</button>
+                    </div>
+                    <div class="wenxin-login wenxin-hidden" data-session-url="http://www.wgtong/admin/sign_in_with_weixin" id="wenxinLogo">
+                        <img  src="https://wxopen.tanmer.com/wx/mp_auth/qrcode.svg?code=2e04fcd4ea71e7b0bc77e359d6b83452" style="width:180px;height:180px">
+                         <p>正在等待扫码...</p>
+                    </div>
+                    <hr>
+                    <p class="text-center text-inverse">© Wgtong All Right Reserved 2017</p>
+                </div>
+            </div> 
+      </div>
+      <div class="modal fade" id="phone_login_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">手机登录</h4>
+          </div>
+          <div class="modal-body">
+          <%= form_tag("/sign_up",method:"post",class:"register",id:'phoneForm',novalidata:"novalidata") do%>
+            <div class="from-group">
+               
+                <input class="from-control input-lg" name="user[mobile]" placeholder="手机号" type="text" >
+                
+            </div>
+            <div class="from-group">
+                 <div class="col-xs-9">
+                     <input class="form-control input-lg" name="user[code]" placeholder="验证码" type="text">
+                 </div>
+                 <div class="col-xs-3">
+                     <span class="btn btn-default input-lg get_code" data-url="/api/v1/session/sms" pop="false">获取验证码</span>
+                 </div>
+            </div> 
+            <div class="">错误信息<div>
+             <div class="login-button">
+             <input type="submit" name="commit" value="登录" class="btn btn-lg right_btn right_btn_bg" id="login_click" data-href="/" data-disable-with="登录">
+             </div>
+          <%end%>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <script>
+      function weixinLogin(){
+        $("#wenxinLogo").toggle();
+      }
+      </script>
+       

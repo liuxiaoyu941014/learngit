@@ -18,18 +18,54 @@
   <body class="container-bgcolor">
         <div class="container-fulid " >
           <%= yield %>
+
           <script> 
-          var documentHeight = 0;
+         var documentHeight = 0;
           var topPadding = -5;
-          $(function(){
-            
+          $(function(){         
               $("#myCarousel").carousel({
                           interval:2000
                         });
-                       
-                 
+                            var offset = $("#content_left").offset();
+                            documentHeight = $(document).height();
+                            $(window).scroll(function() {
+                                var sideBarHeight = $("#content_left").height();
+                                if ($(window).scrollTop() > offset.top) {
+                                    var newPosition = ($(window).scrollTop() - offset.top) + topPadding;
+                                    var maxPosition = documentHeight - (sideBarHeight + 318);
+                                    if (newPosition > maxPosition) {
+                                        newPosition = maxPosition;
+                                    }
+                                    $("#content_left").css({
+                                        marginTop: newPosition
+                                    });
+                                } else {
+                                    $("#content_left").css({
+                                        marginTop: 0
+                                    });
+                                };
+                            });   
+                         
+                            
+
+
            });
-      
+      function wetSignup(){      
+            document.getElementById("wetid").style.backgroundColor="#80E3D1";
+            document.getElementById("wetid").style.color="white";
+            document.getElementById("phoneid").style.backgroundColor="#666";
+            document.getElementById("phoneid").style.color="white";
+            document.getElementById("bind-phone").style.display="none";
+            document.getElementById("bind-wechat").style.display="block"
+             }
+          function phoneSignup(){      
+              document.getElementById("phoneid").style.backgroundColor="#80E3D1";
+              document.getElementById("phoneid").style.color="white";
+              document.getElementById("wetid").style.backgroundColor="#666";
+              document.getElementById("wetid").style.color="white";
+              document.getElementById("bind-wechat").style.display="none"
+              document.getElementById("bind-phone").style.display="block"
+               } 
           </script>
 
           

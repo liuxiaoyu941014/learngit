@@ -19,17 +19,40 @@
                     <div class="row" style="margin-top:15px">
                         <div class="col-md-7 col-md-offset-5">
                              <div aria-label=".." class="btn-group text-center btn-group-md" role="group" >
-                                 <button class="btn right_btn right_btn_bg" type="button">手机号注册</button>
-                                 <button class="btn right_btn " type="button">微信号注册</button>
+                                 <button class="btn right_btn right_btn_bg" type="button" onclick="phoneSignup()" id="phoneid">手机号注册</button>
+                                 <button class="btn right_btn" onclick="wetSignup()" type="button" id="wetid">微信号注册</button>
                              </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top:80px">
                          <div class="col-md-8 col-md-offset-2">
-                              <div class="bind-phone">
-                                  <h3>注册</h3>
-                                  
+                              <div id="bind-phone">
+                                  <h3 style="color:#999">注册</h3>
+                                  <%= form_tag("/sign_up",method:"post",class:"register",id:'phoneForm',novalidata:"novalidata") do%>
+                                    <div class="from-group">
+                                        <label style="color:#eee">手机号</label>
+                                        <input class="from-control" name="user[mobile]" placeholder="手机号" aria-required="ture" required type="username">
+                                        <input id="wechat-response-code" name="user[wechat_code]" type="hidden">
+                                    </div>
+                                    <div class="input-group">
+                                        <label style="color:#eee">手机号</label>
+                                        <input class="from-control" name="user[code]" placeholder="验证码" aria-required="ture" required type="username" type="text"
+                                        style="border-radius:4px;border-top-right-radius:0px;border-bottom-right-radius:0px">
+                                         <div class="input-group-btn">
+                                             <button class="btn btn-default" data-url="/api/v1/session/sms">获取验证码</button>
+                                         </div>
+                                    </div> 
+                                    <div class="login-button">
+                                       <input type="submit" name="commit" value="立即注册" class="btn btn-lg right_btn right_btn_bg" id="login_click" data-href="/" data-disable-with="立即注册">
+                                    </div>
+
+                                  <%end%>
                               </div>
+                               <div id="bind-wechat" data-url="/sign_up" >
+                                   <h3 class="text-center" style="color:#999">绑定微信</h3>
+                                   <img src="https://wxopen.tanmer.com/wx/mp_auth/qrcode.svg?code=495f4577a62f0777cbff7cb664cfb126" style="width:180px">
+                                    <p>正在等待扫码...</p>
+                                </div>
                          </div>
                     </div>
                </div>

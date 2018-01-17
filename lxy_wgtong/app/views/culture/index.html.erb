@@ -1,12 +1,12 @@
-<div class="topbar">
-    <div class="container">
-        <div class="row">
-             <div class="col-md-3">
+<div class="topbar clearfix">
+    <div class="container" style="transform:none">
+        <div class="row row-height" style="transform:none">
+             <div class="col-md-3 col-sm-6 col-xs-6">
                  <a href="javascript:;" title="文广通,公共文化大数据平台" class="nav-img">
                     <img class="img-responsive" src="http://s.tanmer.cn/qgm0" alt="文广通,公共文化大数据平台" style="max-height:35px;min-width:135px"></img>
                  </a>
              </div>
-             <div class="col-md-3">
+             <div class="col-md-3 col-sm-6 col-xs-6">
                  <div class="text-top">
                     <a href="javascript:;" class="white-text dropdown-toggle" type="button" id="selectArea" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="文广通地区分站">
                     选择地区 &nbsp;
@@ -14,7 +14,7 @@
                     </a> 
                  </div>
              </div>
-             <div class="col-md-6">
+             <div class="col-md-6 col-sm-12 col-xs-12">
                  <div class="topbar-right" id="topbar-right"> 
                     <div class="topbaruser" >
                         <div class="dropdown topbaruser-dropdown white-text">
@@ -32,34 +32,36 @@
                             </ul>
                         </div>
                      </div>
-                    <div class="searchNlogin">
-                            <ul class="topbar-ul">
-                                <li class="topbar-li login-text">
-                                    <a href="http://www.wgtong.cn/admin/sign_in" title="文广通发布新活动" class="white-text">发布新活动</a>
-                                </li>
-                                <li class="topbar-li login-text">
-                                <a href="http://www.wgtong.cn/complaints" title="文广通侵权说明" target="_blank" class="white-text">侵权说明</a>
-                                </li>
-                                <li class="topbar-li login-text">
-                                <a href="/users/self_message?type=unread" class="white-text">
-                                <i class="glyphicon glyphicon-bell"></i>
-
-                                </a>
-                                </li>
-                            </ul>
+                    
+                        <div class="searchNlogin">
+                                <ul class="topbar-ul">
+                                    <li class="topbar-li login-text">
+                                        <a href="http://www.wgtong.cn/admin/sign_in" title="文广通发布新活动" class="white-text">发布新活动</a>
+                                    </li>
+                                    <li class="topbar-li login-text">
+                                    <a href="http://www.wgtong.cn/complaints" title="文广通侵权说明" target="_blank" class="white-text">侵权说明</a>
+                                    </li>
+                                    <li class="topbar-li login-text">
+                                    <a href="/users/self_message?type=unread" class="white-text">
+                                    <i class="glyphicon glyphicon-bell"></i>
+                                    </a>
+                                    </li>
+                                </ul>
                         </div>
-                    </div>                 
-               </div>
+                  
+                </div>                
+            </div>
              
         </div>
+       
     </div>
 </div>
 <!--内容部分 -->
 <div class="content-body">
     <div class="container">
-        <div class="row">
-            <div class="col-md-2 col-sm-12">
-            <!--内容左边部分 -->
+        <div class="row" style="transform:none">
+            <div class="col-md-2 col-sm-12 hidden-xs">
+                <!--内容左边部分 -->
                 <div class="content-left" id="content_left">
                     <ul class="list-group"> 
                     <a href="/" class="list-group-item active">推荐</a>
@@ -83,6 +85,22 @@
                      <div class="contenMiddle-top">
                           <div class="picture">
                                 <div id="myCarousel" class="carousel slide">
+                                     
+                                    <!-- 轮播（Carousel）项目 -->
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                        <a href="#" title="联系我们 注册商家 成为我们的一员"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1231/original_1.jpg" alt="联系我们 注册商家 成为我们的一员" style="height:300px"></a>
+                                        <a href="#" class="a-bar">联系我们 注册商家 成为我们的一员</a>
+                                        </div>
+                                        <div class="item">
+                                        <a href="#" title="欢迎入住 携手聚合城市公共文化"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1232/original_3.jpg" alt="欢迎入住 携手聚合城市公共文化" style="height:300px"></a>
+                                            <a href="#" class="a-bar">欢迎入住 携手聚合城市公共文化</a>
+                                         </div>
+                                        <div class="item">
+                                        <a href="#" title="陈奕讯/王凯/蔡依林等几十明星阵容空降成都"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1230/original_2.jpg" alt="陈奕讯/王凯/蔡依林等几十明星阵容空降成都" style="height:300px"></a>
+                                        <a href="#" class="a-bar">陈奕讯/王凯/蔡依林等几十明星阵容空降成都</a>
+                                        </div>
+                                    </div>  
                                     <!-- 轮播（Carousel）指标 -->
                                     <ol class="carousel-indicators">
                                         <li data-target="#myCarousel" data-slide-to="0" class="active">
@@ -94,22 +112,7 @@
                                         <li data-target="#myCarousel" data-slide-to="2">
                                         <img class="img-responsive" src="http://www.wgtong.cn/ckeditor_assets/pictures/1230/original_2.jpg" alt="First slide" style="width:80px;height:38.7px">
                                         </li>
-                                    </ol>   
-                                    <!-- 轮播（Carousel）项目 -->
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                        <a href="#" title="联系我们 注册商家 成为我们的一员"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1231/original_1.jpg" alt="联系我们 注册商家 成为我们的一员"></a>
-                                        <a href="#" class="a-bar">联系我们 注册商家 成为我们的一员</a>
-                                        </div>
-                                        <div class="item">
-                                        <a href="#" title="欢迎入住 携手聚合城市公共文化"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1232/original_3.jpg" alt="欢迎入住 携手聚合城市公共文化"></a>
-                                            <a href="#" class="a-bar">欢迎入住 携手聚合城市公共文化</a>
-                                         </div>
-                                        <div class="item">
-                                        <a href="#" title="陈奕讯/王凯/蔡依林等几十明星阵容空降成都"><img src="http://www.wgtong.cn/ckeditor_assets/pictures/1230/original_2.jpg" alt="陈奕讯/王凯/蔡依林等几十明星阵容空降成都"></a>
-                                        <a href="#" class="a-bar">陈奕讯/王凯/蔡依林等几十明星阵容空降成都</a>
-                                        </div>
-                                    </div>   
+                                    </ol>  
                                                                 
                                 </div> 
 
@@ -126,7 +129,7 @@
                                </div>
                                <div class="row  clearfix">   
                                  <% Picture.where(message_id: message.id).each do |picture| %>                    
-                                    <div class="col-md-3 col-sm-3 row-padding">
+                                    <div class="col-md-3 col-sm-3  col-xs-3 row-padding">
                                         <a href="#" title="<%=message.title%> "><img src="<%=picture.pic%>"  class="img1"></a>
                                     </div>
                                    <% end %>
@@ -147,11 +150,11 @@
                             
                              <div class="row row-margin row-padding0" >
                                 <% Picture.where(message_id: message.id).each do |picture| %>   
-                                <div class="col-md-3  col-sm-3 row-padding">
+                                <div class="col-md-3  col-sm-3 col-xs-3 row-padding">
                                 <a href="#" ><img src="<%=picture.pic%>"  class="img1 "></a>
                                  </div>
                                 <%end%>
-                                <div class="col-md-9 col-sm-9"> 
+                                <div class="col-md-9 col-sm-9 col-xs-9"> 
                                      <h4><a href="#" title="<%=message.title%>"><%=message.title%></a></h4>  
                                      <div class="list-text">
                                      <a class="" href="javascript:;" title="2018-1-19"> &nbsp2018-1-19&nbsp</a> · 
@@ -292,31 +295,7 @@
 
    
 </div>
-<script>
-var documentHeight = 0;
-var topPadding = -5;
-$(function(){
-    var offset = $("#content_left").offset();
-    documentHeight = $(document).height();
-    $(window).scroll(function() {
-        var sideBarHeight = $("#content_left").height();
-        if ($(window).scrollTop() > offset.top) {
-            var newPosition = ($(window).scrollTop() - offset.top) + topPadding;
-            var maxPosition = documentHeight - (sideBarHeight + 348);
-            if (newPosition > maxPosition) {
-                newPosition = maxPosition;
-            }
-            $("#content_left").css({
-                marginTop: newPosition
-            });
-        } else {
-            $("#content_left").css({
-                marginTop: 0
-            });
-        };
-    });         
-})
-</script>
+
 <script type='text/javascript'>
 (function(m, ei, q, i, a, j, s) {
     m[i] = m[i] || function() {

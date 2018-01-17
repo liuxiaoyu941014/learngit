@@ -23,12 +23,18 @@
  .container-bgcolor{
      background-color: rgba(250, 245, 245, 0.966);
  }
- .topbar{
+ .topbar {
     width:100%;
     height:52.984px;
     margin-bottom:30px;
     background-color:#e81a1b;  
 }
+.topbar .container{
+    height:54px 
+}
+ .topbar .container .row-height{
+    height:54px !important;
+ }
 .nav-img{
     position:absolute;
     top:10px;
@@ -47,15 +53,16 @@
 }
 .topbar-right{
     position:relative;
-    left:200px ;
+    left:71px;
 }
 .topbaruser{
     position: relative;
+   
     top:15px;
     font-weight: 700;
 }
 .topbaruser-dropdown {
-    height: 90px;
+    
     display: inline-block;
 }
 .topbaruser a{
@@ -99,14 +106,14 @@
     color: #fff 
 }
 .searchNlogin{
-    width:70% ;
-    // height:45px ;
-    position: absolute;
-    top:5px;
-    left:100px ;
+    width:156%;
+   
+    position: relative;
+    top:-26px;
+    left:74px ;
 }
 .topbar-ul{
-    width:100% ; 
+    width:58% ; 
 }
 .topbar-ul li{
     width:25% ; 
@@ -129,6 +136,7 @@
     background-color: #fff;
     border-radius: 5px;
     padding: 15px 10px;
+    left:-34px ;
   
 }
 //  .fixed{
@@ -162,12 +170,12 @@
 }
 .contenMiddle-top{
     width:100%;
-    height:449px;
+     height:439px;
     border-radius: 5px;
 }
 .contenMiddle-top .picture{
     width:100%;
-    height:92%;
+    height:409px;
     padding:15px;
     background-color: #fff;
     border-radius: 5px;
@@ -176,9 +184,10 @@
 .carousel-indicators{
     width:100% ;
     height:49px ;
-    position: absolute;
-    top:309px;
-    left:143px ;
+    position:static;
+    top:320px;
+    left:0px ;
+    margin-left:0px 
     
     
 }
@@ -201,11 +210,10 @@
     background-color: rgba(250, 245, 245, 0)!important;
     opacity:1 ;
 }
-// .carousel-inner {
+ .carousel-inner {
     
-//     position:relative; 
-//     top:-10px; 
-// }
+   height:340px ;
+}
 .carousel-inner .a-bar{
     width:100% ;
     height:30px;
@@ -309,11 +317,11 @@
  .contentRight .contentRight-ad{
 
     border-top:5px; 
-    height:269.47px;
+    // height:269.47px;
 }
 .contentRight .contentRight-ad1{
     border-top:5px; 
-    height:292.5px;
+    // height:292.5px;
    
 }
 .ad-picture:after{
@@ -373,7 +381,7 @@
 }
 .contentRight-ad2{
      border-top:0px ;
-    height:408px ;
+    // height:408px ;
 }
 
 .h4-fontweight{
@@ -495,7 +503,209 @@
     color:#fff;
     background-color:#53C5B9  
 }
- @media (max-width: 987px) and (min-width: 768px){
+#bind-phone .from-control{
+   display: block;
+   width: 100%;
+   height: 34px;
+   padding: 6px 12px;
+   border-radius: 4px;
+   border: 1px solid #ccc;
+}
+#bind-phone .from-group{
+    margin-top:30px;
+    margin-bottom:15px 
+
+}
+.input-group{
+    display:table;
+    margin-top:30px;
+    position: relative;  
+}
+.input-group-btn{
+vertical-align:bottom 
+}
+.login-button{
+    margin-top:30px 
+}
+.right_btn{
+    border-radius: 18px;  
+}
+.right_btn_bg{
+    background-color: #80E3D1;
+    box-shadow: -1px 11px 13px -5px #2e2e2e;
+}
+.login-button input:hover{
+    color: white;
+}
+#bind-wechat img{
+    margin-left: 50%;
+    transform:translate(-50%) ;
+    background-color:#eee;
+    padding:10px  
+}
+#bind-wechat p{
+    color: #eee;
+    margin-top: 15px; 
+    text-align: center
+}
+.login-content{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.login-content .login-left{
+    position: fixed;
+    right:500px ;
+    left:0px ;
+    top:0px;
+    bottom:0;
+    overflow: hidden;
+}
+// .login-left{
+//      width:614px;
+    
+//  }
+.login-content .login-left .login-left-img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.login-content .login-left .img{
+    position: absolute;
+    max-height: 100%;
+    min-width: 100%;
+    top: -1960px;
+    bottom: -1960px;
+    left: -1960px;
+    right: -1960px;
+    margin: auto;
+ }
+ .login-content .login-left .login-left-content{
+    background: rgba(0,0,0,0.7);
+    color: #999;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 60px;
+    font-size: 14px;
+    z-index: 20;
+    font-weight: 300;
+    min-width: 680px;
+ }
+ .login-content .login-left .login-left-content .content-title{
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    font-size: 28px;
+ }
+ .fa{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+ }
+
+.text-success {
+    color: #00acac !important;
+}
+.login-right{
+    float: right;
+    width: 500px;
+    background-color: #d9e0e7;
+    // max-height:100%;
+}
+.login-right .login-right-top{
+    position: relative;
+    top: 0;
+    margin: 0;
+    left: 0;
+    right: 0;
+    padding: 100px 60px 0;
+    font-weight: 300;
+}
+.login-right .login-right-top .top-left{
+    color: #242a30;
+    padding: 0;
+    font-size:28px;
+}
+.login-right .login-right-top .top-left .logo{
+    border: 14px solid transparent;
+    border-color: #4DCACA #31A3A3 #1D8888;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    font-size: 0;
+    margin-right: 10px;
+    top: -9px;
+}
+.login-right .login-right-top .top-icon{
+    position: absolute;
+    top: 98px;
+    right: 10px;
+    opacity: 0.1;
+}
+.login-right-buttom{
+    width: 500px;
+    padding: 30px 60px;
+    color: #999;
+    margin: 0 auto;
+    position: relative;
+    left:-61px ;
+}
+.login-right-buttom .buttom-content{
+    margin-bottom: 30px !important;
+    margin-top: 30px !important;
+}
+.login-right-buttom .buttom-content .btn-success{
+    color: #fff;
+    background: #00acac;
+    border-color: #00acac;
+}
+.login-right-buttom .buttom-content .btn-block{
+    display: block;
+    width: 100%;
+}
+.login-right-top small{
+    font-size: 14px;
+    display: block;
+    color: #707478;
+}
+.wenxin-hidden{
+    display:none;
+}
+
+@media (min-width: 1200px){
+  .content-left{
+     position: relative; 
+     left:0px;
+    
+  }
+}
+ @media (max-width: 992px) and (min-width: 768px){
+    .topbar{
+        height:151px; 
+    }
+    .topbar .topbaruser{
+        position: relative;
+        top:-21px;
+        left:526px ; 
+    } 
+    .topbar .topbar-right{
+        position: relative;
+        top:86px
+    }
+    .searchNlogin {
+        position: relative;
+        left:390px ;
+        top:-13px
+    }
+    .searchNlogin .topbar-ul{
+        width:32% ;
+    }
    .content-left{
       width:100%;
       position: relative; 
@@ -506,11 +716,11 @@
        width:100%;
        height:100% ;
    }
-   .carousel-indicators{
-       position: absolute;
-       top:369px
+//    .carousel-indicators{
+//        position: absolute;
+//        top:369px
    
-   } 
+//    } 
    .contentRight .contentRight-ad {
       height:676.47px;  
     }
@@ -536,3 +746,59 @@
         top:30px
     }
  }
+
+ @media (max-width: 768px) and (min-width: 368px){
+    .topbar{
+        height:100px; 
+    }
+    .topbar .topbaruser{
+        position: relative;
+        top:44px;
+        left:294px ; 
+    }
+    .topbar .topbar-ul li{
+        border-left:0px 
+    }
+    .searchNlogin {
+        width:85%;
+        position: relative;
+        left:373px ;
+        top:0px
+        
+    } 
+    // .carousel-indicators{
+    //     position:absolute;
+    //     top:361px;
+    //     left:198px ; 
+    // }
+    .contentRight{
+        position: relative;
+        top:23px
+    }
+    .footer{
+        position: relative;
+        top:30px
+    }
+}
+    @media (max-width: 368px){
+        .topbar{
+            height:100px; 
+        }
+        .topbar .topbaruser{
+            position: relative;
+            top:44px;
+            left:-65px ; 
+        }
+        .topbar .topbar-ul li{
+            border-left:0px 
+        }
+        .searchNlogin {
+            width:190%;
+            position: relative;
+            left:3px ;
+            top:0px
+            
+        }  
+    }
+
+ 
