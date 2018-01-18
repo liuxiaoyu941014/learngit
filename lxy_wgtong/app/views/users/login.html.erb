@@ -38,35 +38,28 @@
       <div class="modal fade" id="phone_login_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">手机登录</h4>
-          </div>
-          <div class="modal-body">
-          <%= form_tag("/sign_up",method:"post",class:"register",id:'phoneForm',novalidata:"novalidata") do%>
-            <div class="from-group">
-               
-                <input class="from-control input-lg" name="user[mobile]" placeholder="手机号" type="text" >
-                
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">手机登录</h4>
             </div>
-            <div class="from-group">
-                 <div class="col-xs-9">
-                     <input class="form-control input-lg" name="user[code]" placeholder="验证码" type="text">
-                 </div>
-                 <div class="col-xs-3">
-                     <span class="btn btn-default input-lg get_code" data-url="/api/v1/session/sms" pop="false">获取验证码</span>
-                 </div>
-            </div> 
-            <div class="">错误信息<div>
-             <div class="login-button">
-             <input type="submit" name="commit" value="登录" class="btn btn-lg right_btn right_btn_bg" id="login_click" data-href="/" data-disable-with="登录">
-             </div>
-          <%end%>
+          <div class="modal-body">
+              <%= form_tag "/sign_in" do %>
+                <div class="form-group row">
+                  <%= label_tag '用户名' %>
+                  <%= text_field_tag :name, params[:name] %>
+                </div>
+                <div class="form-group row">
+                  <%= label_tag '密码' %>
+                  <%= password_field_tag :password, params[:password] %>
+                </div>
+                <div class="form-group row">
+                  <%= label_tag '记住我' %>
+                  <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+                </div>
+                <%= submit_tag "登陆" %>
+              <% end %>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+         
         </div>
       </div>
     </div>

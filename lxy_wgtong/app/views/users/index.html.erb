@@ -1,0 +1,60 @@
+
+<%= render '/users/header' %>
+<!-- 中间内容部分 -->
+    <div class="text-center ">
+         <div class="container">
+             <div class="tr-breadcrumb">
+                  <div class="title pull-left">
+                       <h1>个人中心</h1>
+                  </div>
+                  <ol class="breadcrumb pull-right">
+                      <li>
+                          <a href="/">首页</a>
+                      </li>
+                      <li>
+                         <a href="javascript">个人中心</a>
+                      </li>
+                  </ol>
+             </div>
+             <div class="row">
+                  <div class="col-md col-xs-12">
+                      <div class="user-bottom">
+                          <div class="user-bottom-box">
+                              <div class="col-md-2 col-xs-12">
+                                  <div class="user-logo">
+                                      <img src="http://www.wgtong.cn/assets/default-headshot-221359cc329eeeeff33ec5d271613a1f06c4159c38180f48592e80cc3c6de709.png"
+                                      class="img-circle" width="80px" height="px">
+                                  </div>
+                                  <h5>
+                                      <a href="/users/edit">用户修改</a>
+                                  </h5>
+                              </div>
+                              <div class="col-md-10 col-xs-12">
+                                  <div class="row" style="margin-top:15px">  
+                                      <div class="col-md-2 col-xs-4">邮箱:</div>
+                                      <div class="col-md-10 col-xs-8 text-left">
+                                          <a href="/users/edit">绑定邮箱</a>
+                                      </div>
+                                  </div>
+                                  <div class="row" style="margin-top:15px">
+                                        <div class="col-md-2 col-xs-4">电话:</div>
+                                        <div class="col-md-10 col-xs-8 text-left">
+                                               这里应该要电话的(从数据库中提取)
+                                            <a href="/users/edit">重新绑定</a>
+                                        </div>
+                                  </div>
+                                  <div class="row" style="margin-top:15px">
+                                        <div class="col-md-2 col-xs-4">微信:</div>
+                                        <div class="col-md-10 col-xs-8 text-left">
+                                               
+                                            <a href="/users/edit">立即绑定</a>
+                                        </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  <div>
+             </div>
+         </div>
+    </div>
+<%= render '/users/footer' %>

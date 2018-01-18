@@ -93,6 +93,10 @@
     height:41px;
     border-top:1px solid #fff; 
 }
+.dropdown-menu li a {
+    color: #fff; 
+    line-height:2.428571  
+}
  .dropdown-menu li a span{
   text-align:center;
   line-height:41px  
@@ -247,7 +251,7 @@
 }
 .contenMiddle-buttom .img1{
     width:100%;
-    max-height:100px;
+    height:100px;
 }
  .contenMiddle-buttom .row{
     padding-left:15px;
@@ -677,7 +681,67 @@ vertical-align:bottom
 .wenxin-hidden{
     display:none;
 }
+.modal-content{
+    width:393.75px;
+}
+.modal-body .from-control{
+    border: 1px solid #ccd0d4;
+    box-shadow: none;
+    font-size: 12px;
+    border-radius: 3px; 
+    display: block;
+    width: 100%; 
+    color: #555;
+    background-color: #fff;
+    background-image: none; 
+}
+.modal-body .input-lg{
+    height: 46px;
+    padding: 10px 16px;
+    line-height: 1.3333333;
+}
+.bg-red{
+    height:246px;
+    background-color: #e81a1b
+}
+.tr-breadcrumb{
+    overflow: hidden;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    line-height:0px 
+}
+.tr-breadcrumb .title h1{
+    font-size: 36px;
+    color: #e81a1b;
+    margin: 0;
+    font-weight: bolder
+}
+.tr-breadcrumb .breadcrumb{
+    margin-bottom:0px;
+    background-color: transparent;
+    padding: 15px 15px;
+    border-radius: 4px;
+}
+.tr-breadcrumb .breadcrumb li a{
+    color: #afb1b2;
+    font-size: 14px;
+}
+.tr-breadcrumb .breadcrumb li a:hover{
+    text-decoration:none;
+    color:  #e81a1b; 
+}
 
+.user-bottom .user-bottom-box{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+     height:175px ;
+}
 @media (min-width: 1200px){
   .content-left{
      position: relative; 
@@ -780,6 +844,7 @@ vertical-align:bottom
         top:30px
     }
 }
+
     @media (max-width: 368px){
         .topbar{
             height:100px; 

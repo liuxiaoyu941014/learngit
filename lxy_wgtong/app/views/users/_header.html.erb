@@ -1,0 +1,95 @@
+<div class="topbar clearfix">
+<div class="container" style="transform:none">
+    <div class="row row-height" style="transform:none">
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <a href="javascript:;" title="文广通,公共文化大数据平台" class="nav-img">
+                <img class="img-responsive" src="http://s.tanmer.cn/qgm0" alt="文广通,公共文化大数据平台" style="max-height:35px;min-width:135px"></img>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="text-top">
+                <a href="javascript:;" class="white-text dropdown-toggle" type="button" id="selectArea" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="文广通地区分站">
+                选择地区 &nbsp;
+            <i class="glyphicon glyphicon-map-marker "></i>
+                </a> 
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="topbar-right" id="topbar-right"> 
+                <div class="topbaruser" >
+                    <div class="dropdown topbaruser-dropdown white-text">
+                你好,
+                    <% if current_user %>
+                        <span class="nav-item">
+                        <%= link_to current_user.name, '#', class: 'nav-link' %>
+                        </span>
+                    
+                    <a href="#" class="white-text  dropdown-toggle" aria-expanded="true" data-toggle="dropdown">
+                    
+                        <span class="caret"></span>
+                        </a>
+                    
+                            <ul class="dropdown-menu bg-red" role="menu" aria-labelledby="dropdownMenu1">
+                            
+                            <li role="presentation" >
+                                <%= link_to '个人中心', users_url, method: 'get', class: 'nav-link white-text login-text' %>
+                            </li>
+                            <li role="presentation" >
+                                <a href="users/sign_up" ><span class="white-text login-text">消息中心</span></a>
+                            </li>
+                            <li role="presentation" >
+                            <a href="users/sign_up" ><span class="white-text login-text">我的订单</span></a>
+                            </li>
+                            <li role="presentation" >
+                            <a href="users/sign_up" ><span class="white-text login-text">我的评论</span></a>
+                            </li>
+                            <li role="presentation" >
+                            <a href="users/sign_up" ><span class="white-text login-text">关注收藏</span></a>
+                            </li>
+                            <li role="presentation" >
+                            <%= link_to '退出', logout_path, method: 'delete', class: 'nav-link white-text' %>
+                            </li>
+                            </ul>
+                        <%else%>
+                        
+                        <a href="#" class="white-text  dropdown-toggle" aria-expanded="true" data-toggle="dropdown">欢迎访问
+                        
+                        <span class="caret"></span>
+                        </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation" >
+                                    <a href="users/login" ><span class="white-text login-text">登录</span></a>
+                                </li>
+                                <li role="presentation" >
+                                    <a href="users/new" ><span class="white-text login-text">注册</span></a>
+                                </li>
+                                </ul>
+                        <% end %>
+
+                    </div>
+                    
+                </div>
+                
+                    <div class="searchNlogin">
+                            <ul class="topbar-ul">
+                                <li class="topbar-li login-text">
+                                    <a href="http://www.wgtong.cn/admin/sign_in" title="文广通发布新活动" class="white-text">发布新活动</a>
+                                </li>
+                                <li class="topbar-li login-text">
+                                <a href="http://www.wgtong.cn/complaints" title="文广通侵权说明" target="_blank" class="white-text">侵权说明</a>
+                                </li>
+                                <li class="topbar-li login-text">
+                                <a href="/users/self_message?type=unread" class="white-text">
+                                <i class="glyphicon glyphicon-bell"></i>
+                                </a>
+                                </li>
+                            </ul>
+                    </div>
+            
+            </div>                
+        </div>
+        
+    </div>
+
+</div>
+</div>
