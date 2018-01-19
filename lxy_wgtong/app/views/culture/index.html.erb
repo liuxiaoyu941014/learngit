@@ -32,7 +32,7 @@
                             <ul class="dropdown-menu bg-red" role="menu" aria-labelledby="dropdownMenu1">
                             
                             <li role="presentation" >
-                                <%= link_to '个人中心', users_url, method: 'get', class: 'nav-link white-text login-text' %>
+                                <%= link_to '个人中心', users_url, method: 'get', class: 'nav-link white-text' %>
                             </li>
                             <li role="presentation" >
                                 <a href="users/sign_up" ><span class="white-text login-text">消息中心</span></a>
@@ -95,10 +95,15 @@
 </div>
 <!--内容部分 -->
 <div class="content-body">
-    <div class="container">
+    <div class="container"> 
+        <div class="row">
+             <div class="col-xs-12 visible-xs">
+             <button class="btn btn-danger pull-left" type="button" id="meun" onclick="meunBlock()"><span class="glyphicon glyphicon-align-justify"></span></button>
+             </div>
+        </div>
         <div class="row" style="transform:none">
-            <div class="col-md-2 col-sm-12 hidden-xs">
-                <!--内容左边部分 -->
+            <div class="col-md-2 col-sm-12 " id="meun_block">
+                <!--内容左边部分 -->             
                 <div class="content-left" id="content_left">
                     <ul class="list-group"> 
                     <a href="/" class="list-group-item active">推荐</a>
@@ -115,6 +120,7 @@
                     </ul>
                 </div> 
            </div>
+            
             <div class="col-md-7 col-sm-12">
                <!--内容中间部分 -->
                 <div class="contenMiddle">
@@ -336,6 +342,7 @@
 </div>
 
 <script type='text/javascript'>
+
 (function(m, ei, q, i, a, j, s) {
     m[i] = m[i] || function() {
         (m[i].a = m[i].a || []).push(arguments)
@@ -348,4 +355,8 @@
     s.parentNode.insertBefore(j, s);
 })(window, document, 'script', '_MEIQIA');
 _MEIQIA('entId', 95893);
+
+
+
+
 </script>

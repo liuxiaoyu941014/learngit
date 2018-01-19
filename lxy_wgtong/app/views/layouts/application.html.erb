@@ -36,7 +36,7 @@
                                 var sideBarHeight = $("#content_left").height();
                                 if ($(window).scrollTop() > offset.top) {
                                     var newPosition = ($(window).scrollTop() - offset.top) + topPadding;
-                                    var maxPosition = documentHeight - (sideBarHeight + 328);
+                                    var maxPosition = documentHeight - (sideBarHeight + 368);
                                     if (newPosition > maxPosition) {
                                         newPosition = maxPosition;
                                     }
@@ -72,6 +72,11 @@
               document.getElementById("bind-wechat").style.display="none"
               document.getElementById("bind-phone").style.display="block"
                } 
+            function meunBlock(){
+               
+                $("#meun_block").toggle();
+                
+            }
           </script>
 
           
