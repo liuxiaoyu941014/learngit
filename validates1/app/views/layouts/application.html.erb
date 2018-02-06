@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Validates</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+    <div class="collapse navbar-collapse nav-submenu-color collapse" id="bs-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-right custom">
+      
+      <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to "欢迎你：#{current_user.try :email}", '#', class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to('退出', destroy_user_session_path, :method => :delete) %></li>
+     
+      <% end -%>
+      </li>
+    </ul>
+  </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </body>
+</html>
