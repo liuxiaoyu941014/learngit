@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+   
+    </head>
+  
+  <body>
+    <%= yield %>
+  
+    <script>
+    $(document).ready(function() {
+        $('.leftSidebar, .content, .rightSidebar')
+            .theiaStickySidebar({
+                additionalMarginTop: 30
+            });
+    });
+    </script>
+  </body>
+</html>
