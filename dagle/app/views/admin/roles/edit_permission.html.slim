@@ -1,0 +1,26 @@
+h1.page-header
+  | 管理角色权限
+  small 修改角色权限
+  .pull-right
+    = link_to "返回角色列表", admin_roles_path, class: 'btn btn-primary'
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title  角色：#{@role.role_name}
+  .panel-body
+    .[rel='permission-block' data-url=update_permission_admin_role_path data-permission=@permissions.to_json data-status=@checked_status.to_json data-checked=@chekced_permissions]
+      .col-row[v-for='value, group_name in allPermission']
+        h4
+          input[v-on:click="checkAll(value, group_name)" type='checkbox'] &nbsp; {{ group_name }}
+        .col-md-12[v-for='item in value' style='padding-bottom: 10px']
+          span
+            input[type='checkbox' v-model='permission_ids' :value='item.id'] &nbsp; {{ item.name }}
+      br
+      button[v-on:click="postPermission" class='btn btn-big btn-primary'] 保存
+        
+
+

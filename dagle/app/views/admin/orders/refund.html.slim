@@ -1,0 +1,43 @@
+h1.page-header
+  | #{Order.model_name.human}退款列表
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title &nbsp;
+  .panel-body
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th = Order.human_attribute_name(:code)
+            th = Order.human_attribute_name(:site)
+            th = Order.human_attribute_name(:price)
+            th = Order.human_attribute_name(:status)
+            th 操作
+        tbody
+          - @orders.each do |order|
+            tr
+              td = order.code
+              td = order.site.title
+              td = order.price.to_f / 100
+              td = enum_l(order, :status)
+              - if Settings.project.grand?
+                td = enum_l(order, :internal_status) || '-'
+                th
+                  span.label.label-primary
+                    = order_amount = order.order_materials.sum{|om| om.amount.to_i}
+                  | &nbsp; &nbsp;
+                  span.label.label-info
+                    = order_practical = order.order_materials.sum{|om| om.practical_number.to_i}
+                  | &nbsp; &nbsp;
+                  span.label.label-danger
+                    = order_practical - order_amount
+              td
+                => link_to '查看', admin_order_path(order), class: 'btn btn-xs btn-default'
+                = link_to '删除', admin_order_path(order), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-xs btn-danger'
+.pull-right
+  = paginate @orders

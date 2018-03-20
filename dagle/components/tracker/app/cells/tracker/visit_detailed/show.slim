@@ -1,0 +1,62 @@
+/ content
+.row.visit_detailed[data-url=options[:path]]
+  .col-md-12
+    .white-content
+      .head.h5
+        span 访问明细
+      .head-nav.row
+        .col-md-4
+          .input-group[id="default-daterange"]
+            input.form-control[placeholder="点击选择时间范围查询" type="text" readonly]
+            span.input-group-btn
+              button.btn.btn-default[type="button"]
+                i.fa.fa-search
+        ul.col-md-8.zone-time[type='none']
+          li.active
+            a 全部
+          li
+            a 今天
+          li
+            a 昨天
+          li
+            a 过去７天
+          li
+            a 过去３０天
+      .table-responsive
+        table.table.table-email
+          thead
+            tr
+              th.email-select #
+              th IP
+              th 受访页面
+              th 使用平台
+              th 时间
+          tbody
+            tr[v-for="(visit,index) in visits"]
+              td
+                | {{ index+1 }}
+              td
+                | {{ visit.ip_address }}
+              td
+                a[v-bind:href="visit.url"]
+                  | {{ visit.url }}
+              td
+                | {{ visit.user_agent_data['browser_name'] }}
+              td
+                | {{ new Date(visit.created_at).toLocaleString() }}
+      / = paginate @visits_data
+      div.white-footer
+        span.pull-left.small
+          | {{ visits.length + '条 -- 记录' }}
+        ul.pagination.pagination-sm
+          li[v-bind:class="{ 'disabled': selected_page == 1 }"]
+            a[href="javascript:;"v-on:click="selected_page == 1 ? false : loadDetailed(--selected_page)"] &laquo;
+          li[v-if="total_pages > 5"]
+            a[href="javascript:;" @click="onPreviousPageGroup"] ...
+          li[v-for="n in (total_pages > 5 ? 5 : total_pages)" v-bind:class="(showPage + n) == selected_page ? 'active' : false"]
+            a[href="javascript:;" v-on:click="loadDetailed(total_pages > 5 ? showPage+n : n)"]
+              | {{ total_pages > 5 ? showPage+n : n }}
+          li[v-if="total_pages > 5"]
+            a[href="javascript:;" @click="onNextPageGroup"] ...
+          li[v-bind:class="{ 'disabled': selected_page == total_pages }"]
+            a[href="javascript:;"v-on:click="selected_page == total_pages ? false : loadDetailed(++selected_page)"] &raquo;

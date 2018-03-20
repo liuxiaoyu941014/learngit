@@ -1,0 +1,35 @@
+<div id="fullpage">
+  <section data-anchor="section_welcome">
+    <div class="container">
+      <div class="row">
+        <div class="text-center col-sm-6 col-sm-offset-6 col-md-5 col-md-offset-6">
+          <div class="thumbnail">
+            <img src="http://admin.imolin.cn/ckeditor_assets/pictures/11/content_xiaoqu_pic_hd.jpg" class="img img-responsive" />
+            <div class="caption">
+                <p>我在<br/>
+                  <span style="color: orange; font-size:1.4em;"><%= @share_obj.name %></span>
+                </p>
+                已有<%= rand(30..100) %>位邻居入驻该社区
+            </div>
+          </div>
+
+          <h1 class="heading" data-animate-in="animateUpDown">
+           陌邻，<br />
+           让邻里不再陌生！
+          </h1>
+
+          <p class="delay_1" data-animate-in="animateUpDown">
+            陌邻APP提供社区邻友社交互动，提供全方位社区便民服务，通过人工智能，让周边服务，呼之即来。
+          </p>
+          <a href="<%= @cms_site.value_for('ios')%>" class="btn btn-lg btn-danger delay_2" data-animate-in="animateUpDown">
+            <i class="fa fa-apple"></i> IOS Store
+          </a>
+          <a href="<%= @cms_site.value_for('android')%>" class="btn btn-lg btn-danger delay_2" data-animate-in="animateUpDown">
+            <i class="fa fa-android"></i> Android Store
+          </a>
+
+        </div>
+      </div> <!-- / .row -->
+    </div><!-- / .container -->
+  </section>
+</div>

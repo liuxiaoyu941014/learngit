@@ -1,0 +1,2 @@
+module Agent::AgentPlansHelper
+end

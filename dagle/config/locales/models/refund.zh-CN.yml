@@ -1,0 +1,24 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      refund: Refund
+    attributes:
+      refund:
+        pingpp_charge_id: Pingpp charge
+        event_id: Event
+        order_no: Order no
+        description: Description
+        charge: Charge
+        amount: Amount
+        created: Created
+        succeed: Succeed
+        status: Status
+        time_succeed: Time succeed
+        failure_code: Failure code
+        failure_msg: Failure msg
+    errors:
+      models:
+        refund: 
+  helpers:
+    refund: 

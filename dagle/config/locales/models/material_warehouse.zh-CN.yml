@@ -1,0 +1,16 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_warehouse: 物料仓库
+    attributes:
+      material_warehouse: 
+        name: 仓库名
+        warehouse_user: 库管员
+        phone: 电话
+        warehouse_address: 仓库地址
+    errors:
+      models:
+        material_warehouse: 
+  helpers:
+    material_warehouse: 

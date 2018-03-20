@@ -1,0 +1,20 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      produce: 生产任务
+    attributes:
+      produce:
+        order: 订单编号
+        status: 生产任务状态
+        assignee_id: 负责人
+        statuses:
+          wait_for_task: 等待分配创建任务
+          processing: 处理中
+          cancelled: 已取消
+          completed: 已完成
+    errors:
+      models:
+        produce:
+  helpers:
+    produce:

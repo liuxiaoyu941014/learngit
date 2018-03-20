@@ -1,0 +1,43 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+        i class="fa fa-times"
+
+  .panel-body
+    = simple_form_for @market_page, url: @market_page.new_record? ? agent_market_pages_path(@market_page) : agent_market_page_path(@market_page), html: { class: 'form-horizontal' } do |f|
+      .row
+        .col-md-4
+          .iphone-bg-white
+            = image_tag @market_template.image_path, style: 'width:315px;height:482px;'
+        .col-md-2
+          |
+        .col-md-6
+            - if @market_page.errors.any?
+              #error_explanation
+
+                ul
+                  - @market_page.errors.full_messages.each do |message|
+                    li = message
+            = f.input :market_template_id, as: :hidden,input_html: {value: @market_template.id}
+            fieldset
+              legend[style="background:#ffcc00;"] 微信设置
+              = f.input :name, required: true, label: '微信分享标题'
+              = f.input :description, label: '微信分享描述'
+            fieldset
+              legend[style="background:#ffcc00;"] 内容替换
+              == render inline: @market_template.form_source, locals: {f: f}
+
+      .form-group
+        label
+          | 图片
+          small
+            | (手机全屏推荐大小：640x1136px)
+        image-select[server="#{image_items_path}" rel="vue"  name="market_page[image_item_ids][]" selected-ids="#{@market_page.image_item_ids.join(', ')}"]
+      div.hidden
+        = f.input :content, as: :ckeditor
+      p
+        = f.submit '提交保存', class: 'btn btn-success btn-lg'

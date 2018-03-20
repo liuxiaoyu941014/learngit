@@ -1,0 +1,70 @@
+.container
+  h1
+    | 营销活动
+    .pull-right
+      = link_to '新建营销活动', new_agent_market_page_path, class: 'btn btn-primary'
+
+  .panel
+    .panel-heading
+      .panel-heading-btn
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+          i class="fa fa-expand"
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+          i class="fa fa-minus"
+      h4  营销页
+    .panel-body
+
+      - @market_pages.each do |market_page|
+        .account-container style="margin-bottom: 20px; border:solid 1px #ccc"
+          /! BEGIN account-sidebar
+          .account-sidebar
+            .account-sidebar-cover
+              img alt="" src=market_page.market_template.image_path
+            .account-sidebar-content
+              h4 = market_page.name
+              p
+                = market_page.description
+              p
+                = market_page.market_template.name
+          /! END account-sidebar
+          /! BEGIN account-body
+          .account-body
+            /! BEGIN row
+            .row
+              /! BEGIN col-6
+              .col-md-6
+                h4
+                  i.fa.fa-gitlab.fa-fw.text-muted
+                  | 营销效果分析
+                ul.nav.nav-list
+                  li
+                    | 访问人次：
+                    = market_page.impressions_count
+                  li
+                    | 展示次数：
+                    = market_page.impressionist_count
+
+                h4
+                  i.fa.fa-universal-access.fa-fw.text-muted
+                  | 更多操作
+                ul.nav.nav-list
+                  li
+                    = link_to '在线预览', agent_frontend_market_page_path(@site, market_page), class: "btn btn-success bg-#{rand_bg_color}", style: 'color: #fff;', target: '_blank'
+                  li
+                    = link_to '分享链接', agent_market_page_path(market_page), class: 'btn btn-success'
+                  li
+                    = link_to '编辑', edit_agent_market_page_path(market_page), class: 'btn btn-info'
+                  li
+                    = link_to '删除', agent_market_page_path(market_page), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-default'
+
+              /! END col-6
+              /! BEGIN col-6
+              .col-md-6
+                h4
+                  i.fa.fa-cc-visa.fa-fw.text-muted
+                  | 营销页二维码
+                ul.nav.nav-list
+                  li
+                    - share_path = URI(request.scheme + "://" + request.host + ":" + request.port.to_s).merge(market_page.sales_distribution_resources.first.share_path).to_s
+                    img src="http://qr.liantu.com/api.php?text=#{share_path}&w=200" /
+                    br

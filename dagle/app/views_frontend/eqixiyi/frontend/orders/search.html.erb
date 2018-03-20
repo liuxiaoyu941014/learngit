@@ -1,0 +1,38 @@
+<%= render file: @cms_site.template_dir + '_header.html.erb'  %>
+
+<div class="container text-center">
+  <div class="row" style="margin-top: 30px;">
+    <h1>订单查询系统</h1>
+  </div>
+
+  <div class="row" style="margin: 30px 0px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <%= form_tag(do_search_frontend_orders_path)  do %>
+        <div class="input-group">
+          <%= text_field_tag :keywords, nil, class: 'form-control searchInput', placeholder: "请输入预留电话或订单号" %>
+          <span class="input-group-btn">
+            <%= submit_tag "查询", class: 'btn btn-default' %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row" style="margin: 20px 0px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="padding: 20px; border: solid 2px orange;">
+      <p>需输入合同订单编号即可查询订单进展！</p>
+      <p>欢迎广大客户对我们24小时进行监工！</p>
+      <p>我们随时欢迎您的到访！</p>
+      <p>本系统可以查询您在<%= @cms_site.value_for(:site_name) %>所购买的产品详细信息，由于网站更新，可能造成信息错漏，如您的订单无法查询到，
+        请致电我们全国售后服务专线<%= @cms_site.value_for(:phone) %>进行验证！感谢您对我们的支持！</p>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="text-center">
+    <img src="" class="img-responsive"/>
+  </div>
+
+</div>
+<%= render file: @cms_site.template_dir + '_footer.html.erb'  %>

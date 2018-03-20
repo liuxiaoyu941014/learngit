@@ -1,0 +1,28 @@
+.row
+  .col-md-4
+    h1 用户后台操作记录
+  .col-md-8
+    form.form-inline.pull-right.pt-10[action="#{admin_audits_path}" method="get"]
+      .form-group
+        / input[type="text" class="form-control" name="username" id="username" placeholder="输入操作用户" value="#{params['username']}"]
+        select.select2.form-control[id="dropdown" data-url="#{admin_users_url}"  data-id="#{params['username']}" data-name="#{User.find_by(id: params['username']).try(:nickname)}"  style="width: 200px;"]
+      .form-group
+        input[type="text" name="daterange" class="form-control" placeholder="请选择日期范围" value="#{params['daterange']}"]
+      button[type="submit" class="btn btn-primary"] 搜索
+- @admint_audits.each do |audit|
+  p[class="pt-5"]
+    span = distance_of_time_in_words_to_now(audit.created_at)
+    span 前 
+    span.text-info = audit.user.nickname if audit.user
+    | &nbsp;
+    span.text-warning = I18n.t('action.' + audit.action)
+    span 了 id 为 
+    span = audit.auditable_id.to_s + ' 的 '
+    span.text-primary =  audit.auditable ? audit.auditable.try(:model_name).try(:human) : audit.auditable_type
+    | &nbsp;
+    span 具体内容是
+    p.well = audit.audited_changes
+
+.pull-right
+  = paginate @admint_audits
+

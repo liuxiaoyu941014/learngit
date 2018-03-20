@@ -1,0 +1,38 @@
+
+#page-container.fade
+  .login.login-with-news-feed
+    .news-feed
+      .news-image
+        = image_tag rand_banner_img, data: { id: 'login-cover-image' }
+      .news-caption
+        h4.caption-title
+          i.fa.fa-diamond.text-success
+            = Settings.site.copyright
+        p
+          = Settings.site.copyright
+    .right-content
+      .login-header
+        .brand
+            span.logo
+            = Settings.site.name
+            small
+              = Settings.site.description
+        .icon
+            i.fa.fa-sign-in
+      .login-content
+
+        .login-buttons.m-b-30.m-t-30
+            button.btn.btn-success.btn-block.btn-lg[data-toggle='modal' data-target='#mobile_login_modal'] 手机号登录
+            button#weixin-login.btn.btn-primary.btn-block.btn-lg
+              |微信扫码登录
+          
+              button#email-login.btn.btn-info.btn-block.btn-lg[data-toggle='modal' data-target='#email_login_modal'] 邮箱密码登录
+        .weixin-login-container.hide[data-session-url=admin_sign_in_with_weixin_url data-verify-url="#{Settings.weixin_login.host}/wx/mp_auth/qrcode/#{Settings.weixin_login.appid}.json?title=#{URI.encode(Settings.site.name)}"]
+          img.weixin-login-qrcode
+          p.weixin-login-message
+        hr
+        p.text-center.text-inverse
+          = Settings.site.copyright
+= render 'mobile_login'
+<!--- unless Settings.project.wgtong? -->
+  = render 'email_login'

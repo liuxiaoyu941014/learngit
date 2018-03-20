@@ -1,0 +1,31 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      community: 社区
+    attributes:
+      community:
+        name: 名称
+        features: Features
+        address_line: 地址别名
+        address_precise: 是否精确解析出地址
+        address_confidence: 解析出地址的信任度，0-100，100最高
+        address_name: 标准化之后的地址
+        address_lat:  纬度
+        address_lng:  经度
+        street_name:  街道名
+        district_name: 区县名
+        city_name:  城市
+        province_name: 省份
+        lat: 纬度
+        lng: 经度
+        is_published: 是否发布
+        updated_by: 最后更新人
+        owned_by: 拥有者(分配给谁负责)
+        contact_info: 社区联系方式
+        note: 营销备注
+    errors:
+      models:
+        community:
+  helpers:
+    community:

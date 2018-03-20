@@ -1,0 +1,3 @@
+.tracker
+  == cell(Tracker::NavTopCell, nil, {visit: true, home: admin_tracker_path, visits_statistics: admin_tracker_visits_statistics_path, visits_details: admin_tracker_visits_details_path, shares_show: admin_tracker_shares_path})
+  == cell(Tracker::VisitDetailedCell, nil, path: admin_tracker_visits_details_url)

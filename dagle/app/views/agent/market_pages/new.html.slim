@@ -1,0 +1,5 @@
+.container
+  - if params[:template_id].nil?
+    == render 'template_list'
+  - else
+    == render 'form'

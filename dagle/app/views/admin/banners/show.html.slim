@@ -1,0 +1,61 @@
+h1.page-header
+  | 查看#{Banner.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_banner_path(@banner), class: 'btn btn-primary'
+    = link_to '返回', admin_banners_path, class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.col-md-3.text-right
+                strong
+                  | #{Banner.human_attribute_name(:title)}
+              td
+                span
+                  = @banner.title
+            tr
+              td.col-md-3.text-right.strong
+                strong
+                  | #{Banner.human_attribute_name(:banner_type)}
+              td
+                span
+                  = enum_l(@banner, :banner_type)
+            tr
+              td.col-md-3.text-right
+                strong
+                  | #{Banner.human_attribute_name(:image_url)}
+              td
+                p
+                  = @banner.image_url
+                img[src="#{@banner.image_url}" width="300px"]
+            tr
+              td.col-md-3.text-right
+                strong
+                  | #{Banner.human_attribute_name(:redirect_web_url)}
+              td
+                span
+                  = @banner.redirect_web_url
+            tr
+              td.col-md-3.text-right
+                strong
+                  | #{Banner.human_attribute_name(:redirect_app_url)}
+              td
+                span
+                  = @banner.redirect_app_url
+            tr
+              td.col-md-3.text-right
+                strong
+                  | #{Banner.human_attribute_name(:description)}
+              td
+                span
+                  = @banner.description

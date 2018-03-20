@@ -1,0 +1,22 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+        i class="fa fa-times"
+  .panel-body
+    = simple_form_for @agent_delivery, url: @agent_delivery.new_record? ? agent_deliveries_path(@agent_delivery) : agent_delivery_path(@agent_delivery), html: { class: 'form-horizontal' } do |f|
+      /- if @agent_delivery.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@agent_delivery.errors.count, "error")} prohibited this agent_delivery from being saved:"
+          ul
+            - @agent_delivery.errors.full_messages.each do |message|
+              li = message
+
+      = f.input :name, label: '货运名称'
+      = f.input :phone_number
+      .form-group
+        .col-md-2
+          = f.submit @agent_delivery.new_record? ? '新建货运信息' : '更新货运信息', class: 'btn btn-success'

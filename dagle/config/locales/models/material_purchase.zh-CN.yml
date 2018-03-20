@@ -1,0 +1,18 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_purchase: 物料采购
+    attributes:
+      material_purchase: 
+        material_purchase_details: 物料清单
+        vendor: 供应商
+        statuses:
+          uncheck: 未审核
+          checked: 已审核
+          storage: 已入库
+    errors:
+      models:
+        material_purchase: 
+  helpers:
+    material_purchase: 

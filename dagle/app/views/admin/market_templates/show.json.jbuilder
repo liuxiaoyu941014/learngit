@@ -1,0 +1,1 @@
+json.partial! "admin_market_templates/admin_market_template", admin_market_template: @admin_market_template

@@ -1,0 +1,133 @@
+<div class="product-info">
+  <div class="product-info-header">
+      <h1 class="product-title">
+        <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+          <span class="label label-danger">
+            优惠折扣中
+          </span>
+        <% end %>
+        <%= @product.name %>
+        <span class="share" rel="share" data-url="<%= sales_distribution_agent_product_path(@product) %>">
+          <i class="fa fa-share-alt text-info btn" @click="getSalesDistribution(<%= @product.id %>)" title= '分享' data-toggle= "tooltip" data-trigger= "hover" data-title= "分享" data-placement= "top" data-original-title= "" title= ""></i>
+          <share-modal title="商品: <%= @product.name%>" :url="url" :show-modal="showSharModal" @close="showSharModal = false"></share-modal>
+        </span>
+      </h1>
+  </div>
+  <div class="product-attr-info">
+      <ul class="list-inline row">
+        <li class='col-sm-12 col-md-4'>库存: <b class="text-success">
+        <% @product.stock.each do |key,value|%>
+           <%=value%>
+        <%end%>
+        <% if @product.unit.present? %>
+          <%@product.unit.each do |key,value|%>
+            <%=value%>
+          <%end%>
+        <%end%>
+        </b>
+        </li>
+        <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+
+          <li class='col-sm-12 col-md-4'>
+            原价：<span class="discount text-danger">￥<%= @product.price.to_f / 100 %></span>
+          </li>
+          <li class='col-sm-12 col-md-4'>
+            优惠价：<span class="price text-primary">￥<%= @product.discount.to_f / 100 %></span>
+          </li>
+        <% else %>
+          <li class='col-sm-12 col-md-4'>
+            售价：<span class="price text-primary">￥<%= @product.price.to_f / 100 %></span>
+          </li>
+        <% end %>
+      </ul>
+  </div>
+  <div class="product-attr-info">
+    <span>产品标签：</span>
+    <% @product.tag_list.each do|tag| %>
+      <span class="label label-success"><%= tag %></span>
+    <% end %>
+  </div>
+  <% if [@product.hot, @product.recommend, @product.event, @product.promotion].uniq.include?('1') %>
+    <div class="product-attr-info">
+      <span>其他：</span>
+      <span class="label label-success"><%= Product.human_attribute_name(:hot) if @product.hot == "1" %></span>
+      <span class="label label-success"><%= Product.human_attribute_name(:recommend) if @product.recommend == "1" %></span>
+      <span class="label label-success"><%= Product.human_attribute_name(:event) if @product.event == "1" %></span>
+      <span class="label label-success"><%= Product.human_attribute_name(:promotion) if @product.promotion == "1" %></span>
+    </div>
+  <% end %>
+  <ul class="product-info-list">
+    <% if @product.status.present? %>
+      <li>
+        <i class="fa fa-cogs"></i>
+        <span>状态</span>:
+        <span class="label label-info">
+          <strong><%= enum_i18n(Product, :status, @product.status) %></strong>
+        </span>
+      </li>
+    <% end %>
+    <% if @product.address_line1.present? %>
+      <li>
+        <i class="fa fa-map-marker"></i>
+        <span>地址1</span>:
+        <span>
+          <%= @product.address_line1 %>
+        </span>
+      </li>
+    <% end %>
+    <% if @product.address_line2.present? %>
+      <li>
+        <i class="fa fa-map-marker"></i>
+        <span>地址2（详细地址）</span>:
+        <span>
+          <%= @product.address_line2 %>
+        </span>
+      </li>
+    <% end %>
+    <% if @product.phone.present? %>
+      <li>
+        <i class="fa fa-phone"></i>
+        <span>联系电话</span>:
+        <span>
+          <%= @product.phone %>
+        </span>
+      </li>
+    <% end %>
+    <% if  @product.time.present? %>
+      <li>
+        <i class="fa fa-clock-o"></i>
+        <span>时间</span>:
+        <% @product.time.each do |key,value|%>
+        <span>
+          <%=value %>
+        </span>
+        <%end%>
+      </li>
+    <% end %>
+    <% if @product.additional_attribute_keys.present? %>
+      <% @product.additional_attribute_keys.each do |k, v| %>
+        <% if @product.additional_attribute_values[k].present? %>
+          <li>
+            <i class="fa fa-circle"></i>
+            <span><%= v %></span>:
+            <span><%= @product.additional_attribute_values[k] %></span>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class="product-attr-info">
+    <div class="row">
+      <div class="col-xs-2">
+        产品介绍：
+      </div>
+      <div class="col-xs-10">
+        <% if @product.description.present? %>
+          <%= @product.description %>
+        <% else %>
+          <%= link_to "立即编辑", edit_agent_product_path(@product), 'data-turbolinks': false %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

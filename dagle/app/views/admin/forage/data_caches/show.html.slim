@@ -1,0 +1,97 @@
+h1.page-header
+  | 查看#{Forage::DataCache.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_forage_data_cach_path(@forage_data_cache, migrate_to: @migrate_to), class: 'btn btn-primary' if @forage_data_cache.unmerged?
+    = link_to '返回', admin_forage_data_caches_path(migrate_to: @migrate_to), class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:title)}
+              td
+                  = @forage_data_cache.title
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:is_merged)}
+              td
+                  = enum_l(@forage_data_cache, :is_merged)
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:migrate_to)}
+              td
+                  = Forage::DataCache::MIGRATE_TO_HASH[@forage_data_cache.migrate_to.to_sym]
+            tr.divider
+            - if @forage_data_cache.merged?
+              tr
+                td.field
+                  | 合并结果
+                td
+                  = link_to "#{@forage_data_cache.source.try(:title) || @forage_data_cache.source.try(:name)}", @merge_url
+              tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:matched_status)}
+              td
+                = Forage::DataCache::MATCHED_STATUS[@forage_data_cache.matched_status.to_sym]
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:url)}
+              td
+                = @forage_data_cache.url
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:external_purchase_url)}
+              td
+                  = @forage_data_cache.external_purchase_url
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:time)}
+              td
+                  = @forage_data_cache.time
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:address_line1)}
+              td
+                  = @forage_data_cache.address_line1
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:phone)}
+              td
+                  = @forage_data_cache.phone
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:price)}
+              td
+                  = @forage_data_cache.price
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:from)}
+              td
+                  = @forage_data_cache.from
+            tr.divider
+            tr
+              td.field
+                | #{Forage::DataCache.human_attribute_name(:content)}
+              td
+                  = @forage_data_cache.content.html_safe
+            tr.divider

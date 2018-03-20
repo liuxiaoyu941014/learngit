@@ -1,0 +1,15 @@
+<% meta_title \
+  [ @page.try(:title),
+    @channel.title,
+  ].compact.join(' | ').sub(/^\s*\|/, '').strip %>
+<% meta_keywords \
+  [ @page.try(:keywords).blank? ? @page.try(:title) : @page.keywords,
+    @channel.title, @channel.keywords].compact.join(', ').sub(/^\s*,/, '').strip %>
+<% meta_description \
+  @page.nil? ? @channel.description : @page.description %>
+
+<% if File.exist?( @cms_site.template_dir + 'temp_search.html.erb' )%>
+  <%= render file: @cms_site.template_dir + 'temp_search.html.erb' %>
+<% else %>
+  <h2 class="error">没有找到搜索模版文件: temp_search.html</h2>
+<% end %>

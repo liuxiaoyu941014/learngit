@@ -1,0 +1,25 @@
+h1.page-header
+  = @community.name
+  .pull-right
+    - if params[:sites]
+      => link_to '详情', admin_community_path(@community), class: 'btn btn-info'
+    - else
+      => link_to '周边商家', admin_community_path(@community, sites: true), class: 'btn btn-info', 'data-turbolinks': false
+    => link_to '公告列表', admin_community_articles_path(@community), class: 'btn btn-info'
+    => link_to '修改', edit_admin_community_path(@community), class: 'btn btn-primary', 'data-turbolinks': false
+    => link_to '定位', edit_admin_community_path(@community, map: true), class: 'btn btn-primary', 'data-turbolinks': false
+    => link_to '删除', admin_community_path(@community), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-danger'
+    = link_to '返回', admin_communities_path, class: 'btn btn-default'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    - if params[:sites]
+      == render 'sites'
+    - else
+      == render 'profile'

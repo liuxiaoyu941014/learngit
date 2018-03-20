@@ -1,0 +1,121 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<style media="screen">
+ .orderDescription {
+  width: 100%;
+  text-overflow : ellipsis;
+  overflow: hidden;
+  white-space: nowrap
+}
+</style>
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+      <!-- header start -->
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>
+            消息中心
+          </h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+      <!-- header end -->
+
+      <!-- content start -->
+      <div class="row">
+        <div class="col-sm-8 col-md-8 tr-sticky">
+          <!-- message types -->
+          <div class="tr-section">
+            <p class="text-left">
+              状态：
+               <a href="<%= self_message_users_path(type: 'unread') %>" class="btn btn-default  <%= params[:type] == 'unread' ? 'active' : '' %>">
+                 <span class="fa fa-bell" style="font-size: 20px; color: #dfdfdf; text-shadow: 1px 1px 1px #dfdfdf;"></span>
+                 未阅读
+               </a>
+               <a href="<%= self_message_users_path() %>" class="btn btn-default  <%= params[:type].blank? ? 'active' : '' %>">
+                 <span class="fa fa-bell" style="font-size: 20px; color: #f0ad4e; text-shadow: 1px 1px 1px #dfdfdf;"></span>
+                 已阅读
+               </a>
+            </p>
+          </div>
+          <!-- block type comment -->
+          <% if @notifications.any? %>
+          <% @notifications.each do |notice| %>
+          <% next if notice.actor_id.nil? %>
+            <div class="tr-section text-left">
+              <div class="feed pull-right">
+                <span class="fa fa-bell" style="font-size: 20px; color: #f0ad4e; text-shadow: 1px 1px 1px #dfdfdf;"></span>
+              </div>
+              <% if notice.actor %>
+              <div class="entry-meta">
+                <ul>
+                  <li>
+                    <img src="<%= notice.actor_avatar_url%>" alt="" class="img-circle" width="80px">
+                    <a href="#"><%= notice.actor_name%></a>
+                  </li>
+                </ul>
+              </div>
+              <%end%>
+              <p>对您的<%= notice.notify_type %> <a href="<%=notice.target_url%>"><%= notice.target.send(notice.target_name) %></a> <%= notice.content%></p>
+              <div class="well">
+                <a href="javascritpt:void(0)"><%= notice.second_target.send(notice.second_target_name) %></a>
+              </div>
+              <div class="clearfix">
+                <div class="feed pull-left">
+                  <span class="entry-meta"><%= distance_of_time_in_words_to_now(notice.created_at)%>前</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <!-- block type email -->
+          <% @notifications.each do |notice| %>
+          <% next if notice.actor_id %>
+          <div class="tr-section text-left">
+            <div class="media row">
+              <div class="col-md-1 col-xs-1">
+                <a href="#">
+                  <img class="img-responsive" src="/templetes/newshub/images/ico/apple-touch-icon-57-precomposed.png" alt="...">
+                </a>
+              </div>
+              <div class="col-md-11 col-xs-11" style="margin-left: -15px;">
+                <div class="feed pull-right">
+                  <span class="fa fa-bell" style="font-size: 20px; color: #f0ad4e; text-shadow: 1px 1px 1px #dfdfdf;"></span>
+                </div>
+                <h4 class="media-heading"><%= current_user.name %></h4>
+                <p class="orderDescription">你的<%= notice.notify_type%>
+                  <a href="<%=notice.target_url %>"><%= notice.target.send(notice.target_name)%></a>
+                  <%= notice.content%>
+                </p>
+                <div class="feed clearfix">
+                  <div class="feed pull-left entry-meta">
+                    <%= distance_of_time_in_words_to_now(notice.created_at)%>前
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end%>
+          <% else %>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <i class="fa fa-frown-o" style="font-size:40px;color: #999;"></i>
+              </div>
+              <div class="col-md-12 text-center">
+                您目前还没有任何<%= params[:type] == 'unread' ? '未读' : '已读'%>消息
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <!-- nav_sidebar -->
+        <div class="col-sm-5 col-md-4 tr-sticky" >
+          <%= render file: 'frontend/users/_nav_sidebar.html.erb' %>
+        </div>
+      </div>
+      <!-- content end -->
+
+    </div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+</div>

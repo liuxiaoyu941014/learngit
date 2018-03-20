@@ -1,0 +1,9 @@
+.container
+  h1
+    | 添加页面
+    .pull-right
+      - if @cms_channel
+        => link_to '返回栏目', cms_site_channel_path(@cms_site, @cms_channel), class: 'btn btn-default'
+      => link_to '返回列表', cms_site_pages_path(@cms_site), class: 'btn btn-default'
+
+  == render 'form'

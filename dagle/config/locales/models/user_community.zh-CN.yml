@@ -1,0 +1,14 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      user_community: User community
+    attributes:
+      user_community:
+        user: User
+        community: Community
+    errors:
+      models:
+        user_community: 
+  helpers:
+    user_community: 

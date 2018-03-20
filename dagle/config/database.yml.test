@@ -1,0 +1,9 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  host: "<%= ENV.fetch("TANMER_POSTGRESQL_PORT_5432_TCP_ADDR", nil) %>"
+  port: <%= ENV.fetch("TANMER_POSTGRESQL_PORT_5432_TCP_PORT", nil) %>
+  username: <%= ENV.fetch("POSTGRES_USER", nil) %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", nil) %>
+  database: <%= ENV.fetch("POSTGRES_DB") { 'tmf_test' } %>

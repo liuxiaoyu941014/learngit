@@ -1,0 +1,66 @@
+.wechat-box {
+  padding-top: 55px;
+}
+@media (max-width: 767px) {
+  .navbar-brand {
+    margin: 0;
+    padding: 15px;
+    width: 41%;
+  }
+}
+@media (min-width: 767px) {
+  .title-cneter-p {
+    display: none !important;
+  }
+}
+.top-tabs-block{
+  border: 0px;
+  border-radius: 0px;
+  margin-bottom: 5px;
+}
+.top-tabs-block .screen-list label{
+  position: relative;
+  margin-right: 5px;
+  width: 50px;
+  text-align: center;
+}
+.top-tabs-block .screen-list label.active::before{
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -5px;
+  left: 0px;
+  background: #FF5722;
+}
+.list-group-item:first-child, .list-group-item:last-child{
+  border-radius: 0px
+}
+.list-group-item {
+  border: 0px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+
+/* 公共样式  */
+.weight-300{
+  font-weight: 300 !important;
+}
+.margin-top-10{
+  margin-top: 10px !important;
+}
+.contact-fa{
+  padding-right: 5px;
+  color: #35ceb4;
+}
+.text-overflow {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.white-space-nomal {
+  white-space: normal;
+}

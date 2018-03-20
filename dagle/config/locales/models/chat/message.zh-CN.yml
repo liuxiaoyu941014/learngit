@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      chat/message: Message
+    attributes:
+      chat/message: {}
+    errors:
+      models:
+        message:
+  helpers:
+    message:

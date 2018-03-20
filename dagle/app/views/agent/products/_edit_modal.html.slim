@@ -1,0 +1,41 @@
+.modal.fade#editModal.bs-example-modal-lg[tabindex="-1" role="dialog" rel="edit-modal" aria-labelledby="myModalLabel"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+        h4.modal-title#myModalLabel 商品-调价
+      = simple_form_for @product, url: agent_product_path, method: :put, remote: true do |f|
+        .modal-body.p-30
+          .row
+            .alert.alert-danger.fade.in.m-b-15.hide
+							strong 错误!&nbsp;
+							span.title
+							span.close[data-dismiss="alert"] &times;
+          .row
+            .col-xs-6
+              .form-group
+                = f.input :price, input_html: { value: @product.price.to_f / 100 }
+            .col-xs-6
+              .form-group
+                = f.input :discount, input_html: { value: @product.discount.to_f / 100 }
+            .col-xs-12
+              .form-group.col-xs-8.p-l-0.m-0
+                = f.input :stock
+              .form-group.col-xs-4.p-0.m-0
+                = f.input :unit
+            - if Settings.project.imolin?
+              .col-xs-12
+                small.text-danger
+                  | * 订单配送费统一在商家信息编辑中管理
+            - else
+              .col-xs-12
+                .form-group
+                  label.control-label.string.optional 产品是否存在运费
+                  .input-group
+                    span.input-group-addon.fee_checkbox
+                      = f.input_field :is_fee, as: :boolean, label: false
+                    = f.input :shopping_fee, label: false, input_html: {class: "form-control"}
+        .modal-footer
+          button.btn.btn-default[type="button" data-dismiss="modal"] 取消
+          = f.submit '保存调价', class: 'btn btn-primary'

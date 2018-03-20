@@ -1,0 +1,3 @@
+[submodule "components/gnomon"]
+	path = components/gnomon
+	url = git@gitlab.tanmer.com:tm-framework/gnomon.git

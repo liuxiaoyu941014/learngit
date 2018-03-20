@@ -1,0 +1,18 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4 = User.model_name.human
+  .panel-body
+    = simple_form_for(decorate(@admin_user), url: @admin_user.new_record? ? admin_users_path(@admin_user) : admin_user_path(@admin_user)) do |f|
+      = f.input :nickname
+      = f.input :mobile_phone
+      = f.input :email
+      = f.input :password, hint: '密码至少6位，不需要修改密码则不填！'
+      = f.input :password_confirmation
+      - unless !@admin_user.new_record? && @admin_user.has_role?(:super_admin) #超级管理员不可修改自己的角色
+        = f.input :role_ids, collection: Role.where("resource_type is null and name <> 'super_admin'").map{|r| ["#{r.role_name}-#{r.name}", r.id]}, as: :check_boxes
+      = f.submit class: 'btn btn-block btn-primary'

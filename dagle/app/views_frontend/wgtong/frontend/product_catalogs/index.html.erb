@@ -1,0 +1,5 @@
+h1 Frontend::ProductCatalogs#index
+p Find me in app/views/frontend/product_catalogs/index.html.slim
+<% @product_catalogs.each do |catalog| %>
+  <li><%= link_to catalog.name, frontend_product_catalog_path(catalog) %></li>
+<% end %>

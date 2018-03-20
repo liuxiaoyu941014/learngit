@@ -1,0 +1,252 @@
+<%= render file: @cms_site.template_dir + '_header.html.erb'  %>
+
+<% content_for :head do %>
+<style type="text/css">
+
+.searchInput {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  height: 34px;
+}
+.searchInput:focus {
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .75);
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, .75)
+}
+
+.order_head_icon{
+  font-size: 25px;
+  margin-right: 15px;
+}
+.order_head_title{
+  display: inline-block !important;
+}
+.order_tr{
+    background-color: #fff;
+}
+.order_tr:hover{
+    background-color: #eee;
+}
+
+.order_td{
+    vertical-align: baseline !important;
+    transition: all 0.3s linear;
+}
+.order_head_tr{
+    background-color: #555;
+}
+.order_head_td{
+  font-size: 18px;
+  color: #222;
+}
+.table_a{
+    display: inline-block;
+}
+.table_btn{
+    outline: none;
+    border: none;
+    padding:5px 10px;
+}
+
+/* add user page css */
+.add_user_ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.add_user_active{
+    background-color: #cbdb61 !important;
+    color: #fff;
+}
+.add_user_li{
+    float: left;
+    /*padding: 5px 10px;*/
+    box-shadow: 1px 0px 3px -1px #000;
+    cursor: pointer;
+    background-color: #fff;
+}
+.add_user_ul li:hover{
+    background-color: #cbdb61;
+    color: #fff;
+}
+
+
+#drk_timeline {
+  padding: 2em 1em;
+  position: relative;
+  background-color: #fafafa;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+#drk_timeline::before{
+  content: '';
+  display: inline-block;
+  height: 4px;
+  width: 100%;
+  background-color: #d7e4ed;
+}
+.line_item {
+  position: absolute;
+  top: 15%;
+  max-width: 7%;
+}
+.position1 {
+  left: 1%;
+}
+.position2 {
+  left: 11%;
+}
+.position3 {
+  left: 21%;
+}
+.position4 {
+  left: 31%;
+}
+.position5 {
+  left: 41%;
+}
+.position6 {
+  left: 51%;
+}
+.position7 {
+  left: 61%;
+}
+.position8 {
+  left: 71%;
+}
+.lint_point {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  position: relative;
+  z-index: 9;
+}
+.lint_point::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 46%;
+  display: inline-block;
+  height: 50px;
+  width: 2px;
+  background-color: #dfdfdf;
+  z-index: 40;
+
+}
+.bg_success {
+  background-color: #75ce66;
+}
+.bg_warning {
+  background-color: #f0ad4e;
+}
+.line_content {
+  position: relative;
+  padding: 0.5em;
+  margin-top: 15px;
+  background-color: #dfdfdf;
+  border-radius: 3px;
+}
+
+</style>
+<% end %>
+
+  <div class="container">
+    <div class="panel panel-default table-responsive">
+      <h2>订单查询结果</h2>
+      <table class="table table-bordered table-stripped">
+        <thead>
+          <tr class="order_head_tr">
+            <td class="order_head_td">
+              编号
+            </td>
+            <td class="order_head_td">
+              订单号
+            </td>
+            <td class="order_head_td">
+              订单状态
+            </td>
+            <td class="order_head_td">
+              下单时间
+            </td>
+            <td class="order_head_td">
+              预计收货
+            </td>
+            <td class="order_head_td">
+              操作
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.order(updated_at: :desc).each_with_index do |order, index| %>
+            <tr class="order_tr">
+              <td class="order_td">
+                <%= index + 1 %>
+              </td>
+              <td class="order_td">
+                <%= order.code %>
+              </td>
+              <td class="order_td">
+                <%= enum_l(order, :internal_status) %>
+              </td>
+              <td class="order_td">
+                <%= format_time(order.created_at) %>
+              </td>
+              <td class="order_td">
+                2017年6月31日
+              </td>
+              <td class="order_td">
+                <button class="table_btn btn-info showResult">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="6">
+                  <div id="drk_timeline" class="timeline">
+                    <div class="line_item position1 text-center">
+                      <div class="lint_point bg_success"></div>
+                      <div class="line_content">
+                        生产设计
+                      </div>
+                    </div>
+                    <div class="line_item position2 text-center">
+                      <div class="lint_point bg_success"></div>
+                      <div class="line_content">
+                        创建订单
+                      </div>
+                    </div>
+                    <% current_status_index = nil %>
+                    <% enum_options_for_select(Order, :internal_status).each_with_index do |order_status, index| %>
+                      <% if current_status_index.blank? %>
+                        <% current_status_index = index if order_status[0] == enum_l(order, :internal_status) %>
+                        <div class="line_item position<%= index + 3 %> text-center">
+                          <div class="lint_point <%= enum_l(order, :internal_status) == order_status[0] ? 'bg_warning' : 'bg_success'  %>"></div>
+                          <div class="line_content">
+                            <%= order_status[0]  %>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @orders%>
+  </div>
+
+<% content_for :foot do %>
+  <script type="text/javascript">
+    $(function () {
+      $('.showResult').parent().parent().next().hide();
+      $('.showResult').click(function() {
+        $(this).parent().parent().next().toggle('slow');
+      });
+    })
+  </script>
+<% end %>
+<%= render file: @cms_site.template_dir + '_footer.html.erb'  %>

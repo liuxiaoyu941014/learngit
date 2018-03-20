@@ -1,0 +1,45 @@
+h1.page-header
+  | 审核#{@complaint.complaint? ? Complaint.model_name.human : '反馈'}
+  .pull-right
+    => link_to '查看相关举报', admin_complaints_path(relation: @complaint.id), class: 'btn btn-primary' if @complaint.complaint?
+    => link_to '返回', admin_complaints_path, class: 'btn btn-primary'
+.panel
+  .panel-body
+    - if @complaint.complaint?
+      h5
+        | #{@complaint.complaint? ? Complaint.model_name.human : '反馈'}对象
+      .table-responsive
+        table.table.table-profile
+          - if @complaint.source_type.to_s == 'Article'
+            tr
+              td.field
+                | #{Article.model_name.human}#{Article.human_attribute_name(:title)}：
+              td
+                = @complaint.source.title
+            tr
+              td.field
+                | #{Article.model_name.human}#{Article.human_attribute_name(:description)}：
+              td
+                = @complaint.source.description
+          - else
+            tr
+              td.field
+                | 评论内容：
+              td
+                = @complaint.source.content
+    h5
+      | #{@complaint.complaint? ? Complaint.model_name.human : '反馈'}人相关内容
+    .table-responsive
+      table.table.table-profile
+        tr
+          td.field
+            | #{@complaint.complaint? ? Complaint.model_name.human : '反馈'}人：
+          td
+            = decorate(@complaint.user).display_name
+        tr
+          td.field
+            | #{@complaint.complaint? ? Complaint.human_attribute_name(:reason) : '反馈原因'}：
+          td
+            = @complaint.reason
+
+== render 'form'

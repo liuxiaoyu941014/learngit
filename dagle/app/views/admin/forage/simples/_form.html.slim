@@ -1,0 +1,29 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    p
+      h5
+        | #{Forage::Simple.human_attribute_name(:run_key)}：　#{@forage_simple.run_key.source.name}（#{@forage_simple.run_key.date}）
+    hr
+    = simple_form_for @forage_simple, url: @forage_simple.new_record? ? admin_forage_simples_path : admin_forage_simple_path(@forage_simple), validate: true do |f|
+      - if @forage_simple.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@forage_simple.errors.count, "error")} prohibited this forage_simple from being saved:"
+          ul
+            - @forage_simple.errors.full_messages.each do |message|
+              li = message
+
+      .row
+        .col-md-6
+          = f.input :title
+        .col-md-6
+          = f.input :catalog
+        .col-md-6
+          = f.input :url
+      = f.input :is_processed, as: :boolean, checked_value: true, unchecked_value: false
+      = f.submit class: 'btn btn-success btn-block'

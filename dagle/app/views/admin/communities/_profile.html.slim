@@ -1,0 +1,101 @@
+.profile-container
+  .profile-section
+    .profile-left
+      .profile-image
+        = image_tag @community.image || 'logo.png'
+        i[class="fa fa-user hide"]
+      .m-b-10
+        .profile-highlight
+          h4 = @community.name
+    .profile-right
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field
+                | #{Community.human_attribute_name(:name)}
+              td
+                a
+                  = @community.name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_line)}
+              td
+                a
+                  = @community.address_line
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:province_name)}
+              td
+                a
+                  = @community.province_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:city_name)}
+              td
+                a
+                  = @community.city_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:district_name)}
+              td
+                a
+                  = @community.district_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:street_name)}
+              td
+                a
+                  = @community.street_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_name)}
+              td
+                a
+                  = @community.address_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_confidence)}
+              td
+                a
+                  = @community.address_confidence
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_precise)}
+              td
+                a
+                  = @community.address_precise ? '是' : '否'
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_lat)}
+              td
+                a
+                  = @community.address_lat
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Community.human_attribute_name(:address_lng)}
+              td
+                a
+                  = @community.address_lng
+            tr.divider
+              td[colspan='2']

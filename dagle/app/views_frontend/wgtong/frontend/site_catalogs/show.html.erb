@@ -1,0 +1,227 @@
+<div class="main-wrapper">
+  <%= render file: 'public/templetes/newshub/_header.html.erb' %>
+	<div class="container">
+    <%= render file: 'public/templetes/newshub/_top_menu.html.erb' %>
+
+		<div class="tr-breadcrumb">
+			<div class="title pull-left">
+				<h1><%= @site_catalog.name %></h1>
+			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+          <li class="active"><%= @site_catalog.name %></li>
+        </ol>
+		</div><!-- /.tr-breadcrumb -->
+    <% if @sites.empty? %>
+      <div class="row tr-content">
+        <div class="col-sm-9 col-md-9 tr-sticky">
+          <div class="tr-section">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class=text-center>
+                  <p>
+                    <span class="fa fa-frown-o" style="color: #9e9e9e; font-size: 40px; vertical-align: middle;"></span>
+                  </p>
+                  <p>
+                    <span>温馨提示：<i class="text-danger" style="color: #e81a1b;">暂无分类信息</i></span>
+                  </p>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <% if Keystore.value_for('banner-site-center-center-773x84').present? %>
+            <div class="tr-ad">
+              <% banner_site_center_center = Keystore.value_for('banner-site-center-center-773x84').split('|') %>
+              <a href="<%= banner_site_center_center[1] || 'javascript:void(0)' %>" target="_blank" ><img class="img-responsive" src="<%= banner_site_center_center[0] %>" alt="广告横幅773x84"></a>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- 最新 -->
+        <div class="col-sm-3 col-md-3 tr-sidebar tr-sticky">
+          <%= render file: 'public/templetes/newshub/_sidebar.html.erb' %>
+        </div>
+      </div>
+    <% else %>
+      <div class="row tr-content">
+        <!-- 头条-->
+        <div class="col-sm-5 col-md-6 tr-sticky">
+          <div class="theiaStickySidebar">
+            <% Site.where(catalog_id: @site_catalog.id).order("updated_at DESC").each do |site| %>
+              <% if site.properties.length == 1  %>
+                <div class="tr-section">
+                  <div class="section-title title-before">
+                    <h1><a href="javascript:void(0)"><%= site.properties.map{|p| ::Site::PROPERTIES[p.to_sym]}.compact.join('，') %></a></h1>
+                  </div>
+                  <div class="tr-post">
+                    <div class="entry-header">
+                      <div class="entry-thumbnail">
+                        <a href="<%= frontend_site_path(site) %>"><img class="img-responsive" src="<%= site.first_image %>" alt="<%= site.title %>"></a>
+                      </div>
+                    </div>
+                    <div class="post-content">
+                      <div class="author">
+                        <a href="/frontend/sites/<%= site.id %>"><img class="img-responsive img-circle" src="/templetes/newshub/images/others/user.png" alt="Image"></a>
+                      </div>
+                      <div class="entry-meta">
+                        <ul>
+                          <li><a href="/frontend/sites/<%= site.id %>"><i class="fa fa-user-circle-o"></i> <%= @cms_site.name %></a></li>
+                          <li><a href="/frontend/sites/<%= site.id %>"><i class="fa fa-clock-o"></i> <%= distance_of_time_in_words_to_now(site.updated_at) %>前</a></li>
+                          <li><a href="/frontend/sites/<%= site.id %>"><i class="fa fa-eye"></i> <%= site.visits_count %>阅读</a></li>
+                          <li><a href="/frontend/sites/<%= site.id %>"><i class="fa fa-comments-o"></i> <%= site.comments_count %>评论</a></li>
+                        </ul>
+                      </div><!-- /.entry-meta -->
+                      <h2 class="entry-title">
+                        <%= link_to site.title, frontend_site_path(site) %>
+                      </h2>
+                      <p><%= site.description.truncate(74) %></p>
+                      <div class="read-more">
+                        <div class="continue-reading pull-left">
+                          <a href="<%= frontend_site_path(site) %>">了解更多 <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="feed pull-right">
+                          <ul>
+                            <div class="bdsharebuttonbox" data-tag="share_1">
+                              <a class="bds_qzone" data-cmd="qzone"></a>
+                              <a class="bds_tsina" data-cmd="tsina"></a>
+                              <a class="bds_sqq" data-cmd="sqq"></a>
+                              <a class="bds_weixin" data-cmd="weixin"></a>
+                            </div>
+                          </ul>
+                        </div>
+                      </div>
+                    </div><!-- /.post-content -->
+                  </div><!-- /.tr-post -->
+                </div><!-- /.tr-post -->
+              <% end %>
+            <% end %>
+
+            <div class="row text-center">
+              <%= paginate @sites, remote: true %>
+            </div>
+
+            <% if Keystore.value_for('banner-site-center-center-773x84').present? %>
+            <div class="tr-ad">
+              <% banner_site_center_center = Keystore.value_for('banner-site-center-center-773x84').split('|') %>
+              <a href="<%= banner_site_center_center[1] || 'javascript:void(0)' %>" target="_blank" ><img class="img-responsive" src="<%= banner_site_center_center[0] %>" alt="广告横幅773x84"></a>
+            </div>
+            <% end %>
+
+          </div><!-- /.theiaStickySidebar -->
+        </div>
+
+        <!-- 滚动 -->
+        <div class="col-sm-4 col-md-3 tr-sticky medium-post-responsive">
+          <div class="theiaStickySidebar">
+            <div class="tr-section">
+              <div class="section-title title-before">
+                <h1><a href="javascript:void(0)">热门<%= @site_catalog.name %></a></h1>
+              </div>
+              <% Site.hot.where(catalog_id: @site_catalog.id).limit(3).each do |site_hot| %>
+                <% if site_hot.present? %>
+                <div class="tr-post">
+                  <div class="entry-header">
+                    <a href="/frontend/sites/<%= site_hot.id %>">
+                      <img class="img-responsive" src="<%= site_hot.first_image %>" />
+                    </a>
+                  </div>
+                  <div class="post-content">
+                    <div class="author">
+                      <a href="/frontend/sites/<%= site_hot.id %>"><img class="img-responsive img-circle" src="/templetes/newshub/images/others/user.png" alt="Image"></a>
+                    </div>
+                    <div class="entry-meta">
+                      <ul>
+                        <li><a href="/frontend/sites/<%= site_hot.id %>"><i class="fa fa-clock-o"></i> <%= distance_of_time_in_words_to_now(site_hot.updated_at) %>前</a></li>
+                        <li><a href="/frontend/sites/<%= site_hot.id %>"><i class="fa fa-eye"></i> <%= site_hot.visits_count %>阅读</a></li>
+                        <li><a href="/frontend/sites/<%= site_hot.id %>"><i class="fa fa-comments-o"></i> <%= site_hot.comments_count %>评论</a></li>
+                      </ul>
+                    </div><!-- /.entry-meta -->
+                    <h2 class="entry-title">
+                      <%= link_to site_hot.title, frontend_site_path(site_hot) %>
+                    </h2>
+                    <p><%= site_hot.description.truncate(50) %></p>
+                    <div class="read-more">
+                      <div class="continue-reading pull-left">
+                        <a href="<%= frontend_site_path(site_hot) %>">了解更多 <i class="fa fa-angle-right"></i></a>
+                      </div>
+                      <div class="feed pull-right">
+                        <ul>
+                          <div class="bdsharebuttonbox" data-tag="share_1">
+                            <a class="bds_qzone" data-cmd="qzone"></a>
+                            <a class="bds_tsina" data-cmd="tsina"></a>
+                            <a class="bds_sqq" data-cmd="sqq"></a>
+                            <a class="bds_weixin" data-cmd="weixin"></a>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div><!-- /.post-content -->
+                </div><!-- /.tr-section -->
+                <% end %>
+              <% end %>
+            </div>
+
+            <% if Keystore.value_for('banner-site-right-center-400×576').present? %>
+            <div class="tr-section tr-ad ad-before">
+              <% banner_site_right_center = Keystore.value_for('banner-site-right-center-400×576').split('|') %>
+              <a href="<%= banner_site_right_center[1] || 'javascript:void(0)' %>" target="_blank" >
+                <img class="img-responsive" src="<%= banner_site_right_center[0] %>" alt="广告横幅400×576"></a>
+            </div>
+            <% end %>
+
+            <div class="tr-section local-events">
+              <div class="section-title title-before">
+                <h1><a href="javascript:void(0)">推荐 <%= @site_catalog.name %></a></h1>
+              </div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#time0" data-toggle="tab">推荐</a></li>
+                <li role="presentation"><a href="#time1" data-toggle="tab">推荐</a></li>
+                <li role="presentation"><a href="#time2" data-toggle="tab"> 推荐</a></li>
+              </ul>
+              <div class="tab-content">
+                <% Site.recommend.where(catalog_id: @site_catalog.id).limit(3).each_with_index do |site_recommends, index| %>
+                <div role="tabpanel" class="tab-pane fade in <%= 'active' if index == 0 %>" id="time<%= index %>">
+                  <div class="tr-post">
+                    <div class="entry-header">
+                      <div class="entry-thumbnail">
+                        <a href="<%= frontend_site_path(site_recommends) %>"><img class="img-responsive" src="<%= site_recommends.first_image %>" alt="Image"></a>
+                      </div>
+                    </div>
+                    <div class="post-content">
+                      <div class="entry-meta">
+                        <ul>
+                          <li><a href="/frontend/sites/<%= site_recommends.id %>"><i class="fa fa-clock-o"></i> <%= distance_of_time_in_words_to_now(site_recommends.updated_at) %>前</a></li>
+                          <li><a href="/frontend/sites/<%= site_recommends.id %>"><i class="fa fa-eye"></i> <%= site_recommends.visits_count %>阅读</a></li>
+                          <li><a href="/frontend/sites/<%= site_recommends.id %>"><i class="fa fa-comments-o"></i> <%= site_recommends.comments_count %>评论</a></li>
+                        </ul>
+                      </div><!-- /.entry-meta -->
+                      <h2 class="entry-title">
+                        <%= link_to site_recommends.title, frontend_site_path(site_recommends) %>
+                      </h2>
+                    </div>
+                  </div><!-- /.tr-post -->
+                  <span><%= site_recommends.description.truncate(50) %></span>
+                </div>
+                <% end %>
+              </div>
+            </div><!-- meta-tab -->
+          </div><!-- /.theiaStickySidebar -->
+        </div>
+        <!-- 最新 -->
+        <div class="col-sm-3 tr-sidebar tr-sticky">
+          <%= render file: 'public/templetes/newshub/_sidebar.html.erb' %>
+        </div>
+      </div><!-- /.row -->
+    <% end %>
+
+
+		<% if Keystore.value_for('banner-site-bottom-center-819×119').present? %>
+		<div class="tr-ad ad-bottom ad-image text-center">
+      <% banner_site_bottom_center = Keystore.value_for('banner-site-bottom-center-819×119').split('|') %>
+			<a href="<%= banner_site_bottom_center[1] || 'javascript:void(0)' %>" target="_blank" ><img class="img-responsive" src="<%= banner_site_bottom_center[0] %>" alt="广告横幅819×119"></a>
+		</div>
+    <% end %>
+
+	</div><!-- /.container-fluid -->
+</div><!-- main-wrapper -->
+<%= render file: 'public/templetes/newshub/_footer.html.erb' %>

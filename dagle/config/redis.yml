@@ -1,0 +1,12 @@
+default: &default
+  url: <%= ENV.fetch('REDIS_URL') %>
+  namespace_suffix: <%= ENV.fetch('APP_NAME', '') %>
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+
+test:
+  <<: *default

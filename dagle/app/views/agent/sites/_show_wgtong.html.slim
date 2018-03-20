@@ -1,0 +1,87 @@
+.container
+  h1 
+    = @agent_site.title || agent_site
+    .pull-right
+      => link_to '编辑', edit_agent_site_path(@agent_site), class: 'btn btn-primary'
+      => link_to '返回', agent_root_path, class: 'btn btn-default'
+
+  .panel
+    .panel-heading
+      .panel-heading-btn
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+          i class="fa fa-expand"
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+          i class="fa fa-minus"
+    .panel-body
+      .profile-container
+        .row
+          - if @agent_site.tanmer_wxopen_token.blank?
+            .col-md-12
+              => link_to fa_icon('weixin', text: '点击绑定公众号'), "https://wxopen.tanmer.com/connect_mp?origin=#{CGI.escape(agent_site_binding_wx_callback_url(site_id: @agent_site.id))}", class: 'btn btn-primary'
+            .col-md-6
+              h5 手动输入token进行绑定
+              = simple_form_for @agent_site, url: agent_site_binding_wx_callback_path(@agent_site.id), method: :post, remote: true do |f|
+                = f.input :tanmer_wxopen_token
+                = f.submit '提交', class: 'btn btn-success'
+          - else
+            p
+              | 已绑定公众号信息：
+            .col-md-2
+              p
+                | 公众号头像：
+                - if @agent_site.wxopen_info['head_img'] == nil
+                  暂无头像
+                - else
+                  img[src="#{@agent_site.wxopen_info['head_img']}" style="width: 80px; height: 80px;"]
+                
+            .col-md-10
+              p
+                | 公众号名称：
+                = @agent_site.wxopen_info['nick_name']
+              p
+                | 公众号类型：
+                = @agent_site.wxopen_info['service_type_info_name']
+              p
+                | 认证情况：
+                = @agent_site.wxopen_info['verify_type_info_name']
+              p
+                | 主体信息：
+                = @agent_site.wxopen_info['principal_name']
+            
+
+        .row
+          .col-md-4.col-xs-6.col-sm-6.p-10
+            span 名称：
+            span = @agent_site.title
+          .col-md-4.col-xs-6.col-sm-6.p-10
+            span 联系人：
+            span = @agent_site.contact_name
+          .col-md-4.col-xs-6.col-sm-6.p-10
+            span 手机号：
+            span = @agent_site.phone
+          .col-md-4.col-xs-6.col-sm-6.p-10
+            span 营业时间：
+            span = @agent_site.business_hours
+          .col-md-4.col-xs-6.col-sm-6.p-10
+            span 人均消费：
+            span = @agent_site.avg_price
+          .col-md-12.col-xs-12.col-sm-12.p-10
+            span 地址：
+            span = @agent_site.address_line
+          .col-md-12.col-xs-12.col-sm-12.p-10
+            span 简要描述：
+            span = @agent_site.description
+          .col-md-12.col-xs-12.col-sm-12.p-10
+            p 背景图片：
+            .gallery#gallery
+              .row
+              -@agent_site.image_items.each do |image|
+                .image.col-sm-6.col-md-4
+                  .image-inner
+                    a[href="javascript:;" data-lightbox="gallery-group-1"]
+                      img[src="#{image.image_url}"]
+                    .image-caption
+                      =image.name
+          .col-md-12.col-xs-12.col-sm-12.p-10.m-b-20
+            span 商家介绍：
+            = raw @agent_site.content

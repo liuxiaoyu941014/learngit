@@ -1,0 +1,189 @@
+<%= render file: @cms_site.template_dir + '_header.html.erb' %>
+<div class="container">
+  <div class="tr-content">
+    <div class="row">
+      <div class="col-sm-8 col-md-12 tr-sticky">
+        <div class="theiaStickySidebar">
+          <div class="breadcrumbs">
+            <a href="/">首页</a>
+            <span>/&nbsp;</span><%= @product.name %>
+          </div>
+          <div class="blog-post">
+            <div class="blog-post-content">
+              <div class="blog-list-desc">
+                <!-- Tags -->
+                <% if @product.tag_list.present? %>
+                  <ul class="blog-tags clearfix">
+                    <li><span>标签</span></li>
+                    <% @product.tag_list.each do |tag| %>
+                      <li><a href="javascript: void(0);"><%= tag %></a></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+                <h3><%= @product.name %></h3>
+                <label>
+                  <span>发布时间：</span>
+                  <%= @product.created_at.year %>年<%= @product.created_at.month %>月<%= @product.created_at.day %>日
+                  <span class="blog-comments">
+                    <i class="fa fa-comment-o"></i>
+                    <a href="javascript:void(0)"><%= @cms_site.previous_page(@product) %></a>
+                  </span>
+                </label>
+              </div>
+
+              <!-- 购买观看 -->
+              <div class="blog-list-desc" style="overflow: hidden;">
+                  <div class="col-md-5">
+                    <%= image_tag('/templetes/eqxiyi/images/b4.png') %>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="formPrice" style="background-color: #fafafa;padding:15px;">
+                      <h4>
+                        <% if @product.discount.present? %>
+                        <span style="background-color: #f08300;padding: 0px 5px; color: #fff; font-size: 13px;">折扣</span>
+                        <% end %>
+                        <%= @product.name %>
+                        <small style="margin-left: 15px; color: #9e9e9e;">
+                          <i class="fa fa-clock-o m-l-5"></i>
+                          <%= @product.service_time %>
+                        </small>
+                      </h4>
+
+                      <label style="margin: 15px 0px; font-size: 12px; color: #9e9e9e;">
+                        <span><%= @product.description %></span>
+                      </label>
+                      <label style="margin: 0px; color: #9e9e9e;">
+                        <% if @product.price != nil && @product.discount != nil %>
+                        折扣价:
+                        <span>￥<%= @product.discount %></span>
+                        [<i style="text-decoration: line-through;font-size: 13px;">￥<%= @product.price %></i>]
+                        <% elsif @product.price != nil && @product.discount == nil %>
+                        价格:
+                        <span>￥<%= @product.price %></span>
+                        <% end %>
+
+
+                      </label>
+
+                      <!-- 支付测试 -->
+                      <%#= current_user.id %>
+                      <% if current_user.present? %>
+                        <%= simple_form_for(current_user.orders.build, url: frontend_orders_path,  method: :post, html: {class: "myform", style: 'margin: 30px 0px;'}) do |f| %>
+                          <% 1.times do |i| %>
+                            <%= hidden_field_tag "order[order_products][][id]", @product.id %>
+                            <%= hidden_field_tag "order[order_products][][amount]", 1 %>
+                            <% if @product.discount.present? %>
+                            <%= hidden_field_tag "order[order_products][][price]", @product.discount %>
+                            <% else %>
+                            <%= hidden_field_tag "order[order_products][][price]", @product.price %>
+                            <% end %>
+                           <% end %>
+                          <%= f.submit '购买', style: 'padding: 6px 10px; background-color: #d12630; color: #fff;', class: 'pinterest' %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to '购买', agent_sign_in_path, class: 'pinterest', style: 'display: inline-block; padding: 6px 10px; background-color: #d12630; color: #fff;margin: 30px 0px;' %>
+                      <% end %>
+
+                      <div class="formOther">
+                        <div class="blog-share" style="margin: 0px;">
+        									<ul class="clearfix">
+                            <li>
+                              <span style="vertical-align: -moz-middle-with-baseline;">分享：</span>
+        										</li>
+        										<li>
+        											<a href="#" class="twitter"><span class="fa fa-qq fa-lg"></span></a>
+        										</li>
+        										<li>
+        											<a href="#" class="gplus" style="background-color: green;"><span class="fa fa-weixin fa-lg"></span></a>
+        										</li>
+        										<li>
+        											<a href="#" class="gplus"><span class="fa fa-weibo fa-lg"></span></a>
+        										</li>
+        									</ul>
+        								</div>
+                      </div>
+
+                    </div>
+
+                    <!-- 支付测试end -->
+                    <!-- <div class="formButton" style="margin-top: 30px;">
+                      <div class="blog-share">
+      									<ul class="clearfix">
+      										<li>
+                            <%= link_to new_frontend_order_path(@product.id), remote: true, class: 'pinterest', style: 'padding: 6px 10px;' do %>
+                              <i class="fa fa-weixin fa-lg"></i>
+                              微信支付
+                            <% end %>
+      										</li>
+      										<li>
+      											<a href="#" class="gplus" style="padding: 6px 10px;">
+                              <i class="fa fa-shopping-cart fa-lg"></i>
+                              加入购物车
+                            </a>
+      										</li>
+      									</ul>
+      								</div>
+                    </div> -->
+
+                  </div>
+              </div>
+
+
+
+              <!-- 支付成功后跳转显示 -->
+              <div class="blog-image">
+                <video controls="controls" width="100%">
+                  <source src="<%= @product.video_url %>" type="video/mp4">
+                  <source src="<%= @product.video_url %>" type="video/ogg">
+                  <source src="<%= @product.video_url %>" type="video/WebM">
+                </video>
+              </div>
+              <!-- <span class="categories"><a href="java">下载视频</a></span> -->
+              <div class="blog-text">
+                <blockquote class="typo_style2 "><p><%= @product.description %></p></blockquote>
+                <p>注意事项：<%= @product.warning_message %></p>
+                <!-- <ul class="typo_tick">
+                  <li><span class="icon"></span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</li>
+                  <li><span class="icon"></span>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem</li>
+                  <li><span class="icon"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+                  <li><span class="icon"></span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit</li>
+                  <li><span class="icon"></span>adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et</li>
+                </ul> -->
+              </div>
+            </div>
+
+
+            <div class="contact-form comment-form clearfix">
+              <h4>给我们宝贵的意见</h4>
+              <%= render file: @cms_site.template_dir + '_form.html.erb' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%#= render file: @cms_site.template_dir + '_sidebar.html.erb' %>
+    </div>
+  </div>
+</div>
+<%= render file: @cms_site.template_dir + '_footer.html.erb' %>
+
+<%#= javascript_include_tag 'frontend/pingpp' %>
+<%#= link_to '微信付款', charge_frontend_product_path(id: 2), method: :post, remote: true %>
+
+<script type="text/javascript">
+  function onStartCharging(charge){
+    console.log('1')
+    pingpp.createPayment(charge, function(result, err){
+      console.log(result);
+      console.log(err.msg);
+      console.log(err.extra);
+      if (result == "success") {
+          // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+      } else if (result == "fail") {
+          // charge 不正确或者微信公众账号支付失败时会在此处返回
+      } else if (result == "cancel") {
+          // 微信公众账号支付取消支付
+      }
+    });
+  }
+
+</script>

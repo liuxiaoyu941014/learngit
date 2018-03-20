@@ -1,0 +1,29 @@
+h1.page-header
+  | 查看#{Cms::Channel.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_cms_site_channel_path(@cms_site, @cms_channel), class: 'btn btn-primary'
+    = link_to '返回', admin_cms_site_channels_path(@cms_site), class: 'btn btn-default'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .row.profile-info
+        .col-md-3
+          h3 = @cms_channel.title
+          small
+            = @cms_channel.short_title
+          hr
+          p
+            = @cms_channel.tmp_index
+          p
+            = @cms_channel.tmp_detail
+          p
+            = @cms_channel.keywords
+        .col-md-9
+          == render 'admin/cms/pages/list'

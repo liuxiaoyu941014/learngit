@@ -1,0 +1,26 @@
+.modal.fade#mobile_login_modal[tabindex="-1"role="dialog"aria-labelledby="myModalLabel"aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal"]
+          span[aria-hidden="true"] &times;
+          span.sr-only" Close
+        h4.modal-title#myModalLabel 手机号登录
+
+      .modal-body
+        = simple_form_for(@user, url: sign_in_path, remote: true, method: :post, html: {class: "margin-bottom-0"}) do |f|
+          - if flash[:alert]
+            .alert.alert-danger
+              = flash[:alert]
+          .form-group.m-b-25.m-t-10
+            input.form-control.input-lg[placeholder="手机号" name="user[mobile]"type="text"]
+          .form-group.m-b-25.p-0.row
+            .col-xs-9
+              input.form-control.input-lg[name="user[code]" type="text"placeholder="验证码"]
+            .col-xs-3.text-right
+              span.btn.btn-default.input-lg.get_code[pop='false' data-url=api_v1_sessions_sms_path] 获取验证码
+          .text-center.title_error
+          hr
+          .login-buttons
+            = f.submit '登录', class: 'btn btn-success btn-block btn-lg', id: 'click_login', data:{href: admin_root_path}
+

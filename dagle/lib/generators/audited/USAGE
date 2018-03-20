@@ -1,0 +1,7 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate audited Thing
+
+    This will add 'audited' to model

@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    title = 'Agent'
+    /[if lt IE9]
+      script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"
+      script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"
+    = javascript_include_tag *webpack_asset_paths('vendor')
+    = javascript_include_tag *webpack_asset_paths('application')
+    = stylesheet_link_tag    'color_admin/agent/application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'color_admin/agent/application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body.bg-silver[class=[controller_path.parameterize, action_name]]
+    #page-container.fade
+      = render 'layouts/agent/topNav'
+      = render "layouts/agent/header/header.#{ENV['PROJECT_NAME'] || 'default'}"
+      = yield
+      = render 'layouts/agent/footer'
+    / / 信息提示ｊｓ
+    / javascript:
+    /   var flashMessages = #{raw flash.to_json};
+    /   for(i = 0; i < flashMessages.length; i++){
+    /     var k = flashMessages[i][0], v = flashMessages[i][1];
+    /     var name = '提示';
+    /     if(k == 'alert') name = '错误';
+    /     $.gritter.add({title: name, text: v});
+    /   }

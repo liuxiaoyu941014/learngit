@@ -1,0 +1,22 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      article: 公告
+    attributes:
+      article:
+        title: 标题
+        description: 内容
+        tag_list: 标签
+        valid_time_begin: 有效期起始时间
+        valid_time_end: 有效期结束时间
+        is_top: 是否置顶
+        article_type: 公告类型
+        article_types:
+          system: 系统公告
+          community: 社区公告
+    errors:
+      models:
+        article: 
+  helpers:
+    article: 

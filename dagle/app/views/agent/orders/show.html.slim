@@ -1,0 +1,317 @@
+/ h1
+/   | 查看 agent_order
+/   .pull-right
+/     = link_to '编辑', edit_agent_order_path(@agent_order), class: 'btn btn-primary'
+/     = link_to '返回', agent_orders_path, class: 'btn btn-primary', class: 'btn btn-primary'
+/ .container.member-container.primary-content[data-notice="#{notice}"]
+/   .panel.panel-default
+/     .panel-heading
+/       .panel-heading-btn
+/         a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+/           i class="fa fa-expand"
+/         a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+/           i class="fa fa-minus"
+/       h4 订单详情
+/     .panel-body
+/
+= render 'order_delivery'
+.section-container.bg-silver.m-b-20.primary-content
+  .container
+    - if Settings.project.dagle?
+      .search-container
+        .search-content
+          .search-toolbar
+            | 订单产品列表
+          .container-list
+            .panel.panel-forum
+              ul.forum-list.forum-topic-list
+                - @order.order_products.each do |order_product|
+                  - product = order_product.product
+                  li
+                    .media
+                      = image_tag(product.first_image)
+                    .info-container
+                      .info
+                        h4.title
+                          = product.name
+                        ul.info-start-end
+                          li.row
+                            .col-xs-6
+                              | 购买数量：
+                              = order_product.amount
+                            .col-xs-6
+                              | 商品金额：
+                              = order_product.price.to_f / 100
+        .search-sidebar
+          h4.title
+            | 订单信息
+          .form-group
+            label.control-label
+              | 订单号：
+            = @order.code
+          .form-group
+            label.control-label
+              | 客户：
+            = @order.user.nickname
+          .form-group
+            label.control-label
+              | 价格：
+            = @order.price.to_f / 100
+          .form-group
+            label.control-label
+              | 订单状态：
+            = decorate(@order).display_status
+          .form-group
+            label.control-label
+              | 订单描述：
+            = @order.description
+
+          .form-group
+            label.control-label
+              | 订单物流：
+            span.display_order_delivery
+              = @order.order_deliveries.first.logistics_name + '(' + @order.order_deliveries.first.logistics_number + ')' unless @order.order_deliveries.first.try(:logistics_name).blank?
+          button.btn.btn-success.btn-sm[data-toggle='modal' data-target='#orderDelivery']
+            = @order.order_deliveries.first.logistics_name.blank? ? '添加物流信息' : '修改物流信息'
+      javascript:
+        $(function() {
+          var bodyShow = $('.agent-orders.show')
+          var orderDelivery = $('#orderDelivery')
+          if (orderDelivery.length > 0) {
+            orderDelivery.each(function() {
+              $(this).on('ajax:success', function(event, request){
+                if(request.status == 'ok') {
+                  bodyShow.find('.display_order_delivery').text(request.message)
+                  orderDelivery.modal('hide')
+                  $.gritter.add({title: '提示', text: '物流信息保存成功'})
+                } else {
+                  bodyShow.find('.error_message').text(request.message)
+                }
+              })
+              $(this).on('ajax:error', function(event, request){
+                $.gritter.add({title: '错误', text: '网络错误'})
+              })
+            })
+          }
+        })
+    - elsif Settings.project.wgtong?
+      = render 'show_wgtong'
+    - else
+      = render 'edit_modal'
+      ol.breadcrumb 
+        li
+          = link_to '订单列表', agent_orders_path
+        li.active
+          span 订单：
+          span = @order.code
+      .panel.panel-default.order-info
+        .panel-body
+          .row
+            .col-xs-3.left-block
+              ul.list-unstyled
+                li.f-s-14.m-b-15
+                  label.control-label
+                    strong 订单信息
+                li
+                  label.control-label
+                    span 订单号：
+                    = @order.code
+                li
+                  label.control-label
+                    span 客户：
+                    = link_to @order.user && @order.user.nickname || '没有客户'
+                li
+                  label.control-label
+                    span 价格：
+                  = @order.price.to_f / 100
+                / li
+                /   label.control-label
+                /     span 订单状态：
+                /     = decorate(@order).display_status
+                li
+                  label.control-label
+                    span #{Order.human_attribute_name(:delivery_fee)}：
+                  = @order.delivery_fee.to_f/100
+                li
+                  label.control-label
+                    span #{Order.human_attribute_name(:delivery_username)}：
+                  = @order.delivery_username
+                li
+                  label.control-label
+                    span #{Order.human_attribute_name(:delivery_phone)}：
+                  = @order.delivery_phone
+                li
+                  label.control-label
+                    span #{Order.human_attribute_name(:delivery_address)}：
+                  = @order.delivery_address
+
+                li
+                  label.control-label
+                    span 订单物流：
+                    span.display_order_delivery[style='width: auto;']
+                      = @order.order_deliveries.first.logistics_name + '(' + @order.order_deliveries.first.logistics_number + ')' unless @order.order_deliveries.first.try(:logistics_name).blank?
+                li
+                  label.control-label
+                    span 订单描述：
+                  p.p-10
+                    mark
+                      = @order.description
+
+            .col-xs-9.right-block
+              .f-s-14.m-b-15.title
+                strong
+                  = @order.status == 'completed' ? '订单已完成' : '订单处理中'
+              / - @order.status = 'open'
+              ul.list-inline[data-statu="#{@order.status}" data-refund-status="#{@order.refund_status}"]
+                li.open
+                  .fa-block
+                    i.fa.fa-edit.fa-2x
+                  .text-center
+                    span 创建订单
+                    .time = @order.created_at.strftime("%Y-%m-%d %H:%M:%S")
+                li.pending
+                  .fa-block
+                    i.fa.fa-id-card-o.fa-2x
+                  .text-center
+                    span.select 待客户付款
+                    span.select 客户已付款
+                - if @order.refund_status
+                  li.apply_refund
+                    .fa-block
+                      i.fa.fa-floppy-o.fa-2x
+                    .text-center
+                      span.select 用户申请退款
+                      span.select 用户申请退款
+                  li.refunding
+                    .fa-block
+                      i.fa.fa-reply.fa-2x
+                    .text-center
+                      span.select 退款中
+                      span.select 退款中
+                  li.refunded
+                    .fa-block
+                        i.fa.fa-check-square-o.fa-2x
+                    .text-center
+                      span.select 退款完成
+                      span.select 退款完成
+                - else
+                  li.paid
+                    .fa-block
+                      i.fa.fa-inbox.fa-2x.text-muted
+                    .text-center
+                      span.select 订单发货
+                      span.select 订单已发货
+                  li.delivering
+                    .fa-block
+                      i.fa.fa-truck.fa-2x
+                    .text-center
+                      span.select 待用户确认收货
+                      span.select 用户已收货
+                  li.completed
+                    / - if @order.status == 'completed'
+                    /   .fa-block.active
+                    /     i.fa.fa-check-square-o.fa-2x
+                    /     = '订单完成'
+                    - if @order.status == 'cancelled'
+                      .fa-block.active-danger
+                        i.fa.fa-check-square-o.fa-2x
+                      .text-center
+                        = '订单已取消'
+                        .time = @order.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+                    - else
+                      .fa-block
+                        i.fa.fa-check-square-o.fa-2x
+                      .text-center
+                        = '订单完成'
+                        .time = @order.status == 'completed' ? @order.updated_at.strftime("%Y-%m-%d %H:%M:%S") : ''
+              - if @order.status == 'cancelled'
+                h3.text-center.m-t-30 订单已关闭
+              - else
+                .text-right.m-t-30.btns
+                  - if @order.status == 'open' || @order.status == 'pending'
+                    button.btn.btn-info.edit-order-btn[type="submit" data-toggle='modal' data-target='#orderEdit'] 订单修改
+                  - if (@order.status == 'open' || @order.status == 'pending' || @order.status == 'paid') && !@order.refund_status
+                    button.btn.btn-warning.order-delivery[type="submit" data-toggle='modal' data-target='#orderDelivery'] 发货
+                    = link_to '关闭订单', agent_order_path(@order, order: {status: 'cancelled'}), remote: true, class: 'button btn btn-default order-status-btn order-cancelled', method: :PATCH
+                  - unless @order.refund_status
+                    = link_to '确认用户已收到货', agent_order_path(@order, order: {status: 'completed'}), remote: true, class: "button btn btn-warning order-status-btn order-delivered #{@order.status == 'delivering' ? '' : 'hide'}", method: :PATCH
+      .panel.panel-default.order-products
+        .panel-heading
+          .row
+            .col-xs-6.text-center 商品
+            .col-xs-3.text-center 商品数量
+            .col-xs-3.text-center 价格
+        .panel-body
+          - if @order.order_products.length < 1
+            .jumbotron
+              p
+                h3.text-center 此订单无商品
+          - totalProductPrice = 0
+          - @order.order_products.each do |product_item|
+            - totalProductPrice += product_item.price
+            .row.m-b-15
+              .col-xs-6
+                = image_tag product_item.product.first_image, style: 'width: 60px;height: 60px', class: 'img-thumbnail m-r-10'
+                span
+                  = product_item.product.name
+              .col-xs-3.text-center
+                = product_item.amount
+              .col-xs-3.text-center
+                = product_item.price / 100.0
+        .panel-footer
+          ul.list-unstyled
+            li
+              span 商品总额：
+              span.float-right = totalProductPrice.to_f / 100
+            li.text-danger
+              span 应付总额：
+              strong.float-right.f-s-18 = (@order.price.to_f / 100)
+      javascript:
+        $(function () {
+          orderStatusDomSelect()
+          $('#orderDelivery').on('ajax:success', function (event, request) {
+            $('.display_order_delivery').text(request.message)
+            $('#orderDelivery').modal('hide').hide()
+            $('.btns .btn').hide()
+            $('a.btn.order-status-btn.order-delivered').removeClass('hide')
+            $('a.btn.order-status-btn.order-delivered').show()
+            $('.order-info .right-block ul').data('statu', 'delivering')
+            $('.order-info .right-block ul li .fa-block.active').removeClass('active')
+            orderStatusDomSelect()
+          })
+          $('#orderDelivery').on('ajax:error', function (event, request) {
+            $.gritter.add({title: '错误', text: '网络错误'})
+          })
+          $('a.btn.order-status-btn').on('ajax:success', function (event, request) {
+            if(request.status == 'ok') {
+              window.location.href = window.location.href
+            } else {
+              $.gritter.add({title: '错误', text: request.message})
+            }
+          })
+          $('a.btn.order-status-btn').on('ajax:error', function (event, request) {
+            $.gritter.add({title: '错误', text: '网络错误'})
+          })
+        })
+
+        function orderStatusDomSelect() {
+          var orderStatu = $('.order-info .right-block ul').data('statu')
+          var orderRefundStatus = $('.order-info .right-block ul').data('refund-status')
+          var i = true
+          $('.order-info .right-block ul li').each(function () {
+            var self = $(this).find('.fa-block')
+            if ($(this).hasClass(orderStatu) || $(this).hasClass(orderRefundStatus)) {
+              self.addClass('active')
+              i = false
+            }
+            $(this).find('.text-center span.select').show()
+            if (i) {
+              self.find('i').addClass('text-success')
+              self.parent().append('<i class="fa fa-2x fa-caret-right success-right"></i>')
+              $(this).find('.text-center span.select').eq(0).hide()
+            } else {
+              self.find('i').addClass('text-muted')
+              $(this).find('.text-center span.select').eq(1).hide()
+            }
+          })
+        }

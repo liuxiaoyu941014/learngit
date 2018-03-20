@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_purchase_detail: Material purchase detail
+    attributes:
+      material_purchase_detail: {}
+    errors:
+      models:
+        material_purchase_detail: 
+  helpers:
+    material_purchase_detail: 

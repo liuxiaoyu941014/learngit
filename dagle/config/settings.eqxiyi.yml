@@ -1,0 +1,55 @@
+default: &default
+  site:
+    name: E启洗
+    host: http://www.lvh.me:5000
+    copyright: © TMF All Right Reserved 2015
+    description: Dagle是一个工厂SaaS软件管理系统。Dagle提供产品管理，库存管理，订单流程管理，经销商分店Web和会员营销管理系统
+    slogan: Dagle智慧工厂
+  email:
+    sender: sender@tmf.com
+  weixin:
+    app_id: wx2112a27b1c8bb766
+    app_secret: d4624c36b6795d1d99dcf0547af5443d
+    token_string: 50c2263e7f076bbe75c50ebd54401963 # 微信Token值
+    secret_string: 0abcf2c591b0a1b209ca12a20a8eda83 # 微信服务URL配置中，此值用来避免真正使用的Token值暴露在URL上，提高安全性。
+    encoding_aes_key:
+  weixin_open_app: # 微信开放平台绑定的APP
+    app_id:
+    app_secret:
+  sms:
+    provider: yun_pian_v1
+    yun_pian_v1:
+      api_key: c97380fa188341572c1bcdadf383dfc2
+    templates:
+      order_notification: "【E启洗】您单号为#order#的订单当前的状态为:#message#。我们将时刻提醒您订单的状态"
+  mobile:
+    auth_token_template: "【E启洗】您的验证码是#code#。如非本人操作，请忽略本短信。"
+
+  payment: # Ping++支付
+    api_id: "app_HOqTe5KCOGq9O088"
+    api_key: "sk_test_fzLyH49WTyzDi9ufH8jzrTyP"
+    channels:
+    - wx
+    - wx_wap
+    enable_pingpp_one: false
+
+  qiniu: &qiniu_credentials
+    access_key: HXrvQOeDfAizpMzdanxSMiotX60zWuDXAseybFcx
+    secret_key: n886ogK5IGUwYx-M4m-NLSaP0-OTGD2_eCCsqId_
+
+  paperclip:
+    enable: true
+    options:
+      storage: :qiniu
+      qiniu_credentials:
+        <<: *qiniu_credentials
+      bucket: tmf
+      use_timestamp: false
+      qiniu_host: ocwr8qu9g.bkt.clouddn.com
+
+development:
+  <<: *default
+production:
+  <<: *default
+test:
+  <<: *default

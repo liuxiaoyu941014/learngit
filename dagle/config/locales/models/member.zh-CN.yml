@@ -1,0 +1,35 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      member: 客户
+    attributes:
+      member:
+        user: 用户
+        site: 站点
+        typo: 类型
+        from: 来源
+        owned: 归属
+        mobile_phone: 手机号
+        name: 会员名称
+        gender: 性别
+        genders:
+          male: 男
+          female: 女
+          secret: 保密
+        birth: 生日
+        qq: QQ号
+        email: 邮箱
+        tel_phone: 座机
+        wechat: 微信号
+        firm: 公司
+        address: 地址
+        note: 备注
+        features: 更多内容
+        real_name: 真实姓名
+        card_id: 身份证
+    errors:
+      models:
+        member:
+  helpers:
+    member:

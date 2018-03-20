@@ -1,0 +1,1 @@
+json.array! @admin_cms_pages, partial: 'admin_cms_pages/admin_cms_page', as: :admin_cms_page

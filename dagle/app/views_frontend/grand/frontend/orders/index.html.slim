@@ -1,0 +1,27 @@
+h1 Listing frontend_orders
+
+table
+  thead
+    tr
+      th User
+      th Product
+      th Price
+      th Status
+      th
+      th
+      th
+
+  tbody
+    - @frontend_orders.each do |frontend_order|
+      tr
+        td = frontend_order.user
+        td = frontend_order.product
+        td = frontend_order.price
+        td = frontend_order.status
+        td = link_to 'Show', frontend_order
+        td = link_to 'Edit', edit_frontend_order_path(frontend_order)
+        td = link_to 'Destroy', frontend_order, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Order', new_frontend_order_path

@@ -1,0 +1,7 @@
+h1.page-header
+  | 编辑#{Comment::Entry.model_name.human}
+  .pull-right
+    => link_to '查看', admin_comment_path(@admin_comment), class: 'btn btn-primary'
+    = link_to '返回', admin_comments_path, class: 'btn btn-primary'
+
+== render 'form'

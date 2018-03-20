@@ -1,0 +1,18 @@
+h1
+  | 查看 agent_member_note
+  .pull-right
+    = link_to '编辑', edit_agent_member_note_path(@agent_member_note), class: 'btn btn-primary'
+    = link_to '返回', agent_member_notes_path, class: 'btn btn-default'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4 查看 agent_member_note
+  .panel-body
+    dl
+      dt: strong Message
+      dd = @agent_member_note.message

@@ -1,0 +1,12 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+      = simple_form_for @role, url: admin_role_path(@role) do |f|
+        = f.input :name
+        = f.input :role_name
+        = f.submit class: 'btn btn-primary btn-block'

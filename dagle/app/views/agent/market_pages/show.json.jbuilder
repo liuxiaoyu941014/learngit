@@ -1,0 +1,1 @@
+json.partial! "market_pages/agent_market_page", agent_market_page: @agent_market_page

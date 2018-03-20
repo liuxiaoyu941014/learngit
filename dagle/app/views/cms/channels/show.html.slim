@@ -1,0 +1,36 @@
+.container
+  h2
+    = @cms_channel.title
+    .pull-right
+      => link_to '添加页面', new_cms_site_channel_page_path(@cms_site, @cms_channel), class: 'btn btn-success'
+      => link_to '预览', get_cms_url(@cms_channel, subdomain: @cms_site.domain), target: '_blank', class: 'btn btn-info'
+      => link_to '返回', cms_site_path(@cms_site), class: 'btn btn-default'
+
+  .row
+    .col-md-3
+
+      h2
+        = @cms_channel.short_title
+      p
+        strong 封面模版:
+        = @cms_channel.tmp_index
+      p
+        strong 详细页面模版:
+        = @cms_channel.tmp_detail
+      hr/
+      => link_to '编辑栏目', edit_cms_site_channel_path(@cms_site, @cms_channel), class: 'btn btn-primary'
+
+      = link_to '删除此栏目', cms_site_channel_path(@cms_site, @cms_channel), method: :delete, data: { confirm: '谨慎！删除以后，将同时删除此栏目下的所有页面，而且无法恢复，请确认要删除?' }, class: 'btn btn-default'
+      p
+    .col-md-9
+      .panel
+        .panel-heading
+          .panel-heading-btn
+            a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+              i class="fa fa-expand"
+            a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+              i class="fa fa-minus"
+          h4 栏目页面
+        .panel-body
+
+          = render 'cms/pages/list'

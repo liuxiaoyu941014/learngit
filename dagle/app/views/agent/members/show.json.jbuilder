@@ -1,0 +1,1 @@
+json.partial! "agent_members/agent_member", agent_member: @agent_member

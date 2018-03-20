@@ -1,0 +1,18 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      market_page: 营销页
+    attributes:
+      market_page:
+        site: 站点
+        market_template: 模板
+        name: 标题
+        description: 描述
+        content: 内容
+        features: Features
+    errors:
+      models:
+        market_page:
+  helpers:
+    market_page:

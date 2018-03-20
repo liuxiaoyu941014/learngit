@@ -1,0 +1,8 @@
+.container.m-t-20
+  h1 
+    | 申请提现
+    small 选择要提现的订单进行提现申请
+    .pull-right
+      = link_to '返回', agent_finance_bills_path, class: 'btn btn-primary'
+
+  == render 'form'

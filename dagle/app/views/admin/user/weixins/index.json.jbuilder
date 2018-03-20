@@ -1,0 +1,1 @@
+json.array! @admin_user_weixins, partial: 'admin_user_weixins/admin_user_weixin', as: :admin_user_weixin

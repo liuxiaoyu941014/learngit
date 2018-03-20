@@ -1,0 +1,17 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @task, url: @task.new_record? ? admin_tasks_path : admin_task_path(@task), validate: true do |f|
+      - if @task.errors.any?
+        #error_explanation
+          
+          ul
+            - @task.errors.full_messages.each do |message|
+              li = message
+
+      = f.submit class: 'btn btn-success btn-block'

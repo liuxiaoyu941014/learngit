@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      account: Account
+    attributes:
+      account:
+        owner: Owner
+        name: Name
+        amount: Amount
+    errors:
+      models:
+        account: 
+  helpers:
+    account: 

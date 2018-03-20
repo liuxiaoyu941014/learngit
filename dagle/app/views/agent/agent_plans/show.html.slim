@@ -1,0 +1,16 @@
+h1 
+  | 查看 agent_agent_plan
+  .pull-right
+    = link_to '编辑', edit_agent_agent_plan_path(@agent_agent_plan), class: 'btn btn-primary'
+    = link_to '返回', agent_agent_plans_path, class: 'btn btn-primary', class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4 查看 agent_agent_plan
+  .panel-body
+    dl

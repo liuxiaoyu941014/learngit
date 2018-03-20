@@ -1,0 +1,57 @@
+h1 我的个人信息
+
+h2 绑定微信
+
+- if current_user.weixin
+  p 已绑定
+- else
+  img#qrcode-auth-image width="180" style="margin-left: 50%; transform: translateX(-50%)"
+  p#qrcode-auth-message align="center"
+  javascript:
+    var QrcodeAuth = function (){
+      var instance = this;
+      this.init = function() {
+        $.getJSON('#{Settings.weixin_login.host}/wx/mp_auth/qrcode/#{Settings.weixin_login.appid}.json?title=#{URI.encode(Settings.site.name)}', function(data){
+          $('img#qrcode-auth-image').attr('src', data.svg)
+          instance.ping(data)
+        })
+      }
+
+      this.ping = function(response) {
+        $.getJSON(response.status_url, function(data){
+          console.log(data)
+          switch(data.status){
+            case 'confirmed':
+              $('#qrcode-auth-message').text('已确认登录，正在获取用户信息...')
+              instance.connect(response.code)
+              break;
+            case 'waiting':
+              $('#qrcode-auth-message').text('正在等待扫码...')
+              setTimeout(instance.ping, 5000, response)
+              break;
+            case 'confirming':
+              $('#qrcode-auth-message').text('等待微信端确认...')
+              setTimeout(instance.ping, 5000, response)
+              break;
+            case 'expired':
+              $('#qrcode-auth-message').text('二维码过期，正在刷新二维码...')
+              instance.init()
+              break;
+          }
+        })
+      }
+
+      this.connect = function(code) {
+        var url = "#{admin_profile_connect_weixin_url }";
+        $.post(url, { code: code }, function(data){
+          if (data.success) {
+            $('#qrcode-auth-message').text('绑定成功')
+          } else {
+            $('#qrcode-auth-message').text('绑定失败')
+          }
+        })
+      }
+    }
+    $(function(){
+      (new QrcodeAuth()).init()
+    })

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Max Solaris documentation</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,400italic,700,400' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src='js/jquery.scrollto.js'></script>
+    
+</head>
+
+
+
+<body>
+
+
+<div id="wrapper">
+
+
+<header>
+    <div class="container clearfix">
+        <div id="title" class="text-right">
+            <h2 >MaxSolaris documentation</h2>
+			version 1.0
+        </div>
+    </div>
+</header>
+
+
+
+<div id="main">
+    <div class="container clearfix">
+        
+        
+        <div id="sidebar">
+            <div id="nav-anchor"></div>
+            <nav>
+                <ul class="list">
+					<li><img src="img/logo2.png" alt="" width="100%"> </li>
+					<li><a class="" href="#start">Start</a></li>
+					<li><a href="#init_templates" class="">Ajax Page init</a></li>
+					<li><a href="#page_templates" class="">Page Templates</a></li>
+                    <li><a href="#Themes" class="">Themes</a></li>
+					<li><a href="#credits" class="current">Support </a></li>
+                </ul>
+            </nav>
+        </div><!-- /sidebar -->
+        
+        
+        <div id="content">
+            <section id="home">
+                <h1>MaxSolaris <small><br>Multipurpose Mobile and tablet template </small></h1>               
+                <p><br><br><img src="img/logo.png" alt=""><br><br>created:16-8-16<br>by: maxartkiller<br>email: info@maxartkiller.in </p>
+            </section>
+            
+        
+            <section id="start">
+                <h1>GETTING STARTED</h1>
+                
+                <p>
+                    <b> HTML/CSS </b><br>All pages are created with CSS and HTML. Files are organized with standard folder structures like all diferent in different folders CSS. JS, Images, fonts. You can keep what you need to use<br><br>
+                   
+                    <b>BEST DESIGN</b><br>Framework7 is full featured HTML framework for creating iOS & Android apps. You can refer and explore more features and code execution, customization<br><br>
+                   
+                    <b>ICONS LIBRARY</b><br>We all know who are in weba nd appp design that we love font icons. Her we have used Fontaweome icon set. Customize sizes by just css font-size: value<br><br>
+                    Below code is presented for page structure of default index.html page. As normal practice attached csss files meta tags, titles into head tags. Before bosy closing attach all js files required for templates including framework js.
+                </p>
+				<h2>File structure</h2>
+                <p>
+					<span class="imagecontainer">
+						<img src="img/1.png" alt="">
+					</span>
+                </p>
+            
+                <p>
+                   All css, js and images files kept in perticlular folder. to make easy to update
+                </p>
+                <h2>CSS Stylesheet</h2>
+                <p>					
+					<span class="imagecontainer">
+						<img src="img/themes.png" alt="" />
+					</span>
+                </p>
+            
+              
+            </section>
+            
+            
+            
+            <section id="init_templates">
+             <h1>AJAX PAGE INITIALIZATION</h1>
+                <p>We have used framework7 and attached all required files at before body closing,In order to navigate apages and creatin pages, We need to initialize our application and view to run files as per framework configuration below id sample code for app initializaton Custome code can be placed at maxframes.js or app.js file:
+                </p>
+                <h2>Code view </h2>
+				<p>					
+					<span class="imagecontainer">
+						<img src="img/2.png" alt="" >
+					</span>
+                </p>
+            </section>
+            
+            
+            
+           
+    
+            <section id="page_templates">
+                <h1>CREATING OTHER PAGES WITH THE FRAMEWORK</h1>
+                
+                <p>
+                    To create othere pages we dont required to place all page code like header and foooter js codes. We can just call inner conetn of views from ajax page loadin. So just create those elements only. Here is presentaed sample page created as about.html file:
+                </p>
+				
+                    <h2>Code view </h2>
+                    <p>					
+                        <span class="imagecontainer">
+                            <img src="img/2.png" alt="" >
+                        </span>
+                    </p> 
+                
+                    <h2>Use scripts inside page init </h2>
+                    <p>					
+                        <span class="imagecontainer">
+                            <img src="img/pageiitfunctioncall.png" alt="" >
+                        </span>
+                    </p>
+              
+            </section>
+    
+            <section id="Themes">
+                <h1>THEMES</h1>
+                <p>
+                   While you need to update your theme, you need to change body tag class to the theme you need to apply. Here instead of theme-pink you can use theme-blue, theme-yellow, theme-lime. you can also preview from our demo application under menu > themes page.
+                    <span class="imagecontainer">
+						<img src="img/themes.png" alt="" >
+					</span>
+                </p>
+                
+              
+            </section>
+
+        
+            <section id="credits">
+                <img src="img/guide.jpg" alt="" >
+                <h2>Support</h2>
+                <p>
+                   Anytime if you require help or support. Feel free to contact me anytime. I will reply in 48 hours. Send a mail from my Themeforest Profile<br><br><br>
+                </p>
+              
+                 <h2>Thank you</h2><br>
+                   We always try to make things as fluid as posible with the best things only <br><br><br>
+                
+            </section>
+        
+        </div><!-- /#content -->
+        
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+    
+
+        
+    $(document).ready(function(){
+        
+        /** 
+         * This part does the "fixed navigation after scroll" functionality
+         * We use the jQuery function scroll() to recalculate our variables as the 
+         * page is scrolled/
+         */
+        $(window).scroll(function(){
+            var window_top = $(window).scrollTop() + 12; // the "12" should equal the margin-top value for nav.stick
+            var div_top = $('#nav-anchor').offset().top;
+                if (window_top > div_top) {
+                    $('nav').addClass('stick');
+                } else {
+                    $('nav').removeClass('stick');
+                }
+        });
+        
+        
+        /**
+         * This part causes smooth scrolling using scrollto.js
+         * We target all a tags inside the nav, and apply the scrollto.js to it.
+         */
+        $("nav a").click(function(evn){
+            evn.preventDefault();
+            $('html,body').scrollTo(this.hash, this.hash); 
+        });
+        
+        
+        
+        /**
+         * This part handles the highlighting functionality.
+         * We use the scroll functionality again, some array creation and 
+         * manipulation, class adding and class removing, and conditional testing
+         */
+        var aChildren = $("nav li").children(); // find the a children of the list items
+        var aArray = []; // create the empty aArray
+        for (var i=0; i < aChildren.length; i++) {    
+            var aChild = aChildren[i];
+            var ahref = $(aChild).attr('href');
+            aArray.push(ahref);
+        } // this for loop fills the aArray with attribute href values
+        
+        $(window).scroll(function(){
+            var windowPos = $(window).scrollTop(); // get the offset of the window from the top of page
+            var windowHeight = $(window).height(); // get the height of the window
+            var docHeight = $(document).height();
+            
+            for (var i=0; i < aArray.length; i++) {
+                var theID = aArray[i];
+                var divPos = $(theID).offset().top; // get the offset of the div from the top of page
+                var divHeight = $(theID).height(); // get the height of the div in question
+                if (windowPos >= divPos && windowPos < (divPos + divHeight)) {
+                    $("a[href='" + theID + "']").addClass("nav-active");
+                } else {
+                    $("a[href='" + theID + "']").removeClass("nav-active");
+                }
+            }
+            
+            if(windowPos + windowHeight == docHeight) {
+                if (!$("nav li:last-child a").hasClass("nav-active")) {
+                    var navActiveCurrent = $(".nav-active").attr("href");
+                    $("a[href='" + navActiveCurrent + "']").removeClass("nav-active");
+                    $("nav li:last-child a").addClass("nav-active");
+                }
+            }
+        });
+    });
+
+</script>
+
+
+
+
+</body>
+</html>

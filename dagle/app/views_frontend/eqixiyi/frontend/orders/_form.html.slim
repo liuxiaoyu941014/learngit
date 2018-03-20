@@ -1,0 +1,10 @@
+= simple_form_for(@order, url: frontend_orders_path) do |f|
+  = f.error_notification
+
+  .form-inputs
+
+    = f.input :price
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,240 @@
+- content_for(:head) do
+  script[src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js" charset="utf-8" type="text/javascript"]
+  script[src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js" charset="utf-8" type="text/javascript"]
+
+  css:
+    .error{
+      color: #80E3D1;
+    }
+    .cover_box_bg {
+      padding: 15px;
+      background-color: #63D5C4;
+      box-shadow: 1px -3px 20px 1px #000;
+    }
+    .color-white {
+      color: #fff !important;
+    }
+    .color-green {
+      color: #53C5B9 !important;
+    }
+    .cover_box_bg .cover_center{
+      border-radius: 10px;
+      box-shadow: 0px 0px 60px -10px #000;
+      overflow: hidden;
+    }
+    .cover_box_bg .cover_center .center_left{
+      background: linear-gradient(#80E3D1, #63D5C4);
+      background: -webkit-linear-gradient(#80E3D1, #63D5C4);
+      background: -moz-linear-gradient(#80E3D1, #63D5C4);
+      height: 600px;
+      padding: 0px 15px;
+    }
+    .cover_box_bg .cover_center .center_left .center_left_top {
+      color: #fff;
+      margin-top: 15px;
+      font-size: 25px;
+    }
+    .cover_box_bg .cover_center .center_right {
+      background-color: #3C3E52;
+      height: 600px;
+    }
+    .left_header{
+      margin: 100px 30px 50px 30px;
+    }
+    .left_header .left-small{
+      margin: 15px 0px;
+      line-height: 30px;
+      letter-spacing: 0.05em;
+    }
+    .cover_box_bg .cover_center .center_left .tree_style {
+      font-size: calc(100% + 250px);
+    }
+    .cover_box_bg .cover_center .center_left .grass_style {
+      font-size: calc(100% + 50px);
+    }
+    .right_btn {
+      color: #fff;
+      background: #666;
+      background-color: #666;
+      border-radius: 18px;
+    }
+    .right_btn:hover {
+      color: #fff;
+      background: #80E3D1;
+      background-color: #80E3D1;
+    }
+    .right_btn:focus {
+      color: #fff;
+      outline-style: none;
+    }
+    .right_btn_bg {
+      color: #fff;
+      background: #80E3D1;
+      background-color: #80E3D1;
+      box-shadow: -1px 11px 13px -5px #2e2e2e;
+    }
+
+
+.container-fluid[class="cover_box_bg" id="cover_bg"]
+  .container[class="cover_center"]
+    .row
+      .col-md-6[class="hidden-xs center_left"]
+        p
+          span[class="glyphicon glyphicon-th-list center_left_top"]
+          span[class="color-white" style="margin-left: 10px; font-size: 20px;"]
+            = Settings.site.name
+        h2[class="color-white text-center left_header"]
+          .small[class="color-white left-small"]
+            = Settings.site.description
+        div[class="left-content-icon text-center color-green"]
+          span[class="content-icon glyphicon glyphicon glyphicon-grain grass_style"]
+          span[class="content-icon glyphicon glyphicon-tree-deciduous tree_style"]
+          span[class="content-icon glyphicon glyphicon glyphicon-grain grass_style"]
+
+      .col-md-6[class=" col-xs-12 center_right"]
+        .row[style="margin-top: 15px;"]
+          .col-md-7.col-md-offset-5
+            div[class="btn-group text-center #{mobile_device? ? 'btn-group-xs' : 'btn-group-md'}" role="group" aria-label="..." style="margin: 0 atuo;"]
+              button[onclick="mobileRegister()" type="button" class="btn right_btn right_btn_bg"]
+                | 手机号注册
+              button[onclick="wechatRegister()" type="button" class="btn right_btn"]
+                | 微信扫码注册
+              - unless Settings.project.wgtong?
+                button[onclick="emailRegister()" type="button" class="btn right_btn"]
+                  | 邮箱注册
+
+        .row[style="margin-top: 80px;"]
+          .col-md-8.col-md-offset-2
+            div[id="bind-mobile" style="display: block"]
+              h3[style="color: #999;"] 注册
+              = simple_form_for(@user, url: sign_up_path, remote: true, method: :post, html: {class: "margin-bottom-0 register", id: 'phoneForm'}) do |f|
+                - if flash[:alert]
+                  .alert.alert-danger
+                    = flash[:alert]
+                .form-group[style="margin-top: 30px;"]
+                  label[style="color: #eee;"] 手机号
+                  input.form-control.input-md[placeholder="手机号"name="user[mobile]"type="username"required]
+                  input.[type="hidden" name="user[wechat_code]" id="wechat-response-code"]
+                .input-group[style="margin-top: 30px;"]
+                  label[style="color: #eee;"] 验证码
+                  input.form-control.input-md[name="user[code]"type="text"placeholder="验证码" style="border-radius: 4px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;"]
+                  .input-group-btn[style="vertical-align: bottom;"]
+                    button.btn.btn-default.input-md.get_code[data-url=api_v1_sessions_sms_path] 获取验证码
+                .text-center.text-danger.title_error
+                .login-buttons[style="margin-top: 30px;"]
+                  = f.submit '立即注册', class: 'btn btn-lg right_btn right_btn_bg', id: 'click_login', data:{href: root_path}
+
+            div[id="bind-wechat" style="display: none" data-url=sign_up_path]
+              h3.text-center[style="color: #999;"] 绑定微信
+              img[id="qrcode-auth-image" width="180" style="margin-left: 50%; transform: translateX(-50%); background: #eee; padding: 10px;"]
+              p[align="center" id="qrcode-auth-message" style="color: #eee;margin-top:15px;"]
+
+            div[id="bind-email" style="display: none"]
+              h3[style="color: #999;"] 邮箱注册
+              = simple_form_for(@user, url: sign_up_path, remote: true, method: :post, html: {class: "margin-bottom-0 register", id: "emailForm"}) do |f|
+                - if flash[:alert]
+                  .alert.alert-danger
+                    = flash[:alert]
+
+                .form-group[style="margin-top: 30px;"]
+                  label[style="color: #eee;"] 邮箱
+                  input.form-control.input-md[placeholder="邮箱"name="user[email]"type="text"required]
+
+                .form-group[style="margin-top: 30px;"]
+                  label[style="color: #eee;"] 密码
+                  input.form-control.input-md[name="user[password]"type="password"placeholder="密码"required]
+
+                .form-group[style="margin-top: 30px;"]
+                  label[style="color: #eee;"] 确认密码
+                  input.form-control.input-md[name="user[password_confirmation]"type="password"placeholder="确认密码"required]
+
+                .text-center.text-danger.title_error
+
+                .login-buttons[style="margin-top: 30px;"]
+                  = f.submit '立即注册', class: 'btn btn-lg right_btn right_btn_bg', id: 'click_login', data:{href: root_path}
+
+javascript:
+  $(document).ready(function () {
+
+    $("#phoneForm").validate();
+
+    $("#emailForm").validate();
+
+
+    $(".right_btn").click(function() {
+      $(this).addClass('right_btn_bg').siblings().removeClass('right_btn_bg')
+    })
+    var wd_height = $(window).height()
+    var wd_width = $(window).width()
+
+    $("#cover_bg").css({"height": wd_height / 2, "width": wd_width})
+  })
+
+  function mobileRegister () {
+    $('#bind-wechat').css('display', 'none')
+    $('#bind-mobile').css('display', 'block')
+    $('#bind-email').css('display', 'none')
+  }
+  function wechatRegister () {
+    $('#bind-wechat').css('display', 'block')
+    $('#bind-mobile').css('display', 'none')
+    $('#bind-email').css('display', 'none')
+  }
+  function emailRegister () {
+    $('#bind-email').css('display', 'block')
+    $('#bind-mobile').css('display', 'none')
+    $('#bind-wechat').css('display', 'none')
+  }
+
+  var QrcodeAuth = function (){
+    var instance = this;
+    this.init = function() {
+      $.getJSON("#{Settings.weixin_login.host}/wx/mp_auth/qrcode/#{Settings.weixin_login.appid}.json?title=#{Settings.site.name}", function(data){
+        $('img#qrcode-auth-image').attr('src', data.svg)
+        instance.ping(data)
+      })
+    }
+
+    this.ping = function(response) {
+      $.getJSON(response.status_url, function(data){
+        console.log(data)
+        switch(data.status){
+          case 'confirmed':
+            $('#qrcode-auth-message').text('以获取微信信息,正在注册中...')
+            instance.fetchUid(response.code)
+            //$("#wechat-response-code").val(response.code)
+            //$('#bind-wechat').css('display', 'none')
+            //$('#bind-mobile').css('display', 'block')
+            //$('#mobile-text').text('微信绑定手机号')
+            break;
+          case 'waiting':
+            $('#qrcode-auth-message').text('正在等待扫码...')
+            setTimeout(instance.ping, 5000, response)
+            break;
+          case 'confirming':
+            $('#qrcode-auth-message').text('等待微信端确认...')
+            setTimeout(instance.ping, 5000, response)
+            break;
+          case 'expired':
+            $('#qrcode-auth-message').text('二维码过期，正在刷新二维码...')
+            instance.init()
+            break;
+        }
+      })
+    }
+
+    this.fetchUid = function(code) {
+      var post_url = $("#bind-wechat").data('url')
+      $.post(post_url, {user: {weixin_code: code}}, function (data, status) {
+        if (data["error"]) {
+          $('#qrcode-auth-message').text(data["error"])
+        } else {
+          var body = $('body.users-registrations.new')
+          window.location.href = body.find('#click_login').data('href')
+        }
+      })
+    }
+  }
+  $(function(){
+    (new QrcodeAuth()).init()
+  })

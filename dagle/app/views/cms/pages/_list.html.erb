@@ -1,0 +1,62 @@
+<div class="panel panel-forum">
+    <!-- begin panel-heading -->
+    <div class="panel-heading">
+        <h4 class="panel-title">页面列表</h4>
+    </div>
+    <!-- end panel-heading -->
+    <div class="panel-body">
+      <!-- begin forum-list -->
+      <% if @cms_pages.empty? %>
+        <p> 该栏目没有任何页面，</p>
+        <%= link_to '点击这里添加!', new_cms_site_channel_page_path(@cms_site, @cms_channel), class: 'btn btn-success'  %>
+      <% end %>
+
+      <ul class="forum-list">
+        <% @cms_pages.each do |cms_page| %>
+          <li>
+              <!-- begin media -->
+              <div class="media">
+                <%= image_tag cms_page.show_image %>
+                <i><%= cms_page.id %></i>
+              </div>
+              <!-- end media -->
+              <!-- begin info-container -->
+              <div class="info-container">
+                  <div class="info">
+                      <h4 class="title">
+                        <%=link_to cms_page.title, edit_cms_site_channel_page_path(@cms_site, cms_page.channel, cms_page), style: 'color: green;'%></h4>
+                      <p class="desc">
+                        <small><%= link_to cms_page.channel.title, cms_site_channel_path(@cms_site, cms_page.channel) %> / </small>
+                        <strong>&nbsp;&nbsp;<%= cms_page.keywords %></strong><br/>
+                        描述： <%= cms_page.description %>
+                      </p>
+                  </div>
+                  <div class="total-count">
+                      <span class="total-post"><%= cms_page.impressions_count %></span>
+                      <span class="divider">/</span>
+                      <span class="total-comment"><%= cms_page.impressionist_count %></span>
+                      <p>
+                        <% cms_page.properties.map{|p| Cms::Page::PROPERTIES[p.to_sym]}.compact.each do |pro| %>
+                          <span class="label label-<%= rand_color %>"><%= pro %></span>
+                        <% end %>
+                      </p>
+                  </div>
+                  <div class="latest-post">
+                      <h4 class="title"><%= distance_of_time_in_words_to_now(cms_page.updated_at) %>前更新</h4>
+                      <p class="time">
+                        更新次数： <%= cms_page.audits.count %><br/>
+                        最后更新： <%= cms_page.try(:audits).try(:last).try(:user).try(:nickname) %></p>
+                      <hr/>
+                      <%= link_to '编辑', edit_cms_site_channel_page_path(@cms_site, cms_page.channel, cms_page), class: 'btn btn-sm btn-success m-r-5' %>
+                      <%= link_to '预览', get_cms_url(cms_page, subdomain: @cms_site.domain), class: 'btn btn-sm btn-info', target: '_blank' %>
+                      <%= link_to '删除', cms_site_channel_page_path(@cms_site, cms_page.channel, cms_page), method: :delete, data: { confirm: '删除以后无法恢复，请确认要删除?' }, class: 'btn btn-sm btn-default m-r-5' %>
+                  </div>
+              </div>
+              <!-- end info-container -->
+          </li>
+        <% end %>
+      </ul>
+      <!-- end forum-list -->
+      <%= paginate @cms_pages %>
+    </div>
+</div>

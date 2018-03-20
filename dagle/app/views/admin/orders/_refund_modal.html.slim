@@ -1,0 +1,21 @@
+.modal.fade#refundModal.bs-example-modal-lg[tabindex="-1" role="dialog" rel="edit-modal" aria-labelledby="myModalLabel"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+        h4.modal-title#myModalLabel 退款申请
+      = simple_form_for @order, url: apply_refund_admin_order_path(@order), method: :post, remote: true do |f|
+        .modal-body.p-30
+          .row
+            .alert.alert-danger.fade.in.m-b-15.hide
+							strong 错误!&nbsp;
+							span.title
+							span.close[data-dismiss="alert"] &times;
+          .row
+            .col-xs-12
+              .form-group
+                = f.input :refund_description
+        .modal-footer
+          button.btn.btn-default[type="button" data-dismiss="modal"] 取消
+          = f.submit '申请退款', class: 'btn btn-primary'

@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    banners:
+      index:
+        title: Banners
+      show:
+        title: Banner
+      edit:
+        title: Editing Banner
+      new:
+        title: New Banner
+  flash:
+    admin:
+      banners:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

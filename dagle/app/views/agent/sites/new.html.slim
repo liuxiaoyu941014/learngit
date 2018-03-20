@@ -1,0 +1,17 @@
+.container
+  h1.text-center
+    | 第一次使用本系统，给自己取个名字吧？
+  div
+    = form_for @agent_site, url: @agent_site.new_record? ? agent_sites_path(@agent_site) : agent_site_path(@agent_site), html: { class: 'form-horizontal' } do |f|
+      - if @agent_site.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@agent_site.errors.count, "error")} prohibited this agent_site from being saved:"
+          ul
+            - @agent_site.errors.full_messages.each do |message|
+              li = message
+      .form-group
+        .col-md-12
+          = f.text_field :title, class: 'form-control'
+      .form-group
+        .col-md-12
+          = f.submit '提交保存', class: 'btn btn-success'

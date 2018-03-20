@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      ticket: Ticket
+    attributes:
+      ticket: {}
+    errors:
+      models:
+        ticket: 
+  helpers:
+    ticket: 

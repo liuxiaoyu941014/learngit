@@ -1,0 +1,11 @@
+h1.page-header
+  | #{Site.model_name.human}
+  .pull-right
+    => link_to '修改信息', edit_admin_site_path(@site), class: 'btn btn-primary'
+    - if Settings.project.imolin? || Settings.project.wgtong?
+      => link_to '重新定位', edit_admin_site_path(@site, map: true), class: 'btn btn-primary', 'data-turbolinks': false
+    => link_to '查看', admin_site_path(@site), class: 'btn btn-info'
+    => link_to '去往数据合并', admin_forage_data_caches_path, class: 'btn btn-info' if @site.is_foraged
+    = link_to '返回', admin_sites_path, class: 'btn btn-default'
+
+== render 'form'

@@ -1,0 +1,103 @@
+h1.page-header
+  | #{MaterialPurchase.model_name.human}列表
+  .pull-right
+    / = link_to "新建#{MaterialPurchase.model_name.human}", new_admin_material_purchase_path, class: 'btn btn-primary'
+
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title
+      | #{MaterialPurchase.model_name.human}
+  .panel-body
+    = form_for :search, url:  admin_material_purchases_path, method: :get do |f|
+      .toolbar.row
+        .col-md-2.m-b-10
+          input[type="text" name="code" placeholder="输入采购单号" class="form-control" value="#{params[:code]}"]
+        .col-md-2
+          input[type="text" name="vendor_name" placeholder="供应商名称" class="form-control" value="#{params[:vendor_name]}"]
+        .col-md-2
+          input[type="text" name="daterange" class="form-control" placeholder="请选择日期范围" value="#{params['daterange']}"]
+        .col-md-2
+          = f.select "status", enum_options_for_select(MaterialPurchase, 'status'), {selected: params[:search] && params[:search][:status], prompt: '所有状态', include_blank: true}, class: 'form-control'
+        .col-md-2
+          button.btn.btn-success[type="submit"] 搜索
+          button.btn.btn-default[type='submit'name='csv'value='csv'] csv下载
+      .well.form-horizontal
+        .row
+          .col-md-6
+            h4.text-info 
+              | 采购总额: 
+              = @material_purchases.sum{|mp| mp.amount.to_f}.round
+              | 元, &nbsp;&nbsp;
+              | 已付金额: 
+              = @material_purchases.sum{|mp| mp.paid.to_f}.round
+              | 元 &nbsp;&nbsp;
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th 采购单号
+            th 供应商
+            th 操作日期
+            th 总金额
+            th 采购总数
+            th 已付金额
+            th 送货日期
+            th 状态
+        tbody
+          - @material_purchases.each do |material_purchase|
+            tr
+              td 
+                = material_purchase.code
+              td
+                = material_purchase.vendor.try(:name)
+              td
+                = material_purchase.purchase_date
+              td
+                = material_purchase.amount
+              td
+                = material_purchase.total
+              td
+                = material_purchase.paid
+              td
+                = material_purchase.delivery_date
+              td
+                = enum_i18n(MaterialPurchase, 'status', material_purchase.status)
+                / => link_to '查看', admin_material_purchase_path(material_purchase), class: 'btn btn-xs btn-default'
+                / => link_to '编辑', edit_admin_material_purchase_path(material_purchase), class: 'btn btn-xs btn-default'
+                / = link_to '删除', admin_material_purchase_path(material_purchase), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-xs btn-danger'
+      = paginate @material_purchases
+
+/ TODO: move this code to application.js
+javascript:
+  $(document).ready(function(){
+    bindRemoveLabel('.well.filter_search label.control-label');
+    $('form #search_column li a').off().on('click', function(){
+      if($('.well.filter_search .form-group').length == 0){
+        $('.well.form-horizontal.filter_search').removeClass('hidden').addClass('show');
+      }
+      var column_name = $(this).text();
+      var column_key = $(this).data('key');
+      var name = "filters["+ column_key +"]";
+      input_name = "input[name='" + name +"']";
+      if(!$('.well.filter_search').find(input_name).length > 0){
+        $('.well.filter_search hr').before("<div class='form-group'><label class='col-xs-1 control-label'><i class='fa fa-trash-o m-r-5'></i><b>"+ column_name +"</b></label><div class='col-xs-5'><input class='form-control' name='"+ name +"' type='text'></div></div>");
+        $('.well.filter_search .control-label i.fa-trash-o').off();
+        bindRemoveLabel('.well.filter_search label.control-label');
+      }
+    })
+
+    function bindRemoveLabel(dom){
+      $(dom).on('click', function(){
+        $(this).parent('.form-group').remove();
+        if($('.well.filter_search .form-group').length == 0){
+          $('.well.filter_search').addClass('hidden');
+        }
+      })
+    }
+
+  })

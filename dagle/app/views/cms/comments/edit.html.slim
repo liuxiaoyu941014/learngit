@@ -1,0 +1,14 @@
+.container
+  h2
+    | 留言管理
+    .pull-right
+      => link_to '返回', cms_site_comments_path(@cms_site), class: 'btn btn-default'
+  .panel
+    .panel-heading
+      .panel-heading-btn
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+          i class="fa fa-expand"
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+          i class="fa fa-minus"
+    .panel-body
+       == render 'form'

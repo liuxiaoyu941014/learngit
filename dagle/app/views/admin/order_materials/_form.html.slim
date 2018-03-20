@@ -1,0 +1,19 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @order_material, url: @order_material.new_record? ? admin_order_materials_path : admin_order_material_path(@order, @order_material), validate: true do |f|
+      - if @order_material.errors.any?
+        #error_explanation
+          
+          ul
+            - @order_material.errors.full_messages.each do |message|
+              li = message
+
+      = f.association :material
+      = f.input :amount
+      = f.submit class: 'btn btn-success btn-block'

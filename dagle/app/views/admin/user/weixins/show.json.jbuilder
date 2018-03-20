@@ -1,0 +1,1 @@
+json.partial! "admin_user_weixins/admin_user_weixin", admin_user_weixin: @admin_user_weixin

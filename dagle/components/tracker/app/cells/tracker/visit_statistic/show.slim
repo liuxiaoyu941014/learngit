@@ -1,0 +1,49 @@
+.row.visit_statistic[data-url=options[:path]]
+  .col-md-12
+    .white-content
+      .head.h5
+        span 受访统计
+      .head-nav.row
+        .col-md-4
+          .input-group[id="default-daterange"]
+            input.form-control[placeholder="点击选择时间范围查询" type="text" readonly]
+            span.input-group-btn
+              button.btn.btn-default[type="button"]
+                i.fa.fa-search
+        ul.col-md-8.zone-time[type='none']
+          li
+            a 全部
+          li.active
+            a 今天
+          li
+            a 昨天
+          li
+            a 过去７天
+          li
+            a 过去３０天
+      .table-responsive
+        table.table.table-invoice.table-hover
+          thead
+            tr
+              th.email-select #
+              th 受访页面
+              th 浏览次数
+              th IP量
+              th 用户数
+          tbody
+            tr[v-for="(record, index) in visitStatistic"]
+              td
+                | {{ index+1 }}
+              td
+                a[v-bind:href="record.url"]
+                  | {{ record.url }}
+              td
+                | {{ record.count }}
+              td
+                | {{ record.ip }}
+              td
+                | {{ record.user_count }}
+      / = paginate @visits_data
+      div.white-footer
+        span.pull-left.small
+          | {{ visitStatistic.length+"个--受访页面"}}

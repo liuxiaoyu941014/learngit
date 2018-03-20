@@ -1,0 +1,23 @@
+.modal.fade#orderDelivery.bs-example-modal-lg[tabindex="-1" role="dialog" rel="edit-modal" aria-labelledby="myModalLabel"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+        h4.modal-title#myModalLabel 订单物流
+      span.error_message
+        | 
+      = simple_form_for @order_delivery, url: order_delivery_agent_order_path(@order), method: :put, remote: true do |f|
+          .modal-body.p-30
+            .row
+              .col-xs-12
+                .form-group.col-xs-4.p-l-0.m-0
+                  = f.input :logistics_name
+                .form-group.col-xs-8.p-0.m-0
+                  = f.input :logistics_number
+          .modal-footer
+            button.btn.btn-default[type="button" data-dismiss="modal"] 取消
+            - if Settings.project.dagle?
+              = f.submit '保存物流信息', class: 'btn btn-primary save-delivery'
+            - else
+              = f.submit '确认订单发货', class: 'btn btn-primary save-delivery'

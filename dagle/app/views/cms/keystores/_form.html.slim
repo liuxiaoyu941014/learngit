@@ -1,0 +1,10 @@
+= simple_form_for [@cms_site, @cms_keystore], url: @cms_keystore.new_record? ? cms_site_keystores_path : cms_site_keystore_path(@cms_site, @cms_keystore), validate: true do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :key, required: true
+    = f.input :value, required: true
+    = f.input :description
+
+  .form-actions
+    = f.submit class: 'btn btn-success btn-block'

@@ -1,0 +1,17 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @produce, url: @produce.new_record? ? admin_produces_path : admin_produce_path(@produce), validate: true do |f|
+      - if @produce.errors.any?
+        #error_explanation
+          
+          ul
+            - @produce.errors.full_messages.each do |message|
+              li = message
+
+      = f.submit class: 'btn btn-success btn-block'

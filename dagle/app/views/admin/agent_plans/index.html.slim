@@ -1,0 +1,34 @@
+h1.page-header
+  | 商家套餐列表
+  .pull-right
+    = link_to "新建商家套餐", new_admin_agent_plan_path, class: 'btn btn-primary'
+
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title
+      | 商家套餐
+  .panel-body
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th 名称
+            th 简要描述
+            th 价格
+            th
+        tbody
+          - @agent_plans.each do |agent_plan|
+            tr
+              td = agent_plan.name
+              td = agent_plan.description
+              td = agent_plan.price.to_f/100
+              td
+                => link_to '查看', admin_agent_plan_path(agent_plan), class: 'btn btn-xs btn-default'
+                => link_to '编辑', edit_admin_agent_plan_path(agent_plan), class: 'btn btn-xs btn-default'
+                = link_to '删除', admin_agent_plan_path(agent_plan), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-xs btn-danger'
+      = paginate @agent_plans

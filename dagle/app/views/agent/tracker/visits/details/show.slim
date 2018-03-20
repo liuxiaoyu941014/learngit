@@ -1,0 +1,4 @@
+.container[style="min-height: 100vh;background: #D9E0E7"]
+  .tracker
+    == cell(Tracker::NavTopCell, nil, {visit: true, home: agent_tracker_path, visits_statistics: agent_tracker_visits_statistics_path, visits_details: agent_tracker_visits_details_path, shares_show: agent_tracker_shares_path})
+    == cell(Tracker::VisitDetailedCell, nil, path: agent_tracker_visits_details_url)

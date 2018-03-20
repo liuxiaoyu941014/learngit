@@ -1,0 +1,39 @@
+.container
+  h2
+    | 站点：
+    = @cms_site.name
+    .pull-right
+      => link_to '添加栏目', new_cms_site_channel_path(@cms_site), class: 'btn btn-success'
+      => link_to '添加页面', new_cms_site_page_path(@cms_site), class: 'btn btn-success'
+      => link_to '前台预览', cms_frontend_root_url(subdomain: @cms_site.domain), class: 'btn btn-info', target: '_blank'
+  .panel
+    .panel-heading
+      .row
+        .col-md-8
+          h4
+            | 模板：
+            = @cms_site.template
+            | &nbsp;&nbsp;&nbsp;&nbsp;二级域名：
+            => @cms_site.domain
+            | &nbsp;&nbsp;&nbsp;&nbsp;绑定域名：
+            => @cms_site.root_domain
+            span.badge.badge-default
+              = @cms_site.show_published
+          p
+            | 前台地址：
+            = link_to  cms_frontend_root_url(subdomain: @cms_site.domain), cms_frontend_root_url(subdomain: @cms_site.domain), target: '_blank'
+          p
+            = @cms_site.description
+        .col-md-4.text-right
+          => link_to '留言管理', cms_site_comments_path(@cms_site), class: 'btn btn-default'
+          => link_to '参数配置', cms_site_keystores_path(@cms_site), class: 'btn btn-default'
+          a[class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"]
+            | 其他操作
+          div[class="collapse" id="collapseExample"]
+            div[class="well"]
+              p 修改站点的模板和名称，会造成全局的影响，在不清楚操作提示的情况下，不要擅自修改，请咨询相关负责人。
+              => link_to '站点设置', edit_cms_site_path(@cms_site), class: 'btn btn-primary'
+
+
+    .panel-body
+      = render 'cms/channels/list'

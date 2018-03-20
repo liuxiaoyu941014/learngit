@@ -1,0 +1,376 @@
+<div class="container">
+  <h2 class="m-b-0">
+    <%= @product.name %>
+    <div class="pull-right">
+      <button class="btn btn-success btn-default" type="submit" data-toggle="modal" data-target="#editModal" type="submit">调价</button>
+      <%= link_to "编辑信息", edit_agent_product_path(@product), class: 'btn btn-info btn-default', 'data-turbolinks': false%>
+      <span class="process_shelves" data-url="<%= process_shelves_agent_product_path(@product) %>">
+        <% if @product.is_shelves == '1' %>
+        <button class="btn btn-inverse btn-default" type="submit" data-status='0'>取消上架</button>
+        <% else %>
+        <button class="btn btn-warning btn-default" type="submit" data-status='1'>产品上架</button>
+        <% end %>
+      </span>
+      <%= link_to '返回', agent_products_path, class: 'btn btn-default' %>
+    </div>
+    <!-- BEGIN breadcrumb -->
+    <ul class="breadcrumb small f-s-12">
+      <li>分类:&nbsp;</li>
+      <% @catalog_ancestors.each do |catalog| %>
+      <li><a href="#"><%= catalog.name %></a></li>
+      <% end %>
+    </ul>
+    <!-- END breadcrumb -->
+  </h1>
+</div>
+<!-- BEGIN #product -->
+<div id="product" class="section-container p-0">
+    <!-- BEGIN container -->
+    <div class="container">
+        <!-- BEGIN product -->
+        <div class="product p-t-25 m-b-20">
+            <!-- BEGIN product-detail -->
+            <div class="product-detail">
+                <!-- BEGIN product-image -->
+                <div class="product-image">
+                  <% if @product.image_items.length > 0 %>
+                    <!-- BEGIN product-thumbnail -->
+                    <div class="product-thumbnail">
+                      <ul class="product-thumbnail-list checkout_image_list">
+                        <% @product.image_items.each_with_index do |image, index| %>
+                          <li class="<%= if index < 1 then 'active' end %>"><a href="javascript:void(0)" data-url="<%= image.image_url %>"><%= image_tag image.image_url%></a></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                    <!-- END product-thumbnail -->
+                  <% end %>
+                  <!-- BEGIN product-main-image -->
+                  <div class="product-main-image" data-id="main-image">
+                    <%= image_tag @product.image_items.first.try{image_url} || 'no-picture.png'%>
+                  </div>
+                  <!-- END product-main-image -->
+                </div>
+                <!-- END product-image -->
+                <!-- BEGIN product-info -->
+
+                <% if Settings.project.eqxiyi? %>
+                <div class="product-info">
+                  <!-- BEGIN product-info-header -->
+                  <div class="product-info-header">
+                      <h1 class="product-title">
+                        <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+                          <span class="label label-danger">
+                            优惠折扣中
+                          </span>
+                        <% end %>
+                        <%= @product.name %>
+                        <span class="share" rel="share" data-url="<%= sales_distribution_agent_product_path(@product) %>">
+                          <i class="fa fa-share-alt text-info btn" @click="getSalesDistribution(<%= @product.id %>)" title= '分享' data-toggle= "tooltip" data-trigger= "hover" data-title= "分享" data-placement= "top" data-original-title= "" title= ""></i>
+                          <share-modal title="商品: <%= @product.name%>" :url="url" :show-modal="showSharModal" @close="showSharModal = false"></share-modal>
+                        </span>
+                      </h1>
+                  </div>
+                  <!-- END product-info-header -->
+                  <div class="product-attr-info">
+                      <ul class="list-inline row">
+                        <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+
+                          <li class='col-sm-12 col-md-4'>
+                            售价：<span class="discount text-danger">￥<%= @product.price.to_f / 100 %></span>
+                          </li>
+                          <li class='col-sm-12 col-md-4'>
+                            折扣：<span class="price text-primary">￥<%= @product.discount.to_f / 100 %></span>
+                          </li>
+                        <% else %>
+                          <li class='col-sm-12 col-md-4'>
+                            售价：<span class="price text-primary">￥<%= @product.price.to_f / 100 %></span>
+                          </li>
+                        <% end %>
+                      </ul>
+                  </div>
+                  <div class="product-attr-info">
+                    <span>视频链接：</span>
+                    <span class="label label-success"><%= @product.video_url %></span>
+                  </div>
+                  <div class="product-attr-info">
+                    <span>产品标签：</span>
+                    <% @product.tag_list.each do|tag| %>
+                      <span class="label label-success"><%= tag %></span>
+                    <% end %>
+                  </div>
+                  <% if [@product.hot, @product.recommend, @product.event, @product.promotion].uniq.include?('1') %>
+                    <div class="product-attr-info">
+                      <span>其他：</span>
+                      <span class="label label-success"><%= Product.human_attribute_name(:hot) if @product.hot == "1" %></span>
+                      <span class="label label-success"><%= Product.human_attribute_name(:recommend) if @product.recommend == "1" %></span>
+                      <span class="label label-success"><%= Product.human_attribute_name(:event) if @product.event == "1" %></span>
+                      <span class="label label-success"><%= Product.human_attribute_name(:promotion) if @product.promotion == "1" %></span>
+                    </div>
+                  <% end %>
+                  <!-- BEGIN product-info-list 一些主要配置信息列表展示-->
+                  <ul class="product-info-list">
+                    <li>
+                      <i class="fa fa-circle"></i>
+                      <span>月单数</span>:
+                      <span>
+                        <%= @product.month_number %>
+                      </span>
+                    </li>
+                    <li>
+                      <i class="fa fa-circle"></i>
+                      <span>服务时间</span>:
+                      <span>
+                        <%= @product.service_time %>
+                      </span>
+                    </li>
+                    <li>
+                      <i class="fa fa-circle"></i>
+                      <span>注意事项</span>:
+                      <span>
+                        <%= @product.warning_message %>
+                      </span>
+                    </li>
+                  </ul>
+                  <!-- END product-info-list -->
+                  <div class="product-attr-info">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        产品介绍：
+                      </div>
+                      <div class="col-xs-10">
+                        <%=raw @product.description%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% elsif Settings.project.wgtong? %>
+                  <%= render partial: 'show.wgtong' %>
+                <% else %>
+                <div class="product-info">
+                    <!-- BEGIN product-info-header -->
+                    <div class="product-info-header">
+                        <h1 class="product-title">
+                          <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+                            <span class="label label-danger">
+                              优惠折扣中
+                            </span>
+                          <% end %>
+                          <%= @product.name %>
+                          <span class="share" rel="share" data-url="<%= sales_distribution_agent_product_path(@product) %>">
+                            <i class="fa fa-share-alt text-info btn" @click="getSalesDistribution(<%= @product.id %>)" title= '分享' data-toggle= "tooltip" data-trigger= "hover" data-title= "分享" data-placement= "top" data-original-title= "" title= ""></i>
+                            <share-modal title="商品: <%= @product.name%>" :url="url" :show-modal="showSharModal" @close="showSharModal = false"></share-modal>
+                          </span>
+                        </h1>
+                    </div>
+                    <!-- END product-info-header -->
+                    <div class="product-attr-info">
+                        <ul class="list-inline row">
+                          <li class='col-sm-12 col-md-4'>库存: <b class="text-success"><%= @product.stock %><%= "(#{@product.unit})" if @product.unit.present? %></b></li>
+                          <% if @product.discount.to_f > 0 && @product.discount.to_f < @product.price.to_f %>
+
+                            <li class='col-sm-12 col-md-4'>
+                              原价：<span class="discount text-danger">￥<%= @product.price.to_f / 100 %></span>
+                            </li>
+                            <li class='col-sm-12 col-md-4'>
+                              优惠价：<span class="price text-primary">￥<%= @product.discount.to_f / 100 %></span>
+                            </li>
+                          <% else %>
+                            <li class='col-sm-12 col-md-4'>
+                              售价：<span class="price text-primary">￥<%= @product.price.to_f / 100 %></span>
+                            </li>
+                          <% end %>
+                        </ul>
+                    </div>
+                    <div class="product-attr-info">
+                      <span>产品标签：</span>
+                      <% @product.tag_list.each do|tag| %>
+                        <span class="label label-success"><%= tag %></span>
+                      <% end %>
+                    </div>
+                    <% if [@product.hot, @product.recommend, @product.event, @product.promotion].uniq.include?('1') %>
+                      <div class="product-attr-info">
+                        <span>其他：</span>
+                        <span class="label label-success"><%= Product.human_attribute_name(:hot) if @product.hot == "1" %></span>
+                        <span class="label label-success"><%= Product.human_attribute_name(:recommend) if @product.recommend == "1" %></span>
+                        <span class="label label-success"><%= Product.human_attribute_name(:event) if @product.event == "1" %></span>
+                        <span class="label label-success"><%= Product.human_attribute_name(:promotion) if @product.promotion == "1" %></span>
+                      </div>
+                    <% end %>
+                    <!-- BEGIN product-info-list 一些主要配置信息列表展示-->
+                    <ul class="product-info-list">
+                      <li>
+                        <i class="fa fa-circle"></i>
+                        <span>产品重量</span>:
+                        <span>
+                          <%= @product.weight || '0'%>&nbsp;<%= "(#{@product.weight_unit})" if @product.weight_unit.present? %>
+                        </span>
+                      </li>
+                      <% if @product.additional_attribute_keys.present? %>
+                        <% @product.additional_attribute_keys.each do |k, v| %>
+                          <li>
+                            <i class="fa fa-circle"></i>
+                            <span><%= v %></span>:
+                            <span><%= @product.additional_attribute_values[k] %></span>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                    <!-- END product-info-list -->
+                    <div class="product-attr-info">
+                      <div class="row">
+                        <div class="col-xs-2">
+                          产品介绍：
+                        </div>
+                        <div class="col-xs-10">
+                          <%=raw @product.description%>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <% end %>
+                <!-- END product-info -->
+            </div>
+            <div class="product-attr-info">
+              <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-2">
+                  产品二维码：
+                </div>
+                <div class="col-xs-8">
+                  <%= image_tag agent_product_path(product_id: @product.id, format: :png)%>
+                </div>
+              </div>
+            </div>
+            <!-- END product-detail -->
+            <!-- 内容展示/产品评论/产品统计报表 -->
+            <!-- BEGIN product-tab -->
+            <div class="product-tab">
+                <!-- BEGIN #product-tab -->
+                <ul id="product-tab" class="nav nav-tabs">
+                  <li class="active"><a href="#product-content" data-toggle="tab">内容展示</a></li>
+                  <li class=""><a href="#product-info" data-toggle="tab">统计信息</a></li>
+                  <li class=""><a href="#product-reviews" data-toggle="tab">用户评论</a></li>
+                </ul>
+                <!-- END #product-tab -->
+                <!-- BEGIN #product-tab-content -->
+                <div id="product-tab-content" class="tab-content">
+                  <!-- BEGIN #product-info -->
+                  <div class="tab-pane fade active in" id="product-content">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">内容展示-预览</h3>
+                      </div>
+                      <div class="panel-body p-l-0 p-r-0">
+                        <div class="show-conten p-10" style="border: 1px solid #ccc;overflow-x: scroll;">
+                          <%= raw(@product.content)%>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END #product-info -->
+                    <!-- BEGIN #product-info -->
+                    <div class="tab-pane fade" id="product-info">
+                      <div class="panel panel-default">
+                        <div class="row summary">
+                          <div class='collect-top row text-center'>
+                            <div class="col-xs-2 bg-silver col-xs-offset-1">
+                              <div class="h2">
+                                <i class="fa fa-magnet text-primary"></i>
+                                <span></span>
+                                <%= @product.visits_count %>
+                              </div>
+                              <div class="h4 text-muted">总浏览量</div>
+                              <div class="cut_solid"></div>
+                            </div>
+                            <div class="col-xs-2 bg-silver" style="margin-left: 10px">
+                              <div class="h2">
+                                <i class="fa fa-heart text-danger"></i>
+                                <span></span>
+                                <%= @product.favorites_count %>
+                              </div>
+                              <div class="h4 text-muted">收藏数</div>
+                              <div class="cut_solid"></div>
+                            </div>
+                            <div class="col-xs-2 bg-silver" style="margin-left: 10px">
+                              <div class="h2">
+                                <i class="fa fa-thumbs-o-up text-primary"></i>
+                                <span></span>
+                                <%= @product.likes_count %>
+                              </div>
+                              <div class="h4 text-muted">点赞数</div>
+                              <div class="cut_solid"></div>
+                            </div>
+                            <div class="col-xs-2 bg-silver" style="margin-left: 10px">
+                              <div class="h2">
+                                <i class="fa fa-tag text-danger"></i>
+                                <span></span>
+                                <%= @product.sales_count %>
+                              </div>
+                              <div class="h4 text-muted">销量</div>
+                              <div class="cut_solid"></div>
+                            </div>
+                            <div class="col-xs-2 bg-silver" style="margin-left: 10px">
+                              <div class="h2">
+                                <i class="fa fa-share-alt text-primary"></i>
+                                <span></span>
+                                <%= @product.sales_distribution_resources.size %>
+                              </div>
+                              <div class="h4 text-muted">分享数</div>
+                              <div class="cut_solid"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <% if @product.purchase_type && @product.purchase_type.include?('sign_up') %>
+                          <h3>
+                            报名统计信息
+                            <a class="btn btn-primary pull-right" href="<%=download_signup_members_agent_product_path(product_id: @product.id,format: 'csv') %>">下载</a>
+                          </h3>
+                          <div class="row">
+                            <table class="table table-bordered">
+                              <tr>
+                                <% @product.member_attributes.each do |attr| %>
+                                  <th> <%= Product::MEMBER_ATTRIBUTES[attr.to_sym] || attr %></th>
+                                <% end %>
+                              </tr>
+                              <% @orders.each do |order| %>
+                                <% next unless order.member_attributes%>
+                                <% order.member_attributes.each do |mem_attr|%>
+                                  <tr>
+                                    <% @product.member_attributes.each do |attr| %>
+                                      <th> <%= mem_attr[attr] %></th>
+                                    <% end %>
+                                  </tr>
+                                <%end%>
+                              <% end %>
+                            </table>
+                          </div>
+                        <%end%>
+                      </div>
+                    </div>
+                    <!-- END #product-info -->
+                    <!-- BEGIN #product-reviews -->
+                    <div class="tab-pane fade" id="product-reviews">
+                        <!-- BEGIN row -->
+                        <div class="row row-space-30">
+                            <!-- BEGIN col-7 -->
+                            <div class="col-md-8 col-md-offset-2">
+                                <%= render 'comments' %>
+                                <!-- END review -->
+                            </div>
+                            <!-- END col-7 -->
+                        </div>
+                        <!-- END row -->
+                    </div>
+                    <!-- END #product-reviews -->
+                </div>
+                <!-- END #product-tab-content -->
+            </div>
+            <!-- END product-tab -->
+        </div>
+        <!-- END product -->
+
+    </div>
+    <!-- END container -->
+</div>
+<!-- END #product -->
+<%= render 'edit_modal'%>

@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    articles:
+      index:
+        title: Articles
+      show:
+        title: Article
+      edit:
+        title: Editing Article
+      new:
+        title: New Article
+  flash:
+    admin:
+      articles:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

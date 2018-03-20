@@ -1,0 +1,129 @@
+- if current_user != true_user
+  span 你 (
+  span = true_user.nickname
+  span )正在
+  span 模仿登录
+  span = current_user.nickname
+  span = link_to "退出模仿", stop_impersonating_sessions_path, method: :post
+/! begin #content
+/! begin breadcrumb
+ol.breadcrumb.pull-right
+  li
+    a href="javascript:;"  首页
+  li.active 概览
+/! end breadcrumb
+/! begin page-header
+h1.page-header
+  | 数据概览
+/! end page-header
+/! begin row
+.row
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-green
+      .stats-icon
+        i.fa.fa-desktop
+      .stats-info
+        h4 产品
+        p = Product.count
+      .stats-link
+        a href="/admin/products"
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-blue
+      .stats-icon
+        i.fa.fa-chain-broken
+      .stats-info
+        h4 订单
+        p = Order.count
+      .stats-link
+        a href="/admin/orders"
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-purple
+      .stats-icon
+        i.fa.fa-users
+      .stats-info
+        h4 用户
+        p = User.count
+      .stats-link
+        a href="/admin/users"
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-yellow-darker
+      .stats-icon
+        i.fa.fa-clock-o
+      .stats-info
+        h4 CMS 文章
+        p = Cms::Page.count
+      .stats-link
+        a href="/admin/cms/sites"
+          | 查看纤细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+/! end row
+/! begin page-header
+h1.page-header
+  | 快速导航
+/! end page-header
+/! begin row
+.row
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-aqua
+      .stats-icon
+        i.fa.fa-desktop
+      .stats-info
+        p 新建用户
+      .stats-link
+        a href="/admin/users/new"
+          | 点击进入
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-orange
+      .stats-icon
+        i.fa.fa-chain-broken
+      .stats-info
+        p 添加文章
+      .stats-link
+        a href="/cms/sites"
+          | 点击进入
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  - if Settings.project.grand?
+    .col-md-3.col-sm-6
+      .widget.widget-stats.bg-silver-darker
+        .stats-icon
+          i.fa.fa-users
+        .stats-info
+          p 管理任务
+        .stats-link
+          a href="/admin/produces"
+            | 点击进入
+            i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-red
+      .stats-icon
+        i.fa.fa-clock-o
+      .stats-info
+        p 管理订单
+      .stats-link
+        a href="/admin/orders"
+          | 点击进入
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+/! end row

@@ -1,0 +1,156 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4 = Site.model_name.human
+  .panel-body
+    = simple_form_for @site, url: @site.new_record? ? admin_sites_path : admin_site_path(@site), validate: true do |f|
+      - if @site.errors.any?
+        #error_explanation
+
+          ul
+            - @site.errors.full_messages.each do |message|
+              li = message
+      - if params[:map]
+        - if Settings.project.imolin? || Settings.project.wgtong?
+          .row
+            div class="col-md-3 col-sm-12"
+              = f.input :lat, readonly: false, placeholder: '自动填充', input_html: {value: @site.address_lat || params[:lat]}
+              = f.input :lng, readonly: false, placeholder: '自动填充', input_html: {value: @site.address_lng || params[:lng]}
+            div class="col-md-9 col-sm-12"
+              .form-group
+                label.control-label 搜索地图，找到准确位置，通过在地图上标上红点，自动设置经纬度。
+                input#search-address.form-control
+              #baidu-map
+      - else
+        - if Settings.project.grand? || Settings.project.cms? || Settings.project.dagle?
+          label[class="control-label"] 商家所有者
+          select.select2.form-control[id="dropdown" name="site[user_id]" data-url="#{admin_users_url}"  data-id="#{@site.user_id}" data-name="#{User.find_by(id: @site.user).try(:nickname)}" ]
+
+          / select.select2.form-control[id="dropdown" name="site[user_id]" data-url="#{admin_users_url}"  data-id="#{@site.user_id}" data-name="#{User.find_by(id: @site.user).try(:nickname)}" ]
+          = f.input :title
+          = f.input :description, as: :text, input_html: {rows: 10}
+          .form-group
+            image-select[server="#{image_items_path}" name="site[image_item_ids][]" selected-ids="#{@site.image_item_ids.join(', ')}"]
+        - elsif Settings.project.meikemei?
+          .div class="row"
+            .div class="col-md-6 col-sm-12"
+              = f.input :user_id, collection: User.all.decorate, label_method: :display_name
+            .div class="col-md-6 col-sm-12"
+              = f.input :title, required: true
+          .div class="row"
+            .div class="col-md-6 col-sm-12"
+              = f.input :contact_name, required: true
+            .div class="col-md-6 col-sm-12"
+              = f.input :contact_phone, required: true
+          .div class="row"
+            .div class="col-md-6 col-sm-12"
+              = f.input :address_line, required: true
+            .div class="col-md-6 col-sm-12"
+              = f.input :business_hours, collection: ['9:00-22:00', '8:00-22:00'], selected: '9:00-22:00'
+          .div class="row"
+            .div class="col-md-6 col-sm-12"
+              = f.input :good_summary, collection: ['1', '2', '3', '4', '5']
+              p 标签备注（可多选）
+              = f.collection_check_boxes :properties, Site::PROPERTIES, :first, :last, checked: @site.try(:properties)
+            .div class="col-md-6 col-sm-12"
+              = f.input :contract_note, as: :text, input_html: {rows: 5}
+              = f.input :has_contract, as: :boolean, label: false, label: '是否签约'
+          / = f.input :content, as: :ckeditor
+          p 背景图片
+          .form-group
+            image-select[server="#{image_items_path}" name="site[image_item_ids][]" selected-ids="#{@site.image_item_ids.join(', ')}"]
+        - elsif Settings.project.sxhop?
+          .row
+            div class="col-md-6 col-sm-12"
+              label[class="control-label"] 商家所有者
+              / = f.input :user_id, collection: User.all.decorate, label_method: :display_name, include_blank: true, input_html: {class: 'select2'}
+              select.select2.form-control[id="dropdown" name="site[user_id]" data-url="#{admin_users_url}"  data-id="#{@site.user_id}" data-name="#{User.find_by(id: @site.user).try(:nickname)}" ]
+            div class="col-md-6 col-sm-12"
+              = f.input :title
+          = f.input :description, as: :text, input_html: {rows: 10}
+          .form-group
+            image-select[server="#{image_items_path}" name="site[image_item_ids][]" selected-ids="#{@site.image_item_ids.join(', ')}"]
+        - elsif Settings.project.imolin? || Settings.project.wgtong?
+          - if @site.parent
+            .row
+                div class="col-md-12 col-sm-12"
+                  label[class="control-label"] 上级商家
+                  = link_to @site.parent.title, admin_site_path(@site.parent)
+                  = f.hidden_field :parent_id
+          = f.input :parent_id, hint: '请现在site列表中查询出需要设置为父级商家的id，填写在此处'
+          .row
+            div class="col-md-6 col-sm-12"
+              label[class="control-label"] 商家所有者
+              / = f.input :user_id, collection: User.all.decorate, label_method: :display_name, include_blank: true, input_html: {class: 'select2'}
+              select.select2.form-control[id="dropdown" name="site[user_id]" data-url="#{admin_users_url}"  data-id="#{@site.user_id}" data-name="#{User.find_by(id: @site.user).try(:nickname)}" ]
+            div class="col-md-6 col-sm-12"
+              .form-group.catalog-list[data-catalog-name="#{@site.catalog.try(:name)}" data-catalog-id="#{@site.catalog_id}"]
+                label[class="control-label"] 商家分类
+                input[type="hidden" v-model="id" name="site[catalog_id]"]
+                input.form-control[readonly=true @click="showCatalog = true" :value="catalogs"]
+                span.hint 点击输入框选择分类
+                modal[title="产品分类" :show.sync="showCatalog" @cancel="showCatalog = false"]
+                  div
+                    catalog-list[data-url=admin_site_catalogs_path :default="[#{@site.catalog_id}]" @selected="selected" v-if='showCatalog' :show-confirm-buttons="true" @closed="showCatalog = false" :editable='false']
+                  div[slot="footer"]
+
+          = f.input :title
+          = f.input :address_line
+          div class="row"
+            div class="col-md-3 col-sm-12"
+              = f.input :phone, input_html: { maxlength: 11 }
+              = f.input :business_hours, placeholder: '09:00-22:00'
+              = f.input :avg_price, as: :integer
+              = f.input :is_flatform_recommend, as: :boolean
+              = f.input :is_published, as: :boolean, label: false, label: '是否发布'
+            div class="col-md-3 col-sm-12"
+              = f.input :good_summary, as: :integer
+              = f.input :bad_summary, as: :integer
+              p 标签备注（可多选）
+              = f.collection_check_boxes :properties, Site::PROPERTIES, :first, :last, checked: @site.try(:properties)
+              = f.input :delivery_fee, input_html: { value: @site.new_record? ? '' : (@site.delivery_fee.to_f / 100) }, as: :integer
+
+            div class="col-md-3 col-sm-12"
+              = f.input :contact_name
+              = f.input :contact_phone, input_html: { maxlength: 11 }
+              = f.input :contract_note
+              = f.input :has_contract, as: :boolean, label: false, label: '是否签约'
+            div class="col-md-3 col-sm-12"
+              = f.input :description, as: :text, placeholder: '请用120字以内简要描述' , input_html: {rows: 10, maxlength: 120}
+          .form-group
+            image-select[server="#{image_items_path}" name="site[image_item_ids][]" selected-ids="#{@site.image_item_ids.join(', ')}"]
+        = f.input :content, as: :ckeditor
+      = f.submit class: 'btn btn-success btn-block'
+
+- if Settings.project.imolin? || Settings.project.wgtong?
+  script data-turbolinks="false" type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=#{Rails.application.config_for(:baidu_lbs_api)['geocoding']["ak"]}"
+  javascript:
+      var options = { autocomplete_input: 'search-address' };
+      options['center_point'] = "#{@site.city_name}" || '成都' ;
+      var current_point = null;
+      var current_marker = null;
+      if($('#stadium_lat').val() != "" && $('#site_lng').val() != ""){
+        current_point = new BMap.Point($('#site_lng').val(), $('#site_lat').val());
+        current_marker = new BMap.Marker(current_point);  // 创建标注
+        options['center_point'] = current_point;
+        options['zoom'] = 18;
+      }
+      var map_obj = new BaiduMap('baidu-map', options);
+      var map = map_obj.map;
+      map.setDefaultCursor("default");   //设置地图默认的鼠标指针样式
+      map_obj.pickLatLng(function(point){
+        $('#site_lat').val(point.lat);
+        $('#site_lng').val(point.lng);
+        map.clearOverlays();
+        map.addOverlay(new BMap.Marker(point));
+      });
+      map_obj.bindAutocomplete('search-address', function(location){
+        map_obj.setPlace(location);
+      })
+      if(current_marker){
+        map.addOverlay(current_marker);              // 将标注添加到地图中
+      }

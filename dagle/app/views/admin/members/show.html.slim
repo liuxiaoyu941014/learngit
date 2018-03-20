@@ -1,0 +1,68 @@
+h1 
+  | 查看会员
+  .pull-right
+    => link_to '编辑', edit_admin_site_member_path(@site, @member), class: 'btn btn-primary'
+    = link_to '返回', admin_site_members_path(@site), class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4 #{@site.title} 会员
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field 登录用户
+              td
+                a
+                  =@member.user && decorate(@member.user).display_name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field 手机号
+              td
+                a
+                  =@member.mobile_phone
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field 会员名称
+              td
+                a
+                  = @member.name
+            / tr.divider
+            /   td[colspan='2']
+            / tr
+            /   td.field 性别
+            /   td
+            /     a
+            /       = decorate(@member).display_gender
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field 生日
+              td
+                a
+                  = @member.birth
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field QQ号
+              td
+                a
+                  = @member.qq
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field 邮箱
+              td
+                a
+                  = @member.email
+            tr.divider
+              td[colspan='2']

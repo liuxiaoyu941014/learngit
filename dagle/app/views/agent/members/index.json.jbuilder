@@ -1,0 +1,1 @@
+json.array! @agent_members, partial: 'agent_members/agent_member', as: :agent_member

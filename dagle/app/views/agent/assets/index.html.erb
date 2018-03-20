@@ -1,0 +1,78 @@
+<div class="container"><h1>图片资源素材库 </h1></div>
+  <div id="exTab1" class="container">
+    <ul class="nav nav-pills" id="friends">
+        <li><a href="/agent/assets/index" data-target="#contacts" class="media_node active span" id="contacts_tab" data-toggle="tabajax" rel="tooltip"> 默认图片 </a></li>
+        <li><a href="#/agent/assets/intranet_images" data-target="#friends_list" class="media_node span" id="friends_list_tab" data-toggle="tabajax" rel="tooltip"> 内部图片 </a></li>
+        <li><a href="#/agent/assets/extranet_images" data-target="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-toggle="tabajax" rel="tooltip"> 外部图片 </a></li>
+    </ul>
+
+    <div class="tab-content clearfix">
+      <div class="tab-pane active" id="image_content">
+        <% @images.each do |img| %>
+          <%= image_tag img, class: 'img-responsive' %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="friends_list">
+        未接入！
+      </div>
+      <div class="tab-pane  urlbox span8" id="awaiting_request">
+        未接入！
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">图片预览</h4>
+      </div>
+      <div class="modal-body">
+        <p><img src="" id="imagepreview" class="img-responsive"></p>
+        <p id="thumbImg"></p>
+        <p id="contentImg"></p>
+        <p id="originalImg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script language="javascript">
+  $(document).ready(function(){
+     $("#image_content img").click(function(e){
+        var $this = $(this),
+            thumbUrl = $this.attr('src');
+        contentUrl = thumbUrl.replace("thumb", "medium");
+        originalUrl = thumbUrl.replace("thumb", "original");
+
+        $('#imagepreview').attr('src', contentUrl); // here asign the image to the modal when the user click the enlarge link
+        $('#thumbImg').html('缩略图地址：' + thumbUrl);
+        $('#contentImg').html('处理后地址：' + contentUrl);
+        $('#originalImg').html('原始图地址：' + originalUrl);
+        $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+      });
+  });
+
+  // $(document).ready(function(){
+  //   $('[data-toggle="tabajax"]').click(function(e) {
+  //       var $this = $(this),
+  //           loadurl = $this.attr('href'),
+  //           targ = $this.attr('data-target');
+  //
+  //       $.get(loadurl, function(data) {
+  //           $(targ).html(data);
+  //           console.log(data);
+  //       });
+  //
+  //       $this.tab('show');
+  //       return false;
+  //   });
+  // });
+</script>

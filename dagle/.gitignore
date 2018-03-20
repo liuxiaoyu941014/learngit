@@ -1,0 +1,20 @@
+log/*.log
+tmp/*
+.DS_Store
+
+config/settings.yml
+
+db/schema.rb
+# Added by webpack-rails
+/node_modules
+/public/assets
+/public/webpack
+/public/photos
+/coverage/
+public/system/
+public/attachments/
+public/templetes
+public/ckeditor_assets/
+
+# Ignore application configuration
+/config/application.yml

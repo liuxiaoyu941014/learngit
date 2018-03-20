@@ -1,0 +1,14 @@
+= simple_form_for [@agent_member, @agent_member_note], url: agent_member_member_notes_path(@agent_member), html: { class: 'form-horizontal' } do |f|
+  - if @agent_member_note.errors.any?
+    #error_explanation
+
+      ul
+        - @agent_member_note.errors.full_messages.each do |message|
+          li = message
+
+  = f.text_area :message, class: 'form-control', required: true
+  br
+  .row
+    .col-md-6
+    .col-md-4.col-md-offset-2.text-right
+      = f.submit '保 存', class: 'btn btn-success btn-block'

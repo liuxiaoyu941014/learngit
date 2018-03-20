@@ -1,0 +1,213 @@
+<style type="text/css">
+  @media (max-width: 767px) {
+    .slider-style-three .item, .slider-style-three .container{
+      min-height: 200px !important;
+    }
+  }
+  .grey-text {
+    color: #333 !important;
+  }
+  .padding-10 {
+    padding: 10px !important;
+  }
+  .block-title {
+    margin: 20px 0px;
+  }
+  .block-title h4 {
+    padding-left: 5px;
+    border-left: 5px solid #e84f17;
+  }
+  .block-title h4 small {
+    padding-right: 5px;
+  }
+</style>
+<div class="main-wrapper">
+  <div class="container" style="background-color: #fff;">
+
+    <!-- banner -->
+    <div class="row">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000" >
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <% if Keystore.value_for('wechat-index-banner01-380×200').present? %>
+              <% wechat_index_banner01 = Keystore.value_for('wechat-index-banner01-380×200').split('|') %>
+              <a href="<%= wechat_index_banner01[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner01[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+          <div class="item">
+            <% if Keystore.value_for('wechat-index-banner02-380×200').present? %>
+              <% wechat_index_banner02 = Keystore.value_for('wechat-index-banner02-380×200').split('|') %>
+              <a href="<%= wechat_index_banner02[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner02[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+          <div class="item">
+            <% if Keystore.value_for('wechat-index-banner03-380×200').present? %>
+              <% wechat_index_banner03 = Keystore.value_for('wechat-index-banner03-380×200').split('|') %>
+              <a href="<%= wechat_index_banner03[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner03[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- nav -->
+    <div class="row text-center" style="margin: 20px 0px;">
+      <% if Keystore.value_for('wechat-nav-hot-product').present? %>
+      <% wechat_nav_hot_product = Keystore.value_for('wechat-nav-hot-product').split('|') %>
+      <div class="col-md-3 col-xs-3 col-sm-3 padding-10">
+        <a href="<%= wechat_nav_hot_product[1] || 'javascript:void(0)' %>" class="grey-text">
+          <img src="<%= wechat_nav_hot_product[0] %>" class="img-responsive" >
+        </a>
+      </div>
+      <% end %>
+
+      <% if Keystore.value_for('wechat-nav-hot-site').present? %>
+      <% wechat_nav_hot_site = Keystore.value_for('wechat-nav-hot-site').split('|') %>
+      <div class="col-md-3 col-xs-3 col-sm-3 padding-10">
+        <a href="<%= wechat_nav_hot_site[1] || 'javascript:void(0)' %>" class="grey-text">
+          <img src="<%= wechat_nav_hot_site[0] %>" class="img-responsive" >
+        </a>
+      </div>
+      <% end %>
+
+      <% if Keystore.value_for('wechat-nav-hot-news').present? %>
+      <% wechat_nav_hot_news = Keystore.value_for('wechat-nav-hot-news').split('|') %>
+      <div class="col-md-3 col-xs-3 col-sm-3 padding-10">
+        <a href="<%= wechat_nav_hot_news[1] || 'javascript:void(0)' %>" class="grey-text">
+          <img src="<%= wechat_nav_hot_news[0] %>" class="img-responsive" >
+        </a>
+      </div>
+      <% end %>
+
+      <% if Keystore.value_for('wechat-nav-hot-recent').present? %>
+      <% wechat_nav_hot_recent = Keystore.value_for('wechat-nav-hot-recent').split('|') %>
+      <div class="col-md-3 col-xs-3 col-sm-3 padding-10">
+        <a href="<%= wechat_nav_hot_recent[1] || 'javascript:void(0)' %>" class="grey-text">
+          <img src="<%= wechat_nav_hot_recent[0] %>" class="img-responsive" >
+        </a>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <!-- 热门活动 -->
+  <div class="container-fulid">
+    <div class="row block-title">
+      <h4>热门活动 <small class="pull-right"><a href="/micro_website/wechat_products">查看更多&gt;&gt;</a></small></h4>
+      <% @products.hot(4).each do |product| %>
+        <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 5px;">
+          <a href="<%= wechat_product_micro_website_path(id: product.id) %>">
+            <img src="<%= product.first_image %>" class="img-responsive" style="width: 100%;" >
+          </a>
+          <div style="border: 1px solid #ddd;padding: 5px;">
+            <h4><a href="<%= wechat_product_micro_website_path(id: product.id) %>" style="color: #222629;"><%= product.name.truncate(20) %></a></h4>
+            <p>
+              <span class="label label-primary">
+                <% if product.sell_price > 0 %>
+                  <%= product.sell_price / 100.0 %>
+                <% else %>
+                  免费
+                <% end %>
+              </span>&nbsp;&nbsp;
+              <span class="label label-success">
+                <% if product.status == 'open' %>
+                  进行中
+                <% elsif product.status == 'completed' %>
+                  已售完
+                <% elsif product.status == 'pending' %>
+                  未开始
+                <% elsif product.status == 'closed' %>
+                  已结束
+                <% else %>
+                  未发布
+                <% end %>
+              </span>&nbsp;&nbsp;
+              <% if product.phone.present? %>
+              <span class="label label-info">电话：<%= product.phone %></span>
+              <% end %>
+            </p>
+            <p><%= product.description.truncate(50) %></p>
+            <a href="<%= new_frontend_order_path(product_id: product.id) %>" class="btn btn-primary" >立即预定</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 场馆展示 -->
+  <div class="container-fulid">
+    <div class="row block-title">
+      <h4>热门场馆<small class="pull-right"><a href="/micro_website/wechat_sites">查看更多&gt;&gt;</a></small></h4>
+      <ul class="entertainment-slider" style="padding: 0px;">
+        <% @sites.hot(4).each do |site| %>
+          <li>
+            <div class="entertainment">
+              <div class="entertainment-image">
+                <a href="<%= wechat_site_micro_website_path(id: site.id) %>">
+                  <img class="img-responsive" src="<%= site.first_image %>" alt="Image">
+                </a>
+              </div>
+              <div class="entertainment-info text-left">
+                <h2><a href="<%= wechat_site_micro_website_path(id: site.id) %>" style="color: #616161;"><%= site.title %></a></h2>
+                <p>地址：
+                  <% if site.address_line.present? %>
+                    <%= site.address_line %>
+                  <% else %>
+                    暂无
+                  <% end %>
+                </p>
+                <p>联系电话：
+                  <% if site.contact_phone.present? %>
+                    <%= site.contact_phone %>
+                  <% else %>
+                    <%= site.phone %>
+                  <% end %>
+                </p>
+                <p><%= site.description && site.description.truncate(70) %></p>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <p class="text-center" style="margin: 0px;"><small style="color: #ccc;">左右滑动场馆，查看更多！</small></p>
+    </div>
+  </div>
+
+  <!-- 新闻资讯 -->
+  <div class="container-fulid">
+    <div class="row block-title">
+      <h4>新闻资讯<small class="pull-right"><a href="/micro_website/wechat_news">查看更多&gt;&gt;</a></small></h4>
+
+      <% Cms::Page.hot(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+            <a href="<%= wechat_new_micro_website_path(id: page.id) %>">
+              <img src="<%= page.image_path %>" class="img-responsive" >
+            </a>
+          </div>
+          <div class="col-md-8 col-xs-8 col-sm-8">
+            <p><a href="<%= wechat_new_micro_website_path(id: page.id) %>"><%= page.title.truncate(34) %></a></p>
+            <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div><!-- main-wrapper -->
+
+<%= render file: 'frontend/micro_website/_footer.html.erb' %>

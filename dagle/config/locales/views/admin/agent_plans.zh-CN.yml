@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    agent_plans:
+      index:
+        title: Agent plans
+      show:
+        title: Agent plan
+      edit:
+        title: Editing Agent plan
+      new:
+        title: New Agent plan
+  flash:
+    admin:
+      agent_plans:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

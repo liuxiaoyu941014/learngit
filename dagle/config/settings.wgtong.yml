@@ -1,0 +1,66 @@
+default: &default
+  site:
+    name: 文广通
+    host: http://www.lvh.me:5000
+    copyright: © WGTong All Right Reserved 2017
+    description: 文化云，数字文化，应急广播，公共文化服务，文化活动预订平台。
+    slogan: 一个综合公共文化大数据平台
+  email:
+    sender: sender@tmf.com
+  weixin:
+    app_id: wx2112a27b1c8bb766
+    app_secret: d4624c36b6795d1d99dcf0547af5443d
+    token_string: 50c2263e7f076bbe75c50ebd54401963 # 微信Token值
+    secret_string: 0abcf2c591b0a1b209ca12a20a8eda83 # 微信服务URL配置中，此值用来避免真正使用的Token值暴露在URL上，提高安全性。
+    encoding_aes_key:
+  weixin_open_app: # 微信开放平台绑定的APP
+    app_id:
+    app_secret:
+  weixin_login:
+    appid: wx780e6d3737d09255 # 微信扫码登录的公众号appid
+    host: 'https://wxopen.tanmer.com'
+  sms:
+    provider: yun_pian_v1
+    yun_pian_v1:
+      api_key: c97380fa188341572c1bcdadf383dfc2
+    templates:
+      order_notification: "【文广通】您单号为#order#的订单当前的状态为:#message#。我们将时刻提醒您订单的状态"
+      order_succeed_to_user: "【文广通】恭喜你下单成功，商家(#site_name#)商家电话(#phone#)"
+      order_succeed_to_agent: "【文广通】新增用户订单，金额(#price#)，请及时登录商家后台处理"
+      order_completed_to_user: "【文广通】您的(#order_code#)号订单已#from#确认消费,如有疑问您可以进行申诉"
+  mobile:
+    auth_token_template: "【文广通】您的验证码是#code#。如非本人操作，请忽略本短信。"
+
+  payment: # Ping++支付
+    api_id: app_zvv1aDOe5aTCuLOm
+    api_key: sk_live_fzf9S0D0CSOSiLCOu1izDSW5
+    # Test Secret Key:sk_test_LurPKKzbHOyDPWvLm15OyDuT
+    # Live Secret Key:sk_live_fzf9S0D0CSOSiLCOu1izDSW5
+    channels:
+    - alipay
+    - wx
+    enable_pingpp_one: false
+
+  qiniu: &qiniu_credentials
+    access_key: HXrvQOeDfAizpMzdanxSMiotX60zWuDXAseybFcx
+    secret_key: n886ogK5IGUwYx-M4m-NLSaP0-OTGD2_eCCsqId_
+
+  paperclip:
+    enable: true
+    options:
+      storage: :qiniu
+      qiniu_credentials:
+        <<: *qiniu_credentials
+      bucket: tmf
+      use_timestamp: false
+      qiniu_host: ocwr8qu9g.bkt.clouddn.com
+
+  test_account:
+    mobile_phone: '13900000000'
+    code: '000000'
+development:
+  <<: *default
+production:
+  <<: *default
+test:
+  <<: *default

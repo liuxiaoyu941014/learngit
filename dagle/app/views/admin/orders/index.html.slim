@@ -1,0 +1,110 @@
+h1.page-header
+  | #{Order.model_name.human}列表
+  .pull-right
+    = link_to "新建#{Order.model_name.human}", new_admin_order_path, class: 'btn btn-primary' unless Settings.project.sxhop? || Settings.project.imolin?
+
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title &nbsp;
+  .panel-body
+    = form_for :search, url:  admin_orders_path, method: :get do |f|
+      .toolbar.row
+        .col-md-2
+          input[type="text" name="code" placeholder="输入订单号" class="form-control" value="#{params[:code]}"]
+        .col-md-2
+          input[type="text" name="site_name" placeholder="经销商名称" class="form-control" value="#{params[:site_name]}"]
+        .col-md-2
+          input[type="text" name="daterange" class="form-control" placeholder="请选择日期范围" value="#{params['daterange']}"]
+        .col-md-2
+          = f.select "status", enum_options_for_select(Order, 'status'), {selected: params[:search] && params[:search][:status], prompt: '所有状态', include_blank: true}, class: 'form-control'
+        .col-md-2
+          - if Settings.project.grand?
+            = f.select "material", [['实际用料大于计划用料', 'more'], ['实际用料小于计划用料', 'less']], {selected: params[:search] && params[:search][:material], prompt: '所有用料', include_blank: true}, class: 'form-control'
+            span.hint 默认只筛选'已完成'的订单
+        .col-md-2
+          button.btn.btn-success[type="submit"] 搜索
+          button.btn.btn-default[type='submit'name='csv'value='csv'] csv下载
+      .well.form-horizontal
+        .row
+          .col-md-3
+            h4.text-info 
+              | 订单总额: 
+              = (@orders_all.sum(&:price)/100.0).to_s + '元'
+          - if Settings.project.grand?
+            .col-md-3
+              h4.text-info 
+                | 计划用料: 
+                = Order.where(id: @orders_all.pluck("orders.id")).joins(:order_materials).pluck("amount").compact.sum
+            .col-md-3
+              h4.text-info
+                | 实际用料: 
+                =  Order.where(id: @orders_all.pluck("orders.id")).joins(:order_materials).pluck("practical_number").compact.sum
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th = Order.human_attribute_name(:code)
+            th = Order.human_attribute_name(:site)
+            th = Order.human_attribute_name(:price)
+            th = Order.human_attribute_name(:status)
+            - if Settings.project.grand?
+              th = Order.human_attribute_name(:internal_status)
+              th 计划用料/实际用料/差值
+            th 操作
+        tbody
+          - @orders.each do |order|
+            tr
+              td = order.code
+              td = order.site.title
+              td = order.price.to_f / 100
+              td = enum_l(order, :status)
+              - if Settings.project.grand?
+                td = enum_l(order, :internal_status) || '-'
+                th
+                  span.label.label-primary
+                    = order_amount = order.order_materials.sum{|om| om.amount.to_i}
+                  | &nbsp; &nbsp;
+                  span.label.label-info
+                    = order_practical = order.order_materials.sum{|om| om.practical_number.to_i}
+                  | &nbsp; &nbsp;
+                  span.label.label-danger
+                    = order_practical - order_amount
+              td
+                => link_to '查看', admin_order_path(order), class: 'btn btn-xs btn-default'
+                = link_to '删除', admin_order_path(order), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-xs btn-danger'
+.pull-right
+  = paginate @orders
+/ TODO: move this code to application.js
+javascript:
+  $(document).ready(function(){
+    bindRemoveLabel('.well.filter_search label.control-label');
+    $('form #search_column li a').on('click', function(){
+      if($('.well.filter_search .form-group').length == 0){
+        $('.well.form-horizontal.filter_search').removeClass('hidden').addClass('show');
+      }
+      var column_name = $(this).text();
+      var column_key = $(this).data('key');
+      var name = "filters["+ column_key +"]";
+      input_name = "input[name='" + name +"']";
+      if(!$('.well.filter_search').find(input_name).length > 0){
+        $('.well.filter_search hr').before("<div class='form-group'><label class='pull-left m-l-15 control-label'><i class='fa fa-trash-o m-r-5'></i><b>"+ column_name +"</b></label><div class='col-xs-5'><input class='form-control' name='"+ name +"' type='text'></div></div>");
+        $('.well.filter_search .control-label i.fa-trash-o').off();
+        bindRemoveLabel('.well.filter_search label.control-label');
+      }
+    })
+
+    function bindRemoveLabel(dom){
+      $(dom).on('click', function(){
+        $(this).parent('.form-group').remove();
+        if($('.well.filter_search .form-group').length == 0){
+          $('.well.filter_search').addClass('hidden');
+        }
+      })
+    }
+
+  })

@@ -1,0 +1,2 @@
+module Admin::MaterialWarehousesHelper
+end

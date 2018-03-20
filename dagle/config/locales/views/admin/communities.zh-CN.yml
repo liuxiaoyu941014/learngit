@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    communities:
+      index:
+        title: Communities
+      show:
+        title: Community
+      edit:
+        title: Editing Community
+      new:
+        title: New Community
+  flash:
+    admin:
+      communities:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

@@ -1,0 +1,16 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      forage/source: 数据源
+    attributes:
+      forage/source:
+        name: 名称
+        catalog_name: 分类
+        url: 链接地址
+        note: 备注
+    errors:
+      models:
+        source:
+  helpers:
+    source:

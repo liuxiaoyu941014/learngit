@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    tasks:
+      index:
+        title: Tasks
+      show:
+        title: Task
+      edit:
+        title: Editing Task
+      new:
+        title: New Task
+  flash:
+    admin:
+      tasks:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

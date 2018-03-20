@@ -1,0 +1,74 @@
+h1.page-header
+  | 查看#{Cms::Site.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_cms_site_path(@cms_site), class: 'btn btn-primary'
+    = link_to '返回', admin_cms_sites_path, class: 'btn btn-default'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:site)}
+              td
+                a
+                  = @cms_site.site
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:name)}
+              td
+                a
+                  = @cms_site.name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:template)}
+              td
+                a
+                  = @cms_site.template
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:domain)}
+              td
+                a
+                  = @cms_site.domain
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:description)}
+              td
+                a
+                  = @cms_site.description
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:features)}
+              td
+                a
+                  = @cms_site.features
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Cms::Site.human_attribute_name(:is_published)}
+              td
+                a
+                  = @cms_site.is_published
+            tr.divider
+              td[colspan='2']
