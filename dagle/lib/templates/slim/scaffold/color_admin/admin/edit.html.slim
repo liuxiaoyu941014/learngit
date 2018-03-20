@@ -1,7 +1,0 @@
-h1.page-header
-  | 编辑#{<%= model_class_name %>.model_name.human}
-  .pull-right
-    => link_to '查看', <%= singular_table_name %>_path(@<%= model_var_name %>), class: 'btn btn-primary'
-    = link_to '返回', <%= index_helper %>_path, class: 'btn btn-primary'
-
-== render 'form'

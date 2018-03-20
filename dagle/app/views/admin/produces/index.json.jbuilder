@@ -1,1 +1,0 @@
-json.array! @admin_produces, partial: 'admin_produces/admin_produce', as: :admin_produce

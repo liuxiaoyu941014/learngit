@@ -1,2 +1,0 @@
-module Agent::DeliveriesHelper
-end

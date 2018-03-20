@@ -1,7 +1,0 @@
-h1.page-header
-  | 编辑#{Forage::Detail.model_name.human}
-  .pull-right
-    => link_to '查看', admin_forage_detail_path(@forage_detail), class: 'btn btn-primary'
-    = link_to '返回', admin_forage_details_path, class: 'btn btn-primary'
-
-== render 'form'

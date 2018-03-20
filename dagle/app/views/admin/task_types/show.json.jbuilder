@@ -1,1 +1,0 @@
-json.partial! "admin_task_types/admin_task_type", admin_task_type: @admin_task_type

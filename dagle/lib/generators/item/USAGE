@@ -1,8 +1,0 @@
-Description:
-    Generate a model inherit from Item
-
-Example:
-    rails generate item Thing
-
-    This will create:
-        app/models/thing.rb

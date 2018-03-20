@@ -1,1 +1,0 @@
-json.array! @admin_task_types, partial: 'admin_task_types/admin_task_type', as: :admin_task_type

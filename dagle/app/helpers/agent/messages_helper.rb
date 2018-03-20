@@ -1,2 +1,0 @@
-module Agent::MessagesHelper
-end

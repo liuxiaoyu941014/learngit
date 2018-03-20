@@ -1,1 +1,0 @@
-json.array! @admin_material_management_histories, partial: 'admin_material_management_histories/admin_material_management_history', as: :admin_material_management_history

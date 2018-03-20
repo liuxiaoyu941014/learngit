@@ -1,2 +1,0 @@
-module Agent::AssetsHelper
-end

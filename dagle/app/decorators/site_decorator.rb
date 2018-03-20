@@ -1,2 +1,0 @@
-class SiteDecorator < ApplicationDecorator
-end

@@ -1,2 +1,0 @@
-module Agent::OrdersHelper
-end

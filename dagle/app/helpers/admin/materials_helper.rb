@@ -1,2 +1,0 @@
-module Admin::MaterialsHelper
-end

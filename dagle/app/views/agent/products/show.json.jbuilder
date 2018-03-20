@@ -1,1 +1,0 @@
-json.partial! "agent_products/agent_product", agent_product: @agent_product

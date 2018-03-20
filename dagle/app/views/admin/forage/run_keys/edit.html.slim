@@ -1,7 +1,0 @@
-h1.page-header
-  | 编辑#{Forage::RunKey.model_name.human}
-  .pull-right
-    => link_to '查看', admin_forage_run_key_path(@forage_run_key), class: 'btn btn-primary'
-    = link_to '返回', admin_forage_run_keys_path, class: 'btn btn-primary'
-
-== render 'form'

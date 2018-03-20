@@ -1,1 +1,0 @@
-json.array! @agent_statistics, partial: 'agent_statistics/agent_statistic', as: :agent_statistic

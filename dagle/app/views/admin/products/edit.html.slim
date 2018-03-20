@@ -1,8 +1,0 @@
-h1.page-header
-  | 编辑#{Product.model_name.human}
-  .pull-right
-    => link_to '查看', @site ? admin_site_product_path(@site, @product) : admin_product_path(@product), class: 'btn btn-primary'
-    => link_to '去往数据合并', admin_forage_data_caches_path, class: 'btn btn-info' if @product.is_foraged
-    = link_to '返回', @site ? admin_site_products_path(@site) : admin_products_path, class: 'btn btn-primary'
-
-== render 'form'

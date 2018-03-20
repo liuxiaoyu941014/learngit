@@ -1,2 +1,0 @@
-json.extract! admin_cms_channel, :id, :site_id, :channel_id, :title, :short_title, :properties, :tmp_index, :tmp_detail, :keywords, :description, :image_path, :content, :created_at, :updated_at
-json.url admin_cms_channel_url(admin_cms_channel, format: :json)

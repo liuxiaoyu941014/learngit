@@ -1,9 +1,0 @@
-h1.page-header
-  | 编辑#{AppSetting.model_name.human}
-  span.text-danger
-    | （请慎重修改）
-  .pull-right
-    => link_to '查看', admin_app_setting_path(@app_setting), class: 'btn btn-primary'
-    = link_to '返回', admin_app_settings_path, class: 'btn btn-primary'
-
-== render 'form'

@@ -1,1 +1,0 @@
-json.array! @agent_member_notes, partial: 'agent_member_notes/agent_member_note', as: :agent_member_note

@@ -1,1 +1,0 @@
-json.partial! "cms_channels/cms_channel", cms_channel: @cms_channel

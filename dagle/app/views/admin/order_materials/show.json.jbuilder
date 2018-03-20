@@ -1,1 +1,0 @@
-json.partial! "admin_order_materials/admin_order_material", admin_order_material: @admin_order_material

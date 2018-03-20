@@ -1,1 +1,0 @@
-json.partial! "admin_cms_pages/admin_cms_page", admin_cms_page: @admin_cms_page

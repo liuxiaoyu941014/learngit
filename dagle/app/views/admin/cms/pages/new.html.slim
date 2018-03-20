@@ -1,7 +1,0 @@
-h1.page-header
-  | 新建#{Cms::Page.model_name.human}
-  .pull-right
-    => link_to '返回', admin_cms_site_channel_pages_path(@cms_site, @cms_channel), class: 'btn btn-default'
-    => link_to '返回栏目', admin_cms_site_channels_path(@cms_site), class: 'btn btn-default'
-
-== render 'form'

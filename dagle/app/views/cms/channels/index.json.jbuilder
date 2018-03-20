@@ -1,1 +1,0 @@
-json.array! @cms_channels, partial: 'cms_channels/cms_channel', as: :cms_channel

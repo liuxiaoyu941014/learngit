@@ -1,6 +1,0 @@
-$("<%= j(render('room_li', room: @room)) %>").appendTo("#rooms-list")
-$('input[name="new-room"]').val('')
-
-$('li#room-li-<%= @room.id %> > span.btn').click ->
-  data = $(this).data
-  App.RoomChannel.switch data.id, data.name

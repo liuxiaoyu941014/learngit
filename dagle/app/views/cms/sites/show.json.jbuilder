@@ -1,1 +1,0 @@
-json.partial! "cms_sites/cms_site", cms_site: @cms_site

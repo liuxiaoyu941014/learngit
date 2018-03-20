@@ -1,7 +1,0 @@
-h1.page-header
-  | 编辑#{Article.model_name.human}
-  .pull-right
-    => link_to '查看', @community ? admin_community_article_path(@community, @article) : admin_article_path(@article), class: 'btn btn-primary'
-    = link_to '返回', @community ? admin_community_articles_path(@community) : admin_articles_path, class: 'btn btn-primary'
-
-== render 'form'

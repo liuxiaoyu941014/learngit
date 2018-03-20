@@ -1,1 +1,0 @@
-json.partial! "agent_preorder_conversitions/agent_preorder_conversition", agent_preorder_conversition: @agent_preorder_conversition

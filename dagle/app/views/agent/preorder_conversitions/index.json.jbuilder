@@ -1,1 +1,0 @@
-json.array! @agent_preorder_conversitions, partial: 'agent_preorder_conversitions/agent_preorder_conversition', as: :agent_preorder_conversition

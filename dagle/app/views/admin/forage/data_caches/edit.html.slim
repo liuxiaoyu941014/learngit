@@ -1,7 +1,0 @@
-h1.page-header
-  | 编辑#{Forage::DataCache.model_name.human}
-  .pull-right
-    => link_to '不合并', admin_forage_data_cach_path(@forage_data_cache, migrate_to: @migrate_to), data: { confirm: '确定不合并吗?' }, method: :delete, class: 'btn btn-primary btn-danger'
-    = link_to '返回', admin_forage_data_caches_path(migrate_to: @migrate_to), class: 'btn btn-primary'
-
-== render 'form'

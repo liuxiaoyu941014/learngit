@@ -1,1 +1,0 @@
-json.array! @admin_material_stock_alerts, partial: 'admin_material_stock_alerts/admin_material_stock_alert', as: :admin_material_stock_alert
