@@ -1,0 +1,31 @@
+= javascript_include_tag 'payment_core/pingpp'
+.container.m-t-20
+  .content
+    .row
+    - @agent_plans.each do |plan|
+      .col-md-4.col-sm-12
+        .widget.widget-stats.bg-green
+          .stats-info
+            h3.text-center = plan.name
+            h3.text-center.text-danger = (plan.price.to_f/100).to_s + '元'
+          = raw(plan.content)
+          p.text-center
+            = link_to '立即购买', charge_agent_agent_plan_path(plan), method: :post, remote: :true, class: 'btn btn-warning'
+p.text-center
+  a[href="http://www.imolin.cn/news/192" target="_blank"] 购买商家套餐前请先阅读商家入驻协议
+javascript:
+  function onStartCharging(charge){
+    console.log(charge)
+    pingpp.createPayment(charge, function(result, err){
+      console.log(result);
+      console.log(err.msg);
+      console.log(err.extra);
+      if (result == "success") {
+          // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+      } else if (result == "fail") {
+          // charge 不正确或者微信公众账号支付失败时会在此处返回
+      } else if (result == "cancel") {
+          // 微信公众账号支付取消支付
+      }
+    });
+  }

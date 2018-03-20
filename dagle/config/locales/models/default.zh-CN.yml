@@ -1,0 +1,14 @@
+---
+zh-CN:
+  attributes:
+    id: ID
+    name: 名称
+    name_py: 编码
+    description: 文字介绍
+    created_at: 创建时间
+    updated_at: 修改时间
+    headshot: 头像
+    city: 城市
+    province: 省份
+    country: 国家
+    gender: 性别

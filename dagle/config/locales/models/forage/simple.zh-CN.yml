@@ -1,0 +1,19 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      forage/simple: 数据清单
+    attributes:
+      forage/simple:
+        run_key: 运行策略
+        catalog: 分类
+        title: 标题
+        url: Url
+        features: 特性
+        is_processed: 执行状态
+        processed_at: 执行时间
+    errors:
+      models:
+        simple:
+  helpers:
+    simple:

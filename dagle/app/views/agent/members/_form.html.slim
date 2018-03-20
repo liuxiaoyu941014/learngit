@@ -1,0 +1,71 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+        i class="fa fa-times"
+    h4
+  .panel-body
+    = simple_form_for @agent_member, url: @agent_member.new_record? ? agent_members_path(@agent_member) : agent_member_path(@agent_member), html: { class: 'form-horizontal' } do |f|
+      - if @agent_member.errors.any?
+        #error_explanation
+
+          ul
+            - @agent_member.errors.full_messages.each do |message|
+              li = message
+      .row
+        .col-md-4
+          div style="padding: 0px 20px;"
+            = f.input :name, required: true
+            = f.input :mobile_phone, required: true
+            = f.input :real_name
+            = f.input :card_id
+            = f.input :typo, collection: ['正式', '非正式']
+            = f.input :from, collection: ['网络', '线下', '活动']
+            = f.input :owned, as: :hidden, input_html: {value: '系统'}
+            = f.input :tel_phone
+            = f.input :birth, as: :string
+            = f.input :email
+            = f.input :qq
+            = f.input :wechat
+            = f.input :firm
+            = f.input :address
+
+
+        .col-md-8
+          = simple_fields_for :features do |o|
+            - @agent_member_catalogs.each do |catalog|
+              h4 = catalog.key
+              = o.input catalog.key,
+                collection: catalog.value,
+                as: :radio_buttons,
+                checked: @agent_member.features && @agent_member.features[catalog.key],
+                label: false,
+                item_wrapper_class: 'a radio-inline'
+          hr
+          = f.input :note, as: :text, input_html: {rows: "6"}
+
+      .form-group
+        .col-md-12
+          = f.submit '保存', class: 'btn btn-success btn-block'
+
+javascript:
+  $('#member_birth').datetimepicker({
+    format: 'yyyy-mm-dd',
+    startView: 2,
+    minView: 2,
+    minuteStep: 60,
+    language: 'zh-CN'
+  });
+
+  var $radios = $('input:radio');
+
+  $radios.change(function () {
+    $($(this).parent().parent().parent()).find('input:radio').parent().removeClass('checked');
+
+    $(this).parent().addClass('checked');
+  });
+
+  $('input:radio').filter(':checked').parent().addClass('checked');

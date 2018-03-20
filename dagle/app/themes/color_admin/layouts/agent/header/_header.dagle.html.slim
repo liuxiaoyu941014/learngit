@@ -1,0 +1,136 @@
+/! BEGIN #header
+#header.header
+  /! BEGIN container
+  .container
+    /! BEGIN header-container
+    .header-container
+      /! BEGIN navbar-header
+      .navbar-header
+        button.navbar-toggle.collapsed data-target="#navbar-collapse" data-toggle="collapse" type="button"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        .header-logo.hidden-xs
+          a href="/agent"
+            span = Settings.site.name
+            small = Settings.site.slogan
+      /! END navbar-header
+      /! BEGIN header-nav
+      .header-nav
+        #navbar-collapse.collapse.navbar-collapse
+          ul.nav
+            li
+              a href="/agent"  首页
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="javascript:void(0);"
+                | 产品管理
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '产品列表', agent_products_path
+                li = link_to '发布新品', new_agent_product_path, 'data-turbolinks': false
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="javascript:void(0);"
+                | 订单管理
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '订单列表', agent_orders_path
+                / li = link_to '订单创建', new_agent_order_path
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 生产设计
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '任务管理', agent_preorder_conversitions_path
+                li
+                  a[href="#" data-toggle="modal" data-target="#newPreorderConversitionModal"]
+                    i class="fa fa-plus-circle"
+                    | &nbsp;新建任务
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 货运管理
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '货运列表', agent_deliveries_path
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 客户CRM
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '客户', agent_members_path
+                li = link_to '营销', agent_market_pages_path
+
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 网站管理
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                - if @site
+                  - if @site.cms_site
+                    li = link_to '网站设置', cms_site_path(@site.cms_site)
+                    li = link_to '页面列表', cms_site_pages_path(@site.cms_site)
+                    li = link_to '留言管理', cms_site_comments_path(@site.cms_site)
+
+                    li = link_to new_cms_site_page_path(@site.cms_site) do
+                          i class="fa fa-plus-circle"
+                          | &nbsp;添加页面
+                  - else
+                    li = link_to '添加站点', new_cms_site_path
+            li
+              = link_to '图片资源', agent_assets_index_path
+            li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 访客统计
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                - if @cms_site && @cms_site.id?
+                  li = link_to '访客留言', cms_site_comments_path(@cms_site)
+
+                li = link_to '访客统计', agent_tracker_path
+                li = link_to '分销统计', agent_tracker_shares_path
+            /li.dropdown.dropdown-hover
+              a data-toggle="dropdown" href="#"
+                | 财务管理
+                i.fa.fa-angle-down
+                span.arrow.top
+              ul.dropdown-menu
+                li = link_to '账单查询', agent_finance_bills_path
+                li = link_to '资金管理', fund_agent_finance_bills_path
+      /! END header-nav
+      .header-nav
+        ul.nav.pull-right.nav-head-push-messages
+          li.dropdown.dropdown-hover
+            a.header-cart[href="#" data-toggle="dropdown"]
+              i.fa.fa-bell-o
+              span.total
+                | {{messages.length}}
+              span.arrow.top
+            .dropdown-menu.dropdown-menu-cart.p-0
+              .cart-header
+                h4.cart-title
+                  span 最新&nbsp;
+                  span.total.text-info
+                    | {{messages.length > 5 ? 5 : messages.length}}
+                  span &nbsp;条未处理消息
+              .cart-body
+                ul.cart-item
+                  li[v-for="message, index in messages.slice(0, 5)"]
+                    a.cart-item-info[@click='redirectTo(message, index)']
+                      h4
+                        | {{message.content}}
+                      p.price
+                        | {{(new Date(message.created_at)).toLocaleString()}}
+                    .cart-item-close
+                      span[data-toggle="tooltip" data-title="Remove" @click="removeItem(message, index)"] ×
+              .cart-footer
+                .row.row-space-10
+                  .col-xs-12
+                    = link_to '查看全部', agent_messages_path, class: 'btn btn-default btn-block'
+/ 生产任务创建 modal
+= render 'agent/preorder_conversitions/new'

@@ -1,0 +1,21 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @finance_bill, url: @finance_bill.new_record? ? admin_finance_bills_path : admin_finance_bill_path(@finance_bill), validate: true do |f|
+      - if @finance_bill.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@finance_bill.errors.count, "error")} prohibited this finance_bill from being saved:"
+          ul
+            - @finance_bill.errors.full_messages.each do |message|
+              li = message
+
+      = f.input :code
+      = f.input :amount
+      = f.input :site_id
+      = f.input :status
+      = f.submit class: 'btn btn-success btn-block'

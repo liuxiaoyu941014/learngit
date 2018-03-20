@@ -1,0 +1,10 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate cud:model Thing
+
+    This will create:
+      app/models/thing/create.rb
+      app/models/thing/update.rb
+      app/models/thing/destroy.rb

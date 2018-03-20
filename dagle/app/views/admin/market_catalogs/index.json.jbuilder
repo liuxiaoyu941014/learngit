@@ -1,0 +1,1 @@
+json.array! @admin_market_catalogs, partial: 'admin_market_catalogs/admin_market_catalog', as: :admin_market_catalog

@@ -1,0 +1,13 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @delivery, url: @delivery.new_record? ? admin_deliveries_path : admin_delivery_path(@delivery), validate: true do |f|
+      = f.input :name
+      = f.input :phone_number, label: '联系电话'
+      = f.input :address, label: '联系地址'
+      = f.submit class: 'btn btn-success btn-block'

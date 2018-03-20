@@ -1,0 +1,65 @@
+<!-- Modal -->
+<div class="modal fade" id="newPreorderConversitionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">创建生产设计</h4>
+      </div>
+      <%= simple_form_for PreorderConversition.new, url: agent_preorder_conversitions_path, html: { class: 'form-horizontal' }, remote: true do |f| %>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :title %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <% if @site.present? %>
+                <%= f.input :member_id, collection: @site.members.map{|m| [m.name + '(' + (m.mobile_phone.blank? ? '暂无' : m.mobile_phone) + ')', m.id]}, include_blank: true, input_html: { class: 'select2 select-member' } %>
+              <% end %>
+            </div>
+            <div class="col-xs-2 form-group">
+              <label class="control-label select optional">&nbsp;</label>
+              <div><button type="button" class="btn btn-primary" id="addMemberButton">快速创建用户</button></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :content, as: :text, placeholder: '这里填写用户需求' %>
+            </div>
+          </div>
+          <%= f.input :images do %>
+            <image-select server="<%= image_items_path %>" name="order[image_item_ids][]"></image-select>
+          <% end %>
+          <div class="error-text alert alert-danger" role="alert"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <%= f.submit '创建', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+      <div class="add-member" id="addMember" style="display: none">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content" style="padding: 10px">
+            <%= simple_form_for Member.new, url: agent_members_path(format: 'json'), html: { class: 'form-horizontal' }, remote: true do |m| %>
+              <div class="error-text alert alert-danger" role="alert"></div>
+              <div class="modal-body">
+                <div class="row">
+                  <%= m.input :name %>
+                </div>
+                <div class="row">
+                  <%= m.input :mobile_phone %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default close-add-member-modal">关闭</button>
+                <%= m.submit '创建', class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+h3 附近2公里商家
+.row
+  .col-md-4
+    .list-group
+      - if @sites.any?
+        - @sites.each_with_index do |site, index|
+          => link_to admin_site_path(site), target: '_blank', class: "list-group-item site site-#{index}"
+            h4.list-group-item-heading
+              = site.title
+              small
+                = site.distance.to_i.to_s + '米'
+            p.list-group-item-text
+              - if site.has_contract
+                span.badge.badge-info 已签约
+              - else
+                span.badge.badge-default 未签约
+              - if site.is_published
+                span.badge.badge-info 已发布
+              - else
+                span.badge.badge-default 未发布
+      - else
+        p 附近还没有商家,<a href="#{new_admin_site_path}">点击创建</a>
+
+  .col-md-8
+    - if @sites.any?
+      h4 商家地图
+      #baidu-map
+  = paginate @sites
+script data-turbolinks="false" type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=#{Rails.application.config_for(:baidu_lbs_api)['geocoding']["ak"]}"
+javascript:
+    var options = { };
+    options['center_point'] = "#{@community.city_name}" || '成都' ;
+    var current_point = null;
+    var current_marker = null;
+    var pointArray = new Array();
+    var markers = [];
+    current_point = new BMap.Point("#{@community.address_lng}", "#{@community.address_lat}");
+    current_marker = new BMap.Marker(current_point);  // 创建标注
+    options['center_point'] = current_point;
+    options['zoom'] = 16;
+    
+    //BaiduMap 是一个js库, 放在/assets/javascripts/admin/baidu_map.js中,需要引用才能使用
+    var map_obj = new BaiduMap('baidu-map', options);
+    var map = map_obj.map;
+    map.setDefaultCursor("default");   //设置地图默认的鼠标指针样式
+
+    //map.addOverlay(current_marker);              // 将标注添加到地图中
+
+    var sites = JSON.parse('#{raw @sites_string}');
+    for(var i=0; i<sites.length; i++) {
+      site_point = new BMap.Point(sites[i]["address_lng"], sites[i]["address_lat"]);
+      site_marker = new BMap.Marker(site_point);
+      map.addOverlay(site_marker);
+      pointArray[i] = site_point;
+      markers.push(site_marker);
+    }
+    //让所有点在视野范围内
+    map.setViewport(pointArray);
+
+    for (i =0; i <markers.length; i ++) {
+        (function(){
+            var index = i;
+            markers[i].addEventListener('click', function(){
+                //this.openInfoWindow(new BMap.InfoWindow('我是第'+ (index +1) +'个标注'));
+                $('.site').removeClass('active');
+                $('.site-'+index).addClass('active');
+            });    
+        })();
+    }

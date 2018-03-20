@@ -1,0 +1,152 @@
+<div class="section-container bg-silver m-b-20 primary-content order">
+  <!-- BEGIN container -->
+  <div class="container">
+      <!-- BEGIN search-container -->
+    <div class="search-container">
+      <!-- BEGIN search-content -->
+     
+        <!-- BEGIN search-toolbar -->
+        <div class="search-toolbar">
+          <!-- BEGIN row -->
+          <div class="row">
+            <!-- BEGIN col-6 -->
+            <div class="col-md-12">
+              <h4>订单列表
+                <a class="btn btn-primary pull-right" href="<%=orders_agent_product_path(product: @product,format: 'csv') %>">下载</a>
+              </h4>
+            </div>
+            <!-- END col-6 -->
+            <!-- BEGIN col-6 -->
+            <div class="col-md-6 text-right">
+            </div>
+            <!-- END col-6 -->
+          </div>
+          <!-- END row -->
+        </div>
+        <!-- END search-toolbar -->
+        <!-- BEGIN container -->
+        <div class="search-item-container container-list">
+          <div class="panel panel-forum">
+            <!-- list -->
+            <ul class="forum-list forum-topic-list">
+              <% @orders.each do |order| %>
+                <li data-url="<%= (Settings.project.sxhop? || Settings.project.imolin?) ? agent_order_path(order) : '#'%>" class="link-li">
+                  <!-- begin media -->
+                  <div class="media">
+                    <% if Settings.project.imolin? || Settings.project.sxhop? || Settings.project.wgtong? %>
+                      <%= image_tag order.products.first.first_image, height: '50px' %>
+                    <% else %>
+                      <%= image_tag 'no-picture.png' %>
+                    <% end %>
+                  </div>
+                  <!-- end media -->
+                  <!-- begin info-container -->
+                  <div class="info-container" style="height:65px">
+                    <div class="info">
+                      <h4 class="title" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                        <%= order.description.slice(0, 10) unless order.description.blank? %><%= '...' unless order.description.blank? %>
+                      </h4>
+                      <ul class="info-start-end">
+                        <li class="row">
+                          <div class="col-xs-6">
+                            订单编号：
+                            <span><%= order.code %></span>
+                          </div>
+                          <div class="col-xs-6">
+                            客户：
+                            <a href="">
+                              <% if Settings.project.sxhop? || Settings.project.imolin? || Settings.project.wgtong? %>
+                                <%= order.user.try(:nickname) %>
+                              <% else %>
+                                <%= order.try(:member).try(:name)%>
+                              <% end%>
+                            </a>
+                          </div>
+                          <div class="col-xs-6">
+                            
+                            <% if Settings.project.sxhop?  || Settings.project.imolin?%>
+                              物流:
+                              <%= order.order_deliveries.first.logistics_name + '(' + order.order_deliveries.first.logistics_number + ')' unless order.order_deliveries.first.try(:logistics_name).blank? %>
+                            <% elsif Settings.project.grand? %>
+                              <% unless order.order_deliveries.blank? %>
+                                  物流:
+                                  <strong class=" text-primary"><%= order.order_deliveries.first.try{ logistics.map{|log| log.delivery.name + "(" + log.delivery.phone_number.to_s + ")"}.join(" | ") } %></strong>
+                              <% end %>
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            订单总价(含运费)：
+                            <span class="text-danger"><%= order.price.to_f / 100 %></span>
+                          </div>
+                        </li>
+                        <% if Settings.project.sxhop? || Settings.project.imolin? || Settings.project.meikemei?%>
+                          <li class="row">
+                            <div class="col-xs-6">
+                              订单状态:
+                              <span class="btn-info btn-sm"><%= decorate(order).display_status %></span>
+                            </div>
+                            <div class="col-xs-6">
+                              <% if order.refund_status %>
+                                退款状态:
+                                <span class="btn-warning btn-sm"><%= decorate(order).display_refund_status %></span>
+                              <% end %>
+                            </div>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                    <div class="date-replies">
+                      <div class="time">
+                        <%= order.created_at.strftime("%Y-%m-%d") %>
+                      </div>
+                      <div class="time">
+                        <%= order.created_at.strftime("%H:%M:%S") %>
+                      </div>
+                      <div class="order-status-display">
+                        <% if Settings.project.sxhop? || Settings.project.imolin? %>
+                          <!-- sxhop -->
+
+                        <% else %>
+                          <!-- dagle -->
+                          <% if order.cancelled? %>
+                            <span class="label label-warning" style="padding: 8px 10px">
+                              <%= decorate(order).display_status %>
+                            </span>
+                          <% elsif order.internal_status == 'delivering' %>
+                            <%= link_to '点击确认收货', agent_order_path(order), method: :put, remote: true, data: {confirm: '确定收货吗?'}, class: 'label label-danger order-status', style: 'padding: 8px 10px' %>
+                          <% else %>
+                            <span class="label label-info" style="padding: 8px 10px">
+                              <%= decorate(order).display_status %>
+                            </span>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end info-container -->
+                </li>
+              <% end %>
+            </ul>
+            <!-- list -->
+          </div>
+        </div>
+        <!-- END container -->
+
+        <!-- BEGIN pagination -->
+        <div class="text-center">
+          <%= paginate @orders %>
+        </div>
+        <!-- END pagination -->
+      <!-- END search-content -->
+    </div>
+    <!-- END search-container -->
+  </div>
+  <!-- END container -->
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('.agent-orders.index li.link-li').on('click', function(){
+      window.location.href = $(this).data('url')
+    })
+  })
+</script>

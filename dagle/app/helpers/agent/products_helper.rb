@@ -1,0 +1,2 @@
+module Agent::ProductsHelper
+end

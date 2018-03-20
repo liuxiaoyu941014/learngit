@@ -1,0 +1,46 @@
+h1.page-header
+  | 查看#{Comment::Entry.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_comment_path(@admin_comment), class: 'btn btn-primary'
+    = link_to '返回', admin_comments_path, class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field 评论对象：
+              td
+                - if @admin_comment.resource_type.to_s == 'Item'
+                  = Product.find(@admin_comment.resource_id).name
+                - elsif @admin_comment.resource_type.to_s == 'Site'
+                  = Site.find(@admin_comment.resource_id).title
+            tr
+              td.field 评论用户：
+              td
+                = User.find(@admin_comment.user_id).name
+            tr
+              td.field 评论内容
+              td
+                = @admin_comment.content
+            tr
+              td.field 评论时间
+              td
+                = @admin_comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            tr
+              td.field 是否发布
+              td
+                - if @admin_comment.is_published.to_s == 'true'
+                  span.label.label-success 已发布
+                - else
+                  span.label.label-warning 未发布
+            tr.divider
+              td[colspan='2']

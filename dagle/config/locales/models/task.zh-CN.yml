@@ -1,0 +1,25 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      task: 工作任务
+    attributes:
+      task:
+        site: 站点
+        title: 任务标题
+        description: 描述
+        creator_id: 创建者
+        assignee_id: 任务分配
+        resource: Resource
+        task_type_id: 任务类型
+        ordinal: 任务顺序
+        status: 状态
+        statuses:
+          processing: 处理中
+          cancelled: 已取消
+          completed: 已完成
+    errors:
+      models:
+        task:
+  helpers:
+    task:

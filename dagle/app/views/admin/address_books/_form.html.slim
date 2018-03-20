@@ -1,0 +1,25 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @address_book, url: @address_book.new_record? ? admin_address_books_path : admin_address_book_path(@address_book), validate: true do |f|
+      - if @address_book.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@address_book.errors.count, "error")} prohibited this address_book from being saved:"
+          ul
+            - @address_book.errors.full_messages.each do |message|
+              li = message
+
+      = f.association :user
+      = f.input :name
+      = f.input :gender
+      = f.input :mobile_phone
+      = f.input :city
+      = f.input :street
+      = f.input :house_number
+      = f.input :note
+      = f.submit class: 'btn btn-success btn-block'

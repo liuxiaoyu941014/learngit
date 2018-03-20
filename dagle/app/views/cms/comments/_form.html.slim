@@ -1,0 +1,31 @@
+= simple_form_for([@cms_site, @cms_comment], url: cms_site_comment_path(@cms_site, @cms_comment)) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :contact, disabled: true
+    = f.input :content, disabled: true
+    = f.input :name, disabled: true
+    .row
+      .col-md-4
+        = f.input :mobile_phone
+        = f.input :tel_phone
+        = f.input :email
+        = f.input :qq
+      .col-md-4
+        = f.input :address
+        = f.input :gender
+        = f.input :birth
+        = f.input :hobby
+      .col-md-4
+        = f.input :content2
+        = f.input :content3
+        = f.input :datetime
+        = f.input :status, collection: ['未处理', '已处理', '跟踪中', '拉黑'], selected: '已处理'
+    .row
+      .col-md-4
+        = f.input :branch, disabled: true
+      .col-md-4
+        = f.input :is_published, as: :boolean, label: false, label: '是否发布'
+
+  .form-actions
+    = f.button :submit, '提交', class: 'btn btn-primary btn-block btn-lg'

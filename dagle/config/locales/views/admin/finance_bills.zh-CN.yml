@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    finance_bills:
+      index:
+        title: Finance bills
+      show:
+        title: Finance bill
+      edit:
+        title: Editing Finance bill
+      new:
+        title: New Finance bill
+  flash:
+    admin:
+      finance_bills:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

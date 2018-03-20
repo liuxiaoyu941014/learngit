@@ -1,0 +1,14 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      image_item_tag: Image item tag
+    attributes:
+      image_item_tag:
+        image_item: Image item
+        name: Name
+    errors:
+      models:
+        image_item_tag: 
+  helpers:
+    image_item_tag: 

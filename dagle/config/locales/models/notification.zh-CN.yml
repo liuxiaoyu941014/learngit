@@ -1,0 +1,19 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      notification: Notification
+    attributes:
+      notification:
+        user_id: User
+        actor_id: Actor
+        notify_type: Notify type
+        target: Target
+        second_target: Second target
+        third_target: Third target
+        read_at: Read at
+    errors:
+      models:
+        notification: 
+  helpers:
+    notification: 

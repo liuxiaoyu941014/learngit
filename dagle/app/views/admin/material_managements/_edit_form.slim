@@ -1,0 +1,43 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body.choose-material
+    = simple_form_for @material_management, url: admin_material_management_path(@material_management) do |f|
+      - if @material_management.errors.any?
+        #error_explanation
+          
+          ul
+            - @material_management.errors.full_messages.each do |message|
+              li = message
+      .row
+        .col-md-4
+          = f.input :operate_date    
+        .col-md-4
+          = f.input :note
+        .col-md-4               
+      table.table
+        thead
+          tr
+            th 
+              |序号
+            th
+              |物料编号
+            th 
+              |物料名称
+            th 
+              |库存
+            th
+              |数量
+        tbody
+          - @material_management.material_management_details.each_with_index do |mod, index|
+            tr
+              td = index+1
+              td = mod.material.name_py
+              td = mod.material.name
+              td = mod.material.stock
+              td = mod.number
+      = f.submit class: 'btn btn-success btn-block'

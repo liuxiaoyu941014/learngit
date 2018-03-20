@@ -1,0 +1,17 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      account_history: Account history
+    attributes:
+      account_history:
+        account: Account
+        amount: Amount
+        relation_account: Relation account
+        relation_type: Relation type
+        relation_date: Relation date
+    errors:
+      models:
+        account_history: 
+  helpers:
+    account_history: 

@@ -1,0 +1,50 @@
+h1 
+  | 查看#{Material.model_name.human}
+  .pull-right
+    => link_to '编辑', edit_admin_material_path(@material), class: 'btn btn-primary'
+    = link_to '返回', admin_materials_path, class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field
+                | #{Material.human_attribute_name(:name)}
+              td
+                a
+                  = @material.name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Material.human_attribute_name(:name_py)}
+              td
+                a
+                  = @material.name_py
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{Material.human_attribute_name(:stock)}
+              td
+                a
+                  = @material.stock
+            tr.divider
+              td[colspan='2']
+            / tr
+            /   td.field
+            /     | #{Material.human_attribute_name(:min_stock)}
+            /   td
+            /     a
+            /       = @material.min_stock
+            / tr.divider
+            /   td[colspan='2']

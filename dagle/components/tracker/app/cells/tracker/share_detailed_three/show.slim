@@ -1,0 +1,49 @@
+.row.share_statistic.share_three[data-url=options[:path]]
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        h4 
+          span 三级分享记录 - 
+          a[:href="share_obj.root.url" style="vertical-align: top;" target="_Blank"]
+            i.fa.fa-window-restore[style="margin-right: 5px;"]
+            span.text-warning
+              | {{ share_obj.resource.name }}
+            span.small
+              | {{ "  ("+share_obj.root.url+")" }}
+          = link_to '', class: 'pull-right btn', style: "margin-top: -10px", id: 'reUrl' do
+            i.fa.fa-mail-reply[style="margin-right:5px"]
+            span 返回
+      .panel-body.share-list
+        .table-responsive
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th 用户
+                th 手机号
+                th 分享时间
+            tbody
+              tr[v-for="val,index in share_obj.records" style="cursor: pointer;"]
+                td
+                  | {{ index+1 }}
+                td
+                  | {{ val.nickname }}
+                td
+                  | {{ val.phone_number }}
+                td
+                  | {{ formatDate(val.created_at) }}
+        div.white-footer
+          span.pull-left.small
+            | {{ share_obj.records.length + '条 -- 记录' }}
+          ul.pagination.pagination-sm
+            li[v-bind:class="{ 'disabled': selected_page == 1 }"]
+              a[href="javascript:;"v-on:click="selected_page == 1 ? false : loadData(--selected_page)"] &laquo;
+            li[v-if="total_pages > 5"]
+              a[href="javascript:;" @click="onPreviousPageGroup"] ...
+            li[v-for="n in (total_pages > 5 ? 5 : total_pages)" v-bind:class="(showPage) == selected_page ? 'active' : false"]
+              a[href="javascript:;" @click="loadData(total_pages > 5 ? showPage+n : n)"]
+                | {{ total_pages > 5 ? showPage+n : n }}
+            li[v-if="total_pages > 5"]
+              a[href="javascript:;" @click="onNextPageGroup"] ...
+            li[v-bind:class="{ 'disabled': selected_page == total_pages }"]
+              a[href="javascript:;"v-on:click="selected_page == total_pages ? false : loadData(++selected_page)"] &raquo;

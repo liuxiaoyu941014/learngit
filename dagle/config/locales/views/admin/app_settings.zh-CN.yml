@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    app_settings:
+      index:
+        title: App settings
+      show:
+        title: App setting
+      edit:
+        title: Editing App setting
+      new:
+        title: New App setting
+  flash:
+    admin:
+      app_settings:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

@@ -1,0 +1,188 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<style media="screen">
+  .successOrder {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+  .warningOrder {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+  .siteOrderBg {
+    background: #337ab7;
+  }
+  .productOrderBg {
+    background: #d9534f;
+  }
+  .siteColorIcon {
+    color: #337ab7;
+  }
+  .productColorIcon {
+    color: #d9534f;
+  }
+  .orderPrice {
+    font-size: 25px;
+    color: #e81a1b;
+  }
+  .orderLink {
+    color: #fff;
+    padding: 5px 15px;
+  }
+  .orderLinkPayBg {
+    background-color: brown;
+  }
+  .orderLinkOutBg {
+    background-color: #9e9e9e;
+  }
+  .orderDescription {
+    max-width: 100%;
+    text-overflow : ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+  }
+  .productImg {
+    max-height: 120px;
+    /*max-width: 220px;*/
+    overflow: hidden;
+  }
+</style>
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>
+            我的订单
+            <small><%=@user_orders.size %> 条记录</small>
+          </h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+
+      <div class="row">
+        <div class="col-sm-8 col-md-8 tr-sticky">
+          <div class="theiaStickySidebar">
+            <!-- 筛选分类 -->
+            <!-- <div class="tr-section">
+              <p class="text-left">
+                订单类型：
+                <a href="<%= self_order_users_path %>" class="btn btn-default <%= params[:type].blank? ? 'btn-success' : '' %>">
+                  全部
+                </a>
+                <a href="<%= self_order_users_path(type: 'paid') %>" class="btn btn-default <%= params[:type] == 'paid' ? 'btn-success' : '' %>">
+                  <span class="successOrder siteOrderBg"></span>
+                   已付款
+                </a>
+                <a href="<%= self_order_users_path(type: 'open') %>" class="btn btn-default <%= params[:type] == 'open' ? 'btn-warning' : '' %>">
+                  <span class="warningOrder productOrderBg"></span>
+                   未付款
+                </a>
+                <a href="<%= self_order_users_path(type: 'completed') %>" class="btn btn-default <%= params[:type] == 'completed' ? 'btn-info' : '' %>">
+                  <span class="warningOrder productOrderBg"></span>
+                   已消费
+                </a>
+                <a href="<%= self_order_users_path(type: 'cancelled') %>" class="btn btn-default <%= params[:type] == 'cancelled' ? 'btn-danger' : '' %>">
+                  <span class="warningOrder productOrderBg"></span>
+                   已取消
+                </a>
+              </p>
+            </div> -->
+            <% if @user_orders.any? %>
+              <% @user_orders.each_with_index do |order| %>
+                <% next if order.order_products.empty? %>
+                <!-- 文化活动订单 -->
+                <div class="tr-section">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="clearfix">
+                        <span class="pull-left">
+                          <a href="<%=frontend_order_path(order) %>">
+                            <code class="productOrderBg" style="color: #fff;"><i class="fa fa-share-alt"></i> 订单号:<%= order.code%></code>
+                          </a>
+                        </span>
+
+                        <span class="pull-right">
+                          <%=distance_of_time_in_words_to_now(order.created_at) %>前
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <% order.order_products.each_with_index do |order_product| %>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="productImg">
+                        <a href="<%= frontend_order_path(order) %>">
+                          <img src="<%= order_product.try(:product).try(:first_image) %>" alt="" class="img-responsive"/>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8 text-left">
+                      <h4>
+                        <a href="<%= frontend_order_path(order) %>" style="color: #2e2e2e;">
+                          <%= order_product.try(:product).try(:name) %>
+                        </a>
+                        <small><%= order_product.try(:product).try(:catalog).try(:name) %></small>
+                      </h4>
+                      <p><i class="fa fa-map-marker productColorIcon"></i>  <%= order_product.try(:product).try(:address_line1) %></p>
+                      <p><i class="fa fa-clock-o productColorIcon"></i>                   
+                          <% order.features.each do |key,value|%>                
+                            <%value[0].each do |key,value|%>  
+                              <%if key=='datatime'%>
+                                <%=value%>
+                              <%end%>
+                            <%end%>
+                          <%end%>
+                        </p>
+                      <p class="orderDescription"><%= order_product.try(:product).try(:description) %></p>
+                      <div class="btn-group text-right" role="group">
+                        <%#<button class="btn btn-default" type="button" name="button" data-toggle="modal" data-target="#deleteSite1">取消预定</button>%>
+                      </div>
+                    </div>
+                  </div>
+                  <%end%>
+                  <div class="row">
+                    <div class="col-md-4 col-md-offset-8">
+                      <p class="text-right">
+                        <% if ['open', 'pending'].include?(order.status) %>
+                          <a href="<%= frontend_order_path(order) %>" class="btn btn-danger"><%= enum_l(order, :status)%></a>
+                        <% elsif order.paid? %>
+                          <button href="<%= frontend_order_path(order) %>" class="btn btn-default" disabled><%= enum_l(order, :status)%></button>
+                        <% else %>
+                          <button class="btn btn-default" disabled><%= enum_l(order, :status)%></button>
+                        <% end %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row text-center">
+                <%= paginate @user_orders %>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <i class="fa fa-frown-o" style="font-size:40px;color: #999;"></i>
+                </div>
+                <div class="col-md-12 text-center">
+                  您目前还没有任何订单信息
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-md-4 tr-sticky" >
+  				<%= render file: 'frontend/users/_nav_sidebar.html.erb' %>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+</div>

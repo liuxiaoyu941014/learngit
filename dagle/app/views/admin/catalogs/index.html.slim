@@ -1,0 +1,14 @@
+div
+  h1.page-header
+    | 目录管理
+  .panel.panel-info
+    .panel-heading
+      .panel-heading-btn
+        a.btn.btn-xs.btn-icon.btn-circle.btn-default[href="javascript:;" data-click="panel-expand"]
+          i.fa.fa-expand
+        a.btn.btn-xs.btn-icon.btn-circle.btn-warning[href="javascript:;" data-click="panel-collapse"]
+          i.fa.fa-minus
+      h3.panel-title
+        | &nbsp;
+    .panel-body
+      catalog-list[data-url=request.fullpath :editable="#{(current_user.has_role?(:worker) && Settings.project.imolin?) ? 'false' : 'true'}"  :editicon="#{Settings.project.imolin? ? 'true' : 'false'}" :edithot="#{Settings.project.imolin? ? 'true' : 'false'}"]

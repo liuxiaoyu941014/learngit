@@ -1,0 +1,24 @@
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h4.panel-title 会员
+  .panel-body
+    = simple_form_for @member, url: @member.new_record? ? admin_site_members_path(@site) : admin_site_member_path(@site, @member), validate: true do |f|
+      / - if @member.errors.any?
+      /   #error_explanation.alert.alert-danger
+      /     / 
+      /     ul.list-unstyled
+      /       - @member.errors.full_messages.each do |message|
+      /         li = message
+      = f.input :name
+      - if @member.new_record?
+        = f.input :mobile_phone, required: true
+      = f.input :birth, start_year: Date.today.year - 70,
+                              end_year: Date.today.year
+      = f.input :qq
+      = f.input :email
+      = f.submit class: 'btn btn-success btn-block'

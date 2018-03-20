@@ -1,0 +1,22 @@
+---
+zh-CN:
+  cms:
+    channels:
+      index:
+        title: Channels
+      show:
+        title: Channel
+      edit:
+        title: Editing Channel
+      new:
+        title: New Channel
+  flash:
+    cms:
+      channels:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

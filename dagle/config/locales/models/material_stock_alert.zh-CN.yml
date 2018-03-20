@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_stock_alert: 物料库存警报
+    attributes:
+      material_stock_alert: 
+        statuses:
+          unprocessed: 警报
+          processed: 警报解除
+    errors:
+      models:
+        material_stock_alert: 
+  helpers:
+    material_stock_alert: 

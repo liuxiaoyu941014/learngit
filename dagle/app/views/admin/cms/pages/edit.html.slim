@@ -1,0 +1,7 @@
+h1.page-header
+  | 编辑#{Cms::Page.model_name.human}
+  .pull-right
+    => link_to '去往数据合并', admin_forage_data_caches_path, class: 'btn btn-info' if @cms_page.is_foraged
+    = link_to '返回', admin_cms_site_pages_path(@cms_site), class: 'btn btn-default'
+
+== render 'form'

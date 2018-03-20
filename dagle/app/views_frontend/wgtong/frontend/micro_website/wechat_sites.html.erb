@@ -1,0 +1,88 @@
+<%= render file: 'frontend/micro_website/_navbar.html.erb' %>
+<div class="wechat-box">
+  <div class="panel panel-default top-tabs-block">
+    <div class="list-group-item screen-list">
+      <label class="<%= 'active' if @site_catalog.blank? %>">
+        <a href="<%= wechat_sites_micro_website_path %>">
+          <small>全部</small>
+        </a>
+      </label>
+      <% @site_catalogs.each do |catalog| %>
+        <label class="<%= @site_catalog.id == catalog.id ? 'active' : '' if @site_catalog.present? %>">
+          <a href="<%= wechat_sites_micro_website_path(catalog_id: catalog.id) %>">
+            <small><%= catalog.name %></small>
+          </a>
+        </label>
+      <% end %>
+    </div>
+  </div>
+  <div class="list-group custom-list">
+    <% if @sites.empty? %>
+      <p class="text-center" style="margin-top: 15px;">
+        <span class="fa fa-exclamation-circle" style="color: #777; font-size: 2rem; vertical-align: middle;"></span>
+        <span class="" style="color: #777;">当前状态或分类下暂无信息</span>
+      </p>
+    <% end %>
+    <% @sites.each do |site|%>
+      <a href='<%= wechat_site_micro_website_path(id: site.id) %>' class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4" style="padding: 0px 0px 0px 15px">
+            <div class="image-dom" style="background-image: url(<%= site.first_image %>)"></div>
+          </div>
+          <div class="col-xs-8">
+            <div class="title text-overflow">
+              <%= site.title %>
+            </div>
+            <div class="address white-space-nomal">
+              <small><%= site.address_line %></small>
+            </div>
+            <div class="time">
+              <small>营业时间: <%= site.business_hours %></small>
+            </div>
+            <div class="label-catalog white-space-nomal">
+              <small>
+                <label><%= site.catalog.try(:name) %></label>
+              </small>
+            </div>
+          </div>
+        </div>
+      </a>
+    <% end%>
+  </div>
+  <%= paginate @sites %>
+</div>
+<%= render file: 'frontend/micro_website/_footer.html.erb' %>
+
+<style lang="css">
+  .custom-list .heard-title{
+    background: #fff;
+    padding: 15px 15px 5px;
+  }
+  .custom-list .title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-size: 16px;
+  }
+  .custom-list .time{
+    color: #777;
+  }
+  .custom-list .address{
+    margin-top: 10px;
+    color: #777;
+  }
+  .custom-list .label-catalog label{
+    color: #ccc;
+    border: 1px solid;
+    padding: 0px 3px;
+    font-size: 10px;
+    margin: 5px 5px 0px 0px;
+  }
+  .custom-list .image-dom{
+    width: 100%;
+    height: 90px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+</style>

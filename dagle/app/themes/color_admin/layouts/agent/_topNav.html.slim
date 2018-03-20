@@ -1,0 +1,27 @@
+/ BEGIN #top-nav
+#top-nav.top-nav
+  / BEGIN container
+  .container
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          = link_to '#' do
+            | 欢迎使用商家端
+
+      ul.nav.navbar-nav.navbar-right
+        - if @site.present?
+          li
+            = link_to edit_agent_site_path(@site.id) do
+              i.fa.fa-user
+              | &nbsp;
+              | 编辑信息
+        li
+          - if current_user != true_user
+            small.text-success[style='line-height: 40px']
+              = "你 #{true_user.nickname} 正在模仿登录 #{current_user.nickname}"
+            = link_to "退出模仿", stop_impersonating_sessions_path, method: :post, class: 'float-right'
+          - else
+            = link_to sign_out_path, method: :delete do
+              i.fa.fa-sign-out
+              | &nbsp;退出
+          

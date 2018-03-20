@@ -1,0 +1,32 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @finance_history, url: @finance_history.new_record? ? admin_finance_histories_path : admin_finance_history_path(@finance_history), validate: true do |f|
+      - if @finance_history.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@finance_history.errors.count, "error")} prohibited this finance_history from being saved:"
+          ul
+            - @finance_history.errors.full_messages.each do |message|
+              li = message
+      label[class="control-label"] 
+        = @finance_history.in? ? '订单号' : '采购单号'
+      - if @finance_history.in?
+        = f.input :owner_type, as: :hidden  
+        select.select2.form-control[id="dropdown" name="finance_history[owner_id]" data-url="#{admin_orders_url}"  data-id="#{@finance_history.owner_id}" data-name="输入订单号" ]
+      - else
+        = f.input :owner_type, as: :hidden
+        select.select2.form-control[id="dropdown" name="finance_history[owner_id]" data-url="#{admin_material_purchases_url}"  data-id="#{@finance_history.owner_id}" data-name="输入采购单号" ]
+      = f.input :operate_type, as: :hidden
+      = f.input :operate_date
+      = f.input :amount
+      = f.input :note
+      .col-xs-12
+        .form-group[rel="image-select"]
+          label 财务凭证
+          image-select[server="#{image_items_path}" name="finance_history[image_item_ids][]" selected-ids="#{@finance_history.image_item_ids.join(', ')}"]
+      = f.submit class: 'btn btn-success btn-block'

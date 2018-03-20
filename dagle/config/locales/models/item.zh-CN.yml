@@ -1,0 +1,14 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      item: 原子
+    attributes:
+      item:
+        catalog: 所属分类
+        images: 图片
+    errors:
+      models:
+        item:
+  helpers:
+    item:

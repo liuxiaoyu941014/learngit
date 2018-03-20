@@ -1,0 +1,6 @@
+h1.page-header
+  | 新建物料#{enum_l(@material_management, :operate_type)}
+  .pull-right
+    = link_to '返回', admin_material_managements_path(type: @material_management.operate_type), class: 'btn btn-primary'
+
+== render 'form'

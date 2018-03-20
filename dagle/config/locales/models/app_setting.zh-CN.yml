@@ -1,0 +1,24 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      app_setting: APP 参数设置
+    attributes:
+      app_setting:
+        name: 中文名称(name)
+        key_word: 英文名称(key_word)
+        article_share_url_pattern: 文章链接分享模式(article_share_url_pattern)
+        site_share_url_pattern: 商家链接分享模式(site_share_url_pattern)
+        product_share_url_pattern: 产品链接分享模式(product_share_url_pattern)
+        system_rooms: 系统房间(system_rooms)
+        service_banners: 服务轮播图(service_banners)
+        main_banners: 主页轮播图(main_banners)
+        app_version_message: 版本信息(app_version_message)
+        active: 使用状态(active)
+        auto_deliver_days: 自动确认收货的天数(auto_deliver_days)
+        auto_cancel_hours: 自动关闭未支付订单的小时数(auto_cancel_hours)
+    errors:
+      models:
+        app_setting:
+  helpers:
+    app_setting:

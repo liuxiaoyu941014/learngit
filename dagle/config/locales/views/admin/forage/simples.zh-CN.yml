@@ -1,0 +1,24 @@
+---
+zh-CN:
+  admin:
+    forage:
+      simples:
+        index:
+          title: Simples
+        show:
+          title: Simple
+        edit:
+          title: Editing Simple
+        new:
+          title: New Simple
+  flash:
+    admin:
+      forage:
+        simples:
+          create:
+            notice: "%{resource_name} was successfully created."
+          update:
+            notice: "%{resource_name} was successfully updated."
+          destroy:
+            notice: "%{resource_name} was successfully deleted."
+            alert: "%{resource_name} could not be deleted."

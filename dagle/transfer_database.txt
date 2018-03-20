@@ -1,0 +1,137 @@
+
+files=<<-LINES.strip.lines.map(&:strip) and nil
+/data/www/tanmer-account/shared/config/database.yml
+/data/www/cms/shared/config/database.yml
+/data/www/cms/shared/config/database.yml
+/data/www/cms/shared/config/database.yml
+/data/www/dagle/shared/config/database.yml
+/data/www/dagle/shared/config/database.yml
+/data/www/fm1617/shared/config/database.yml
+/data/www/fm1617/shared/config/database.yml
+/data/www/tanmer-gems/shared/config/database.yml
+/data/www/grand/shared/config/database.yml
+/data/www/grand/shared/config/database.yml
+/data/www/jhsport/shared/config/database.yml
+/data/www/jhsport/shared/config/database.yml
+/data/www/rain-cms/footbal/shared/config/database.yml
+/data/www/rain-cms/footbal/shared/config/database.yml
+/data/www/rain-cms/footbal_glpark/shared/config/database.yml
+/data/www/rain-cms/pandaqj/shared/config/database.yml
+/data/www/rain-cms/footbal_tnt/shared/config/database.yml
+/data/www/rain-cms/wcg_lingyu/shared/config/database.yml
+/data/www/rain-cms/travel_gws/shared/config/database.yml
+/data/www/rain-cms/footbal_xnpark/shared/config/database.yml
+/data/www/jseer/shared/config/database.yml
+/data/www/jseer/shared/config/database.yml
+/data/www/khy/shared/config/database.yml
+/data/www/khy/shared/config/database.yml
+/data/www/niuticket/config/database.yml
+/data/www/niuticket/config/database.yml
+/data/www/piaor/shared/config/database.yml
+/data/www/piaor/shared/config/database.yml
+/data/www/rain-cms/pilele/shared/config/database.yml
+/data/www/rain-cms/ap5/shared/config/database.yml
+/data/www/rain-cms/ap5/shared/config/database.yml
+/data/www/rain-cms/jhsite/shared/config/database.yml
+/data/www/rain-cms/jhsite/shared/config/database.yml
+/data/www/rain-cms/jh_site/shared/config/database.yml
+/data/www/rain-cms/jh_site/shared/config/database.yml
+/data/www/rain-cms/jseer/shared/config/database.yml
+/data/www/rain-cms/jseer/shared/config/database.yml
+/data/www/rain-cms/tiansky/shared/config/database.yml
+/data/www/rain-cms/tiansky/shared/config/database.yml
+/data/www/rain-cms/huaxiedu/shared/config/database.yml
+/data/www/rain-cms/huaxiedu/shared/config/database.yml
+/data/www/rain-cms/kuumer/shared/config/database.yml
+/data/www/rain-cms/kuumer/shared/config/database.yml
+/data/www/rain-cms/hxyjy/shared/config/database.yml
+/data/www/rain-cms/hxyjy/shared/config/database.yml
+/data/www/rain-cms/djker/shared/config/database.yml
+/data/www/rain-cms/djker/shared/config/database.yml
+/data/www/rain-cms/txlife/shared/config/database.yml
+/data/www/rain-cms/txlife/shared/config/database.yml
+/data/www/cnmed/shared/config/database.yml
+/data/www/cnmed/shared/config/database.yml
+/data/www/rain-cms/meetiao/shared/config/database.yml
+/data/www/rain-cms/meetiao/shared/config/database.yml
+/data/www/rain-cms/apx/shared/config/database.yml
+/data/www/rain-cms/apx/shared/config/database.yml
+/data/www/rain-cms/jmpt/shared/config/database.yml
+/data/www/rain-cms/jmpt/shared/config/database.yml
+/data/www/rain-cms/lbsccx/shared/config/database.yml
+/data/www/rain-cms/lbsccx/shared/config/database.yml
+/data/www/rain-cms/zoll/shared/config/database.yml
+/data/www/rain-cms/zoll/shared/config/database.yml
+/data/www/rain-cms/qunxian/shared/config/database.yml
+/data/www/rain-cms/qunxian/shared/config/database.yml
+/data/www/rain-cms/sanqiao/shared/config/database.yml
+/data/www/rain-cms/sanqiao/shared/config/database.yml
+/data/www/rain-cms/rxsj/shared/config/database.yml
+/data/www/rain-cms/rxsj/shared/config/database.yml
+/data/www/rain-cms/schtsp/shared/config/database.yml
+/data/www/rain-cms/schtsp/shared/config/database.yml
+/data/www/rain-cms/ylt/shared/config/database.yml
+/data/www/rain-cms/ylt/shared/config/database.yml
+/data/www/rain-cms/met_jcyy/shared/config/database.yml
+/data/www/rain-cms/met_zqhg/shared/config/database.yml
+/data/www/rain-cms/met_gc/shared/config/database.yml
+/data/www/rain-cms/met_fwlm/shared/config/database.yml
+/data/www/rain-cms/met_csnr/shared/config/database.yml
+/data/www/rain-cms/met_djny/shared/config/database.yml
+/data/www/rain-cms/met_pzjy/shared/config/database.yml
+/data/www/rain-cms/tanmer/shared/config/database.yml
+/data/www/rain-cms/tanmer/shared/config/database.yml
+/data/www/rain-cms/raincms/shared/config/database.yml
+/data/www/rain-cms/raincms/shared/config/database.yml
+/data/www/bigdata/config/database.yml
+/data/www/rain-cms/trip1617/shared/config/database.yml
+/data/www/rain-cms/trip1617/shared/config/database.yml
+/data/www/wgtong/shared/config/database.yml
+/data/www/wgtong/shared/config/database.yml
+/data/www/sxhop/shared/config/database.yml
+/data/www/sxhop/shared/config/database.yml
+/data/www/tmf-demo/shared/config/database.yml
+/data/www/tmf-demo/shared/config/database.yml
+/data/www/tmf-prototype/shared/config/database.yml
+/data/www/cnmed/shared/config/database.yml
+/data/www/wedxt/frontend/shared/config/database.yml
+/data/www/wedxt/frontend/shared/config/database.yml
+/data/www/wedxt/backend/config/database.yml
+/data/www/wedxt/backend/config/database.yml
+/data/www/zhidak/zhidak/config/database.yml
+/data/www/zhidak/zhidak/config/database.yml
+/data/www/zhidak/zhidak_admin/config/database.yml
+/data/www/zhidak/zhidak_admin/config/database.yml
+/data/www/zhidat/shared/config/database.yml
+/data/www/zhidat/shared/config/database.yml
+LINES
+
+require 'yaml'
+require 'erb'
+require 'mysql2'
+require 'active_support'
+
+dbfiles = files.select {|f| File.exists?(f) } and nil
+
+dbfiles.each do |f|
+  db = YAML.load(ERB.new(IO.read(f)).result)['production'] rescue nil
+  next unless db
+  begin
+    if db['adapter'] == 'mysql2'
+      client = Mysql2::Client.new(db.slice('host', 'username', 'password'))
+      if client.query(%{show databases like '#{db['database']}'}).size == 0
+        old_client = Mysql2::Client.new(db.slice('username', 'password').merge('host' => '10.10.221.241'))
+        if old_client.query(%{show databases like '#{db['database']}'}).size == 1
+          puts f
+          system(%{ mysqladmin -h#{db['host']} -u#{db['username']} -p#{db['password']} create #{db['database']} })
+          system(%{ mysqldump -h10.10.221.241  -u#{db['username']} -p#{db['password']} #{db['database']} |mysql -h#{db['host']} -u#{db['username']} -p#{db['password']} #{db['database']} })
+        end
+        old_client.close
+      end
+      client.close
+    end
+  rescue => e
+    puts "***** ERROR: #{f} ****** "
+    puts e.message
+  end
+end and nil

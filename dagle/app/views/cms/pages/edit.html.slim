@@ -1,0 +1,7 @@
+.container
+  h1
+    | 编辑页面
+    .pull-right
+      = link_to '返回栏目', cms_site_channel_path(@cms_site, @cms_page.channel), class: 'btn btn-default'
+
+  == render 'form'

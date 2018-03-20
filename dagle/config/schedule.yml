@@ -1,0 +1,9 @@
+order_sweeper_job:
+  cron: "1 * * * *"
+  class: "OrderSweeperJob"
+  queue: default
+  
+migrate_to_forage_data_cache_job:
+  cron: "1 0 * * *"
+  class: "MigrateToForageDataCacheJob"
+  queue: default

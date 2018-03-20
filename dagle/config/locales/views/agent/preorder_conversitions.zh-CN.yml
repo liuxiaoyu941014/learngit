@@ -1,0 +1,22 @@
+---
+zh-CN:
+  agent:
+    preorder_conversitions:
+      index:
+        title: Preorder conversitions
+      show:
+        title: Preorder conversition
+      edit:
+        title: Editing Preorder conversition
+      new:
+        title: New Preorder conversition
+  flash:
+    agent:
+      preorder_conversitions:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

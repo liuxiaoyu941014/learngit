@@ -1,0 +1,55 @@
+h1.page-header
+  | 查看#{FinanceHistory.model_name.human}
+  .pull-right
+    = link_to '返回', admin_finance_histories_path(type: @finance_history.operate_type), class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{FinanceHistory.human_attribute_name(:operate_date)}
+              td
+                a
+                  = @finance_history.operate_date
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{FinanceHistory.human_attribute_name(:amount)}
+              td
+                a
+                  = @finance_history.amount
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | #{FinanceHistory.human_attribute_name(:note)}
+              td
+                a
+                  = @finance_history.note
+            tr.divider
+              td[colspan='2']
+        h4 票据
+        .gallery#gallery.p-20
+          .row
+            - unless @finance_history.image_items.blank?
+              .col-xs-12 没有票据
+            - @finance_history.image_items.each do |image|
+              .image.col-sm-6.col-md-4
+                .image-inner
+                  a[href="javascript:;" data-lightbox="gallery-group-1"]
+                    img[src="#{image.image_url}"]
+                  .image-caption
+                    =image.name

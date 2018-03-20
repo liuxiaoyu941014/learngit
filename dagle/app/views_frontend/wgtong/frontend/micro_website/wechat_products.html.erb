@@ -1,0 +1,142 @@
+<%= render file: 'frontend/micro_website/_navbar.html.erb' %>
+<div class="wechat-box">
+  <div class="panel panel-default top-tabs-block">
+    <div class="list-group-item screen-list">
+      <label class="" style="color: #777;">
+        <small>状态：</small>
+      </label>
+      <label class="<%= params[:type] == nil ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path %>">
+          <small>全部</small>
+        </a>
+      </label>
+      <label class="<%= params[:type] == 'pending' ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path + '?type=pending' + ( params[:id].present? ? '&id='+ params[:id] : '' ) %>">
+          <small>未开始</small>
+        </a>
+      </label>
+      <label class="<%= params[:type] == 'open' ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path + '?type=open' + ( params[:id].present? ? '&id='+ params[:id] : '' ) %>">
+          <small>进行中</small>
+        </a>
+      </label>
+      <label class="<%= params[:type] == 'completed' ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path + '?type=completed' + ( params[:id].present? ? '&id='+ params[:id] : '' ) %>">
+          <small>已售完</small>
+        </a>
+      </label>
+      <label class="<%= params[:type] == 'closed' ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path + '?type=closed' + ( params[:id].present? ? '&id='+ params[:id] : '' ) %>">
+          <small>已结束</small>
+        </a>
+      </label>
+    </div>
+
+    <div class="list-group-item screen-list">
+      <label class="" style="color: #777;">
+        <small>分类：</small>
+      </label>
+      <label class="<%= params[:id] == nil ? 'active' : '' %>">
+        <a href="<%= wechat_products_micro_website_path %>">
+          <small>全部</small>
+        </a>
+      </label>
+
+      <% @product_catalogs.each do |catalog|%>
+        <label class="<%= params[:id] == catalog.id.to_s ? 'active' : '' %>">
+          <a href="<%= wechat_products_micro_website_path + '?id=' + catalog.id.to_s + (params[:type].present? ? '&type='+ params[:type] : '') %>">
+            <small><%= catalog.name %></small>
+          </a>
+        </label>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="list-group custom-list">
+    <% if @products.empty? %>
+      <p class="text-center" style="margin-top: 15px;">
+        <span class="fa fa-exclamation-circle" style="color: #777; font-size: 2rem; vertical-align: middle;"></span>
+        <span class="" style="color: #777;">当前状态或分类下暂无信息</span>
+      </p>
+    <% end %>
+
+    <% @products.each do |product|%>
+      <a href='<%= wechat_product_micro_website_path(id: product.id) %>' class="list-group-item">
+        <div class="image-dom" style="background-image: url('<%= product.first_image %>')"></div>
+        <div class="">
+          <div class="title text-overflow">
+            <%= product.name %>
+          </div>
+          <div class="address white-space-nomal">
+            <small>地址: <%= product.address_line1 %></small>
+          </div>
+          <small class="time text-overflow">活动时间: <%= product.date.present? ? product.date : ''%> <%= product.time.presence || '' %> </small>
+          <% if product.status == 'open' %>
+            <span class='pull-right text-warning'>
+              <strong>
+                <i class='fa fa-fire'></i> 进行中
+              </strong>
+            </span>
+          <% elsif product.status == 'completed' %>
+            <span class='pull-right text-success'>
+              <strong>
+                <i class='fa fa-fire'></i> 已售完
+              </strong>
+            </span>
+          <% elsif product.status == 'pending' %>
+            <span class='pull-right text-danger'>
+              <strong>
+                <i class='fa fa-fire'></i> 未开始
+              </strong>
+            </span>
+          <% elsif product.status == 'closed' %>
+            <span class='pull-right status cancel '>
+               <strong>
+                 <i class='fa fa-fire'></i> 已结束
+               </strong>
+            </span>
+          <% else %>
+          <span class='pull-right'>
+             <strong>
+               <i class='fa fa-fire'></i> 未发布
+             </strong>
+          </span>
+          <% end %>
+        </div>
+      </a>
+    <% end%>
+  </div>
+  <%= paginate @products %>
+</div>
+<%= render file: 'frontend/micro_website/_footer.html.erb' %>
+
+<style lang="css">
+  .custom-list .title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 35px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .custom-list .time, .custom-list .address{
+    color: #777;
+    line-height: 20px;
+  }
+  .custom-list .status.cancel{
+    color: #ccc
+  }
+  .custom-list .status{
+    color: #FF5722;
+  }
+  .custom-list .status .fa{
+    margin-right: 5px;
+  }
+  .custom-list .image-dom{
+    width: 100%;
+    height: 25vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+</style>

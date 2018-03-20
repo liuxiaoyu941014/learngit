@@ -1,0 +1,17 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @market_page, url: @market_page.new_record? ? admin_market_pages_path : admin_market_page_path(@market_page), validate: true do |f|
+      - if @market_page.errors.any?
+        #error_explanation
+          
+          ul
+            - @market_page.errors.full_messages.each do |message|
+              li = message
+
+      = f.submit class: 'btn btn-success btn-block'

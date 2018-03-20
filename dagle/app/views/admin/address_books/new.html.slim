@@ -1,0 +1,6 @@
+h1.page-header
+  | 新建#{AddressBook.model_name.human}
+  .pull-right
+    = link_to '返回', admin_address_books_path, class: 'btn btn-primary'
+
+== render 'form'

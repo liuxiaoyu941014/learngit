@@ -1,0 +1,51 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>
+            意见反馈
+          </h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+
+      <div class="row">
+        <div class="col-sm-8 col-md-8 tr-sticky">
+          <div class="tr-section">
+            <div class="row" style="margin-top: 30px;">
+              <div class="col-md-9 col-md-offset-1 col-xs-12">
+                <%= simple_form_for @complaint, url: self_complaint_users_path, method: :post do |f| %>
+                  <div class="form-horizontal">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label for="inputName" class="col-sm-2 control-label">反馈内容:</label>
+                      <div class="col-sm-10">
+                        <%= f.input :reason, as: :text, label: false, input_html: { class: 'form-control', rows: '8', placeholder: '输入你的意见和建议...' } %>
+                        <!-- <textarea class="form-control" name="name" rows="8"  placeholder="请输入意见内容..."></textarea> -->
+                      </div>
+                    </div>
+                    <p class="text-right">
+                      <%= f.button :submit, class: 'btn btn-warning btn-md', value: '提交反馈' %>
+                    </p>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-md-4 tr-sticky" >
+          <%= render file: 'frontend/users/_nav_sidebar.html.erb' %>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+</div>

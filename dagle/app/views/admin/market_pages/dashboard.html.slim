@@ -1,0 +1,66 @@
+/! begin #content
+/! begin breadcrumb
+ol.breadcrumb.pull-right
+  li
+    a href="javascript:;"  首页
+  li.active 概览
+/! end breadcrumb
+/! begin page-header
+h1.page-header
+  | 营销页
+  small  快速导航...
+/! end page-header
+/! begin row
+.row
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-green
+      .stats-icon
+        | 类
+      .stats-info
+        h4 分类
+        p= MarketCatalog.count
+      .stats-link
+        = link_to admin_market_catalogs_path
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-blue
+      .stats-icon
+        | 模
+      .stats-info
+        h4 模板
+        p= MarketTemplate.count
+      .stats-link
+        = link_to admin_market_templates_path
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-purple
+      .stats-icon
+        | 页
+      .stats-info
+        h4 营销页
+        p= MarketPage.count
+      .stats-link
+        = link_to admin_market_pages_path
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+  /! begin col-3
+  .col-md-3.col-sm-6
+    .widget.widget-stats.bg-yellow-darker
+      .stats-icon
+        | 销
+      .stats-info
+        h4 受众
+        p= Member.where('true').count
+      .stats-link
+        = link_to admin_sites_path
+          | 查看详细
+          i.fa.fa-arrow-circle-o-right
+  /! end col-3
+/! end row

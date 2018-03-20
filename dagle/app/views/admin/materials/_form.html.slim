@@ -1,0 +1,32 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @material, url: @material.new_record? ? admin_materials_path : admin_material_path(@material), validate: true do |f|
+      - if @material.errors.any?
+        #error_explanation
+          
+          ul
+            - @material.errors.full_messages.each do |message|
+              li = message
+      = f.input :name
+      = f.input :name_py
+      .form-group.catalog-list[data-catalog-name="#{@material.catalog.try(:name)}" data-catalog-id="#{@material.catalog_id}"]
+        label[class="control-label"] 物料分类
+        input[type="hidden" v-model="id" name="material[catalog_id]"]
+        input.form-control[readonly=true @click="showCatalog = true" :value="catalogs"]
+        span.hint 点击输入框选择分类
+        modal[title="产品分类" :show.sync="showCatalog" @cancel="showCatalog = false"]
+          div
+            catalog-list[data-url=admin_material_catalogs_path :default="selecteDefault" selecteDefault="[#{@material.catalog_id}]"@selected="selected" v-if='showCatalog' :show-confirm-buttons="true" @closed="showCatalog = false"]
+          div[slot="footer"]
+      / = f.input :min_stock
+      = f.input :price
+      = f.input :unit
+      = f.input :images do
+        image-select[server=image_items_path name="material[image_item_ids][]" selected-ids="#{@material.image_item_ids.join(',')}"]
+      = f.submit class: 'btn btn-success btn-block'

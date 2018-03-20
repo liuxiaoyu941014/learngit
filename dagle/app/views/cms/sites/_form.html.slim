@@ -1,0 +1,21 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for(@cms_site) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :template, collection: eval(Keystore.value_for('cms_template_names'))
+        = f.input :name
+        = f.input :domain
+        = f.input :root_domain, placeholder: 'tanmer.com'
+        = f.input :description
+        = f.input :is_published
+
+      .form-actions
+        = f.button :submit, '提 交', class: 'btn btn-primary btn-block'

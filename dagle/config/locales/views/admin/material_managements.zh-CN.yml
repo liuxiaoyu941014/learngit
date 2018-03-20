@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    material_managements:
+      index:
+        title: Material managements
+      show:
+        title: Material management
+      edit:
+        title: Editing Material management
+      new:
+        title: New Material management
+  flash:
+    admin:
+      material_managements:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

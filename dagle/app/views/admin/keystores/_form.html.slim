@@ -1,0 +1,20 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @keystore, url: @keystore.new_record? ? admin_keystores_path : admin_keystore_path(@keystore), validate: true do |f|
+      - if @keystore.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@keystore.errors.count, "error")} prohibited this keystore from being saved:"
+          ul
+            - @keystore.errors.full_messages.each do |message|
+              li = message
+
+      = f.input :key
+      = f.input :value
+      = f.input :description
+      = f.submit class: 'btn btn-success btn-block'

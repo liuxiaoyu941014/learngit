@@ -1,0 +1,36 @@
+<div style="text-align: center;">
+  <h1><%= @order.code %></h1>
+  <h3>订单号</h3>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>订单金额:&nbsp;&nbsp; <%=@order.price/100.0 %>元</p>
+    <p>订单状态:&nbsp;&nbsp; <%= enum_l(@order, :status)%></p>
+  </div>
+</div>
+
+<h3>报名人员信息</h3>
+<% if @order.member_attributes.present? %>
+  <% @order.member_attributes.each do |attr| %>
+    <div class="panel panel-default" style="margin-top: 5px;">
+      <div class="panel-body">
+        <table class="table">
+          <% attr.each_pair do |key, v| %>
+            <% next if key == 'product_id'%>
+            <tr>
+              <td><%= Product::MEMBER_ATTRIBUTES[key.to_sym] || key %></td>
+              <td><%= v %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  <%end%>
+<% end %>
+
+<div style="text-align: center;">
+  <% if @order.paid? %>
+    <%= link_to '确认消费', wechat_confirm_order_micro_website_url(id: @order.id), class: "btn btn-primary btn-block", method: :POST%>
+  <%end%>
+</div>

@@ -1,0 +1,65 @@
+h1.page-header
+  | 查看#{@complaint.complaint? ? Complaint.model_name.human : '反馈'}
+  .pull-right
+    = link_to '返回', admin_complaints_path, class: 'btn btn-primary'
+
+.panel
+  .panel-body
+    - if @complaint.complaint?
+      h5
+        | 举报对象
+      .table-responsive
+        table.table.table-profile
+          - if @complaint.source_type.to_s == 'Article'
+            tr
+              td.field
+                | #{Article.model_name.human}#{Article.human_attribute_name(:title)}：
+              td
+                = @complaint.source.title
+            tr
+              td.field
+                | #{Article.model_name.human}#{Article.human_attribute_name(:description)}：
+              td
+                = @complaint.source.description
+          - else
+            tr
+              td.field
+                | 评论内容：
+              td
+                = @complaint.source.content
+    h5
+      | #{@complaint.complaint? ? Complaint.model_name.human : '反馈'}人相关内容
+    .table-responsive
+      table.table.table-profile
+        tr
+          td.field
+            | #{@complaint.complaint? ? Complaint.model_name.human : '反馈'}人：
+          td
+            = decorate(@complaint.user).display_name
+        tr
+          td.field
+            | #{@complaint.complaint? ? Complaint.human_attribute_name(:reason) : '反馈原因'}：
+          td
+            = @complaint.reason
+
+.panel
+  .panel-body
+    h5
+      | 审核结果
+    .table-responsive
+      table.table.table-profile
+        tr
+          td.field
+            | #{Complaint.human_attribute_name(:status)}：
+          td
+            = enum_l(@complaint, :status)
+        tr
+          td.field
+            | #{Complaint.human_attribute_name(:comment)}：
+          td
+            = @complaint.comment
+        tr
+          td.field
+            | #{Complaint.human_attribute_name(:processed_by)}：
+          td
+            = decorate(@complaint.processed_user).display_name unless @complaint.processed_user.blank?

@@ -1,0 +1,89 @@
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>
+            微信绑定
+          </h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+      <div class="row">
+        <div class="col-sm-8 col-md-8 tr-sticky">
+          <div class="theiaStickySidebar">
+            <% if current_user.weixin %>
+            <p> 您已经绑定过微信了</p>
+          <%else%>
+            <div class="tr-section">
+              <div id="bind-wechat">
+                <h3 class="text-center" style="color: #999;">扫码绑定微信</h3>
+                <img id="qrcode-auth-image" width="180" style="height: 200px; margin: 0 auto; background: #eee; padding: 10px;" src="" alt="">
+                <p align="center" id="qrcode-auth-message" style="margin-top:15px;"></p>
+              </div>
+            </div>
+          <%end%>
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-4 tr-sticky" >
+          <%= render file: 'frontend/users/_nav_sidebar.html.erb' %>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+</div>
+
+<script>
+  var QrcodeAuth = function (){
+      var instance = this;
+      this.init = function() {
+        $.getJSON("<%= Settings.weixin_login.host %>/wx/mp_auth/qrcode/<%= Settings.weixin_login.appid %>.json?title=<%= Settings.site.name %>", function(data){
+          $('img#qrcode-auth-image').attr('src', data.svg)
+          instance.ping(data)
+        })
+      }
+
+      this.ping = function(response) {
+        $.getJSON(response.status_url, function(data){
+          console.log(data)
+          switch(data.status){
+            case 'confirmed':
+              $('#qrcode-auth-message').text('已确认登录，正在获取用户信息...')
+              instance.connect(response.code)
+              break;
+            case 'waiting':
+              $('#qrcode-auth-message').text('正在等待扫码...')
+              setTimeout(instance.ping, 5000, response)
+              break;
+            case 'confirming':
+              $('#qrcode-auth-message').text('等待微信端确认...')
+              setTimeout(instance.ping, 5000, response)
+              break;
+            case 'expired':
+              $('#qrcode-auth-message').text('二维码过期，正在刷新二维码...')
+              instance.init()
+              break;
+          }
+        })
+      }
+
+      this.connect = function(code) {
+        var url = '#{admin_profile_connect_weixin_url }';
+        $.post(url, { code: code }, function(data){
+          if (data.success) {
+            $('#qrcode-auth-message').text('绑定成功')
+          } else {
+            $('#qrcode-auth-message').text('绑定失败')
+          }
+        })
+      }
+    }
+    $(function(){
+      (new QrcodeAuth()).init()
+    })
+</script>

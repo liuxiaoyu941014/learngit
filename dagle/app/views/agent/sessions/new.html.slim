@@ -1,0 +1,28 @@
+   section.content.pad-lg.bg-black-3
+    .container
+      header.text-center.mgb-30
+        |
+      div.unicard.unicard-framed.account-form
+        div
+          h5.text-center.fw-bold 手机登录
+          = simple_form_for(@user, url: sign_in_path, remote: true, method: :post) do |f|
+            - if flash[:alert]
+              .alert.alert-danger
+                = flash[:alert]
+            input.text-box.form-control[type="email"name='user[login]'placeholder="Your Email"]
+            input.text-box.form-control[type="password"name='user[password]'placeholder="Your Password"]
+            button.btn.btn-green.btn-block 登录
+        div
+          h5.text-center.fw-bold 其他登录
+          a.btn.btn-split.bg-facebook
+            span.bg-black-10pc
+              i.fa-facebook
+            span Sign In With Facebook
+          a.btn.btn-split.bg-twitter
+            span.bg-black-10pc
+              i.fa-twitter
+            span Sign In With Twitter
+          a.btn.btn-split.bg-google-plus
+            span.bg-black-10pc
+              i.fa-google-plus
+            span Sign In With Google

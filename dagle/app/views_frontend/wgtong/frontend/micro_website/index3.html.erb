@@ -1,0 +1,163 @@
+<style type="text/css">
+  @media (max-width: 767px) {
+    .slider-style-three .item, .slider-style-three .container{
+      min-height: 200px !important;
+    }
+    .white-text {
+      color: #fff !important;
+    }
+  }
+</style>
+
+<div class="main-wrapper">
+  <div class="container" style="background-color: #fff;">
+    <!-- banner -->
+    <div class="row">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000" >
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <% if Keystore.value_for('wechat-index-banner01-380×200').present? %>
+              <% wechat_index_banner01 = Keystore.value_for('wechat-index-banner01-380×200').split('|') %>
+              <a href="<%= wechat_index_banner01[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner01[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+          <div class="item">
+            <% if Keystore.value_for('wechat-index-banner02-380×200').present? %>
+              <% wechat_index_banner02 = Keystore.value_for('wechat-index-banner02-380×200').split('|') %>
+              <a href="<%= wechat_index_banner02[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner02[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+          <div class="item">
+            <% if Keystore.value_for('wechat-index-banner03-380×200').present? %>
+              <% wechat_index_banner03 = Keystore.value_for('wechat-index-banner03-380×200').split('|') %>
+              <a href="<%= wechat_index_banner03[1] || 'javascript:void(0)' %>">
+                <img src="<%= wechat_index_banner03[0] %>" alt="" class="img-responsive" >
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- nav -->
+    <div class="row text-center" style="margin: 20px 0px;">
+      <div class="col-md-6 col-xs-6 col-sm-6" style="margin: 0px;background-color: #e84f17;">
+        <h3 class="white-text"><i class="fa fa-list fa-2x"></i></h3>
+        <p><a class="white-text" href="/micro_website/wechat_products">活动报名</a></p>
+      </div>
+      <div class="col-md-6 col-xs-6 col-sm-6" style="margin: 0px;background-color: #7cba00;">
+        <h3 class="white-text"><i class="fa fa-cube fa-2x"></i></h3>
+        <p><a class="white-text" href="/micro_website/wechat_sites">场馆信息</a></p>
+      </div>
+      <div class="col-md-6 col-xs-6 col-sm-6" style="margin: 0px;background-color: #00a2f2;">
+        <h3 class="white-text"><i class="fa fa-newspaper-o fa-2x"></i></h3>
+        <p><a class="white-text" href="/wechat">新闻资讯</a></p>
+      </div>
+      <div class="col-md-6 col-xs-6 col-sm-6" style="margin: 0px;background-color: #ffbb00;">
+        <h3 class="white-text"><i class="fa fa-flag fa-2x"></i></h3>
+        <p>
+        <% if Keystore.value_for('recent-hot-spots').present? %>
+          <% recent_hot_spots = Keystore.value_for('recent-hot-spots').split('|') %>
+          <a href="<%= recent_hot_spots[1] || 'javascript:void(0)' %>" class="white-text"><%= recent_hot_spots[0] %></a>
+        <% end %>
+        </p>        
+      </div>
+    </div>
+  </div>
+
+  <!-- 新闻资讯 -->
+  <div class="container">
+    <div class="row">
+      <div class="tr-widget meta-widget">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#hot" data-toggle="tab">头条</a></li>
+          <li role="presentation"><a href="#recommend" data-toggle="tab">推荐</a></li>
+          <li role="presentation"><a href="#slider" data-toggle="tab">幻灯</a></li>
+          <li role="presentation"><a href="#scroll" data-toggle="tab">滚动</a></li>
+          <li role="presentation"><a href="#redirect" data-toggle="tab">跳转</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active fade in" id="hot">
+            <% Cms::Page.hot(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+                <img src="<%= page.image_path %>" class="img-responsive" >
+              </div>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+                <p><%= page.title.truncate(26) %></p>
+                <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade in" id="recommend">
+            <% Cms::Page.recommend(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+                <img src="<%= page.image_path %>" class="img-responsive" >
+              </div>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+                <p><%= page.title.truncate(26) %></p>
+                <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade in" id="slider">
+            <% Cms::Page.slider(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+                <img src="<%= page.image_path %>" class="img-responsive" >
+              </div>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+                <p><%= page.title.truncate(26) %></p>
+                <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade in" id="scroll">
+            <% Cms::Page.scroll(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+                <img src="<%= page.image_path %>" class="img-responsive" >
+              </div>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+                <p><%= page.title.truncate(26) %></p>
+                <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane fade in" id="redirect">
+            <% Cms::Page.redirect(@cms_site.id, 5, channel: 'wechat').each do |page| %>
+            <div class="row">
+              <div class="col-md-4 col-xs-4 col-sm-4" style="padding: 0px;">
+                <img src="<%= page.image_path %>" class="img-responsive" >
+              </div>
+              <div class="col-md-8 col-xs-8 col-sm-8">
+                <p><%= page.title.truncate(26) %></p>
+                <p style="color: #555;"><i class="fa fa-clock-o"><%= distance_of_time_in_words_to_now(page.updated_at) %>前</i>&nbsp;&nbsp;<i class="fa fa-eye">浏览：<%= page.impressions_count %></i></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- main-wrapper -->
+
+<%= render file: 'frontend/micro_website/_footer.html.erb' %>

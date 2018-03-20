@@ -1,0 +1,22 @@
+---
+zh-CN:
+  admin:
+    task_types:
+      index:
+        title: Task types
+      show:
+        title: Task type
+      edit:
+        title: Editing Task type
+      new:
+        title: New Task type
+  flash:
+    admin:
+      task_types:
+        create:
+          notice: "%{resource_name} was successfully created."
+        update:
+          notice: "%{resource_name} was successfully updated."
+        destroy:
+          notice: "%{resource_name} was successfully deleted."
+          alert: "%{resource_name} could not be deleted."

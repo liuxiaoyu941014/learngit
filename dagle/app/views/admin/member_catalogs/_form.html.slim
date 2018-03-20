@@ -1,0 +1,19 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @member_catalog, url: @member_catalog.new_record? ? admin_member_catalogs_path : admin_member_catalog_path(@member_catalog), validate: true do |f|
+      - if @member_catalog.errors.any?
+        #error_explanation
+          
+          ul
+            - @member_catalog.errors.full_messages.each do |message|
+              li = message
+
+      = f.input :key
+      = f.input :value, hint: '如：{A类,B类,C类}，用英文半角逗号隔开', input_html: {value: (@member_catalog.psql_value unless @member_catalog.new_record?)}
+      = f.submit class: 'btn btn-success btn-block'

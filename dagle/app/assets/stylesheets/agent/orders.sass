@@ -1,0 +1,87 @@
+.order
+  .container-list
+    border: none
+    font-size: 12px
+    color: #707478
+  .pagination
+    ul.pagination
+      margin: 0px !important
+  .forum-list.forum-topic-list
+    li
+      &:hover
+        cursor: pointer
+    .info-container
+      height: 65px
+      .date-replies
+        width: 100px
+        .replies
+          a
+            text-decoration: none
+            &:hover
+              color: #00acac
+  .search-toolbar
+    .sign
+      a
+        border-bottom: 1px solid
+.agent-orders.show
+  .container
+    font-size: 12px
+    color: #707478
+    .order-info
+      .panel-body
+        border-top: 3px solid #2fb331
+        .left-block
+          border-right: 1px dashed #ccc
+          li
+            span
+              width: 80px
+              display: inline-block
+        .right-block
+          ul.list-inline
+            li
+              position: relative
+              width: 20%
+              .text-center
+                display: inline-table
+                width: 100%
+              .success-right
+                position: absolute
+                right: 0px
+                top: 45px
+                color: #00acac
+              .fa-block
+                width: 50px
+                height: 50px
+                margin: 0 auto
+                text-align: center
+                line-height: 50px
+                margin-bottom: 10px
+                i.fa
+                  vertical-align: sub
+              .fa-block.active
+                background: #00acac !important
+                border-radius: 50px
+                i.fa
+                  color: #fff !important
+              .fa-block.active-danger
+                background: #ff5b57 !important
+                border-radius: 50px
+                i.fa
+                  color: #fff !important
+            li.completed
+              .success-right
+                display: none
+          .btns
+            button
+              margin-right: 15px
+              &:last-child
+                margin: 0px
+    .order-products
+      .panel-footer
+        display: inline-block
+        width: 100%
+        ul.list-unstyled
+          float: right
+          width: 160px
+          li
+            line-height: 35px

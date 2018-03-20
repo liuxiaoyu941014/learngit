@@ -1,0 +1,5 @@
+<li id="room-li-<%= room.id %>">
+  <%= content_tag :span, class: 'btn', data: room.as_json(only: [:id, :name]) do  %>
+    <%= room.name %></span> <%= link_to '[x]', "/test-room/#{room.id}", remote: true, method: :delete %>
+  <% end %>
+</li>

@@ -1,0 +1,24 @@
+---
+zh-CN:
+  admin:
+    user:
+      weixins:
+        index:
+          title: Weixins
+        show:
+          title: Weixin
+        edit:
+          title: Editing Weixin
+        new:
+          title: New Weixin
+  flash:
+    admin:
+      user:
+        weixins:
+          create:
+            notice: "%{resource_name} was successfully created."
+          update:
+            notice: "%{resource_name} was successfully updated."
+          destroy:
+            notice: "%{resource_name} was successfully deleted."
+            alert: "%{resource_name} could not be deleted."

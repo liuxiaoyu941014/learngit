@@ -1,0 +1,16 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      market_catalog: 营销页分类
+    attributes:
+      market_catalog:
+        name: 名称
+        keywords: 关键词
+        description: 描述
+        image_path: 预览图
+    errors:
+      models:
+        market_catalog:
+  helpers:
+    market_catalog:

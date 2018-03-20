@@ -1,0 +1,87 @@
+body a:focus
+  outline: none
+body .primary-content
+  min-height: 500px
+ul
+  list-style: none
+.float-right
+  float: right
+.sign
+  a
+    border-bottom: 1px solid
+.gritter-item-wrapper
+  background: none !important
+  overflow: hidden !important
+  -webkit-border-radius: 3px !important
+  .gritter-top, .gritter-bottom, .gritter-item
+    background: rgba(0,0,0,0.8) !important
+  .gritter-item
+    font-family: 'Open Sans' !important
+    color: #aaa !important
+    font-size: 10px !important
+    padding: 2px 15px 5px !important
+    p
+      padding: 0
+      margin: 0
+      word-wrap: break-word
+  .gritter-close, .gritter-light .gritter-close
+    left: auto !important
+    right: 15px !important
+    top: 0 !important
+    background: #ff5b57 !important
+    width: 16px !important
+    height: 16px !important
+    line-height: 16px !important
+    display: block !important
+  .gritter-title
+    font-size: 12px !important
+    line-height: 16px !important
+    padding-bottom: 2px !important
+    font-weight: 400 !important
+    color: #fff !important
+    text-shadow: none !important
+.gritter-close::before, .gritter-light .gritter-close::before
+  content: '\f00d' !important
+  font-family: FontAwesome !important
+  font-size: 9px !important
+  width: 16px !important
+  height: 16px !important
+  line-height: 16px !important
+  color: #fff !important
+  text-indent: 0 !important
+  position: absolute !important
+  text-align: center !important
+  right: 0 !important
+  top: 0 !important
+.header-nav
+  .nav-head-push-messages
+    .cart-body
+      .cart-item
+        li
+          a.cart-item-info
+            display: table-cell
+            vertical-align: middle
+            text-decoration: none
+            cursor: pointer
+          .cart-item-close
+            span
+              font-size: 18px
+              color: #999
+              height: 24px
+              width: 24px
+              text-align: center
+              line-height: 24px
+              display: block
+              text-decoration: none
+              border-radius: 24px
+              background: #f9f9f9
+              &:hover
+                cursor: pointer
+                background: #ccc
+                color: #fff
+    .header-cart
+      .total
+        width: auto
+        padding: 5px 7px
+        height: auto
+        line-height: 12px

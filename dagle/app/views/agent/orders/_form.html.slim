@@ -1,0 +1,21 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+        i class="fa fa-times"
+    h4 agent_order
+  .panel-body
+    / = form_for @agent_order, url: @agent_order.new_record? ? agent_orders_path(@agent_order) : agent_order_path(@agent_order), html: { class: 'form-horizontal' } do |f|
+      / - if @agent_order.errors.any?
+      /   #error_explanation
+      /     
+      /     ul
+      /       - @agent_order.errors.full_messages.each do |message|
+      /         li = message
+
+      .form-group
+        .col-md-2
+          = f.submit class: 'btn btn-success'

@@ -1,0 +1,74 @@
+/ content
+.row.share_statistic.share_home[data-url=options[:path]]
+  .col-md-12
+    .white-content
+      .head.h5
+        span 分享记录
+        a.btn.pull-right[@click="showShareChart = !showShareChart" data-toggle="tooltip" data-placement="bottom" title="报表/图表"]
+          i.fa.fa-exchange
+      .panel-body.share-chart[v-show="showShareChart"]
+        .head-nav.row[style="margin-top: -15px;margin-left: -25px;"]
+          .col-md-4
+            .input-group.datetimepicker-group[id="default-daterange"]
+              input.form-control.datetimepicker[style="margin-top: 0px" placeholder="点击选择时间范围查询" type="text" v-model="chartSelectDate" data-date-format="yyyy-mm" readonly]
+              span.input-group-btn
+                button.btn.btn-default[type="button" @click="changeDate"]
+                  i.fa.fa-search
+          ul.col-md-8.zone-time[type='none']
+            li[:class="thinkTime()"]
+              a[@click="onMonth"] 当月
+        #chart_pv
+          svg[height='300px' width='100%']
+          div.text-center
+            strong.small
+              | {{chartSelectDate+"月"}}
+      .panel-body.share-list[v-show="!showShareChart"]
+        .table-responsive
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th 名称
+                th RUL
+                th 二级分享数
+                th 三级分享数
+                th 浏览访问数量
+                th 分享时间
+                th
+            tbody
+              tr[v-for="val,index in share_list" style="cursor: pointer;"]
+                td
+                  | {{ index+1 }}
+                th.text-warning
+                  | {{ val.root.type_name }}
+                  span[v-if="val.resource"]
+                    | {{ "("+val.resource.name+")" }}
+                td
+                  a[:href="val.root.url" target="_Blank"]
+                    i.fa.fa-window-restore[style="margin-right: 5px"]
+                    | {{ val.root.url }}
+                td
+                  | {{ val.two_distribution_count }}
+                td
+                  | {{ val.three_distribution_count }}
+                td
+                  | {{ val.visit_count }}
+                td
+                  | {{ formatDate(val.root.created_at)}}
+                td
+                  a.small.hover-show[@click="redirectTo(val.root.id)"] 查看下一级分享
+        div.white-footer
+          span.pull-left.small
+            | {{ share_list.length + '条 -- 记录' }}
+          ul.pagination.pagination-sm
+            li[v-bind:class="{ 'disabled': selected_page == 1 }"]
+              a[href="javascript:;"v-on:click="selected_page == 1 ? false : loadData(--selected_page)"] &laquo;
+            li[v-if="total_pages > 5"]
+              a[href="javascript:;" @click="onPreviousPageGroup"] ...
+            li[v-for="n in (total_pages > 5 ? 5 : total_pages)" v-bind:class="(showPage) == selected_page ? 'active' : false"]
+              a[href="javascript:;" @click="loadData(total_pages > 5 ? showPage+n : n)"]
+                | {{ total_pages > 5 ? showPage+n : n }}
+            li[v-if="total_pages > 5"]
+              a[href="javascript:;" @click="onNextPageGroup"] ...
+            li[v-bind:class="{ 'disabled': selected_page == total_pages }"]
+              a[href="javascript:;"v-on:click="selected_page == total_pages ? false : loadData(++selected_page)"] &raquo;

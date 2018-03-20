@@ -1,0 +1,37 @@
+.container.m-t-20
+  .panel.panel-info
+    .panel-heading
+      .panel-heading-btn
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+          i class="fa fa-expand"
+        a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+          i class="fa fa-minus"
+      h4 账单历史记录
+    .panel-body
+      = form_for :search, url: agent_finance_bills_path, method: :get do |f|
+        .toolbar.row
+          .col-md-6.m-b-15
+            .input-group.search_all
+              = f.text_field :code, value: params[:search]&&params[:search][:code], class: 'form-control', placeholder: '输入账单单号...'
+              span.input-group-btn
+                button.btn.btn-inverse[type='submit']
+                  i.fa.fa-search
+      .table-responsive
+        table.table.table-striped
+          thead
+            tr
+              th 单号
+              th 金额(单位:元)
+              th 状态
+              th 类型
+              th 账单时间
+          tbody
+            - @agent_finance_bills.each do |agent_finance_bill|
+              tr
+                td = agent_finance_bill.code
+                td = agent_finance_bill.amount/100.0
+                td = decorate(agent_finance_bill).display_status
+                td = agent_finance_bill.is_entry ? '入账' : '出账'
+                td = agent_finance_bill.created_at.strftime("%Y-%m-%d")
+    .text-center
+      = paginate @agent_finance_bills

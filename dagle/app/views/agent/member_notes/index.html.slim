@@ -1,0 +1,48 @@
+.container
+  h1
+    = @agent_member.name
+    .pull-right
+
+  /! begin row
+  .row
+    /! begin col-9
+    .col-md-9
+      /! begin comment-section
+      .panel.panel-forum
+        .panel-heading
+          h4.panel-title 添加沟通日志
+        .panel-body
+          == render 'agent/member_notes/form'
+          == render 'agent/members/features'
+
+      /! end comment-section
+      /! begin forum-list
+      == render 'agent/member_notes/list'
+      /! begin pagination
+      .text-right
+        = paginate @agent_member_notes
+      /! end pagination
+
+    /! end col-9
+    /! begin col-3
+    .col-md-3
+      /! begin panel-forum
+      .panel.panel-forum
+        .panel-heading
+          h4.panel-title 最新动态
+        /! begin threads-list
+        ul.threads-list
+          - MemberNote.recent.each do |agent_member_note|
+            li
+              h4.title
+                a href="#"
+                  = agent_member_note.message
+              a href="#"
+                = agent_member_note.user.nickname
+              = distance_of_time_in_words_to_now(agent_member_note.created_at) + '前更新'
+
+        /! end threads-list
+      /! end panel-forum
+    /! end col-3
+  /! end row
+/! end container

@@ -1,0 +1,54 @@
+.profile-container
+  .profile-info
+    .table-responsive
+      table.table.table-profile
+        tr
+          td.field 用户名：
+          td
+            =decorate(@site.user).display_name
+          td.field 美容院：
+          td
+            = @site.title
+        tr
+          td.field 联系人：
+          td
+            = @site.contact_name
+          td.field 联系电话：
+          td
+            = @site.contact_phone
+        tr
+          td.field 营业时间：
+          td
+            = @site.business_hours
+          td.field 是否签约：
+          td
+            - if @site.has_contract == '1'
+              | 已签约
+            - else
+              | 未签约
+        tr
+          td.field 标签备注：
+          td
+            = @site.properties.map{|p| Site::PROPERTIES[p.to_sym] }.compact.join('，') if @site.properties && @site.properties.any?
+          td.field 地址：
+          td
+            = @site.address_line
+      table.table.table-profile  
+        tr
+          td.field 签约备注：
+          td
+            = @site.contract_note
+        tr
+          td.field 美容院介绍：
+          td
+            = raw @site.content
+      p 背景图片
+      .gallery#gallery
+        .row
+        -@site.image_items.each do |image|
+          .image.col-sm-6.col-md-4
+            .image-inner
+              a[href="javascript:;" data-lightbox="gallery-group-1"]
+                img[src="#{image.image_url}"]
+              .image-caption
+                =image.name

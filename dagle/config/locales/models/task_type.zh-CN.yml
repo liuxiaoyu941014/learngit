@@ -1,0 +1,17 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      task_type: 任务类型
+    attributes:
+      task_type:
+        type: Type
+        name: 类型名称
+        ordinal: 工作优先顺序
+        roles: 用户组
+    errors:
+      models:
+        task_type:
+  helpers:
+    task_type:
+

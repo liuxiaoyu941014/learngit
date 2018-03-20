@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      attachment: Attachment
+    attributes:
+      attachment: {}
+    errors:
+      models:
+        attachment: 
+  helpers:
+    attachment: 

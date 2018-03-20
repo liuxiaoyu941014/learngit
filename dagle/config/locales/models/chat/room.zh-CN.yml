@@ -1,0 +1,13 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      chat/room: Room
+    attributes:
+      chat/room:
+        name: Name
+    errors:
+      models:
+        room: 
+  helpers:
+    room: 

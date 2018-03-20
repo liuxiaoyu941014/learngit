@@ -1,0 +1,2 @@
+module Admin::MarketTemplatesHelper
+end

@@ -1,0 +1,42 @@
+h1.page-header
+  | #{Order.model_name.human}退款列表
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    h3.panel-title &nbsp;
+  .panel-body
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th = Order.human_attribute_name(:code)
+            th = Order.human_attribute_name(:site)
+            th = Order.human_attribute_name(:price)
+            th = Order.human_attribute_name(:refund_status)
+            th = Order.human_attribute_name(:refund_description)
+            th 操作
+        tbody
+          - @orders.each do |order|
+            tr
+              td = order.code
+              td = order.site.title
+              td = order.price.to_f / 100
+              td = enum_l(order, :refund_status)
+              td = order.refund_description
+              td
+                span.refund-link
+                  - if order.apply_refund?
+                    => link_to '退款', refund_admin_order_path(order), method: :post, remote: true, class: 'btn btn-xs btn-success'
+                  - elsif order.refunding?
+                    - if order.charge.channel == 'create_direct_pay_by_user'
+                      => link_to '确认退款成功', refund_success_admin_order_path(order), method: :post, class: 'btn btn-xs btn-success'
+                    - else
+                      span.btn.btn-xs.btn-warning 退款中
+                  - elsif order.refunded?
+                    span.btn.btn-xs.btn-primary 退款成功
+.pull-right
+  = paginate @orders

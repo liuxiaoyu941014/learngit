@@ -1,0 +1,148 @@
+// search.html style
+.searchInput {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  height: 34px;
+}
+.searchInput:focus {
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .75);
+  -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, .75)
+}
+
+
+// search_result.html style
+.order_head_icon{
+  font-size: 25px;
+  margin-right: 15px;
+}
+.order_head_title{
+  display: inline-block !important;
+}
+.order_tr{
+    background-color: #fff;
+}
+.order_tr:hover{
+    background-color: #eee;
+}
+
+.order_td{
+    vertical-align: baseline !important;
+    transition: all 0.3s linear;
+}
+.order_head_tr{
+    background-color: #555;
+
+}
+.order_head_td{
+    color: #fff;
+}
+.table_a{
+    display: inline-block;
+}
+.table_btn{
+    outline: none;
+    border: none;
+    padding:5px 10px;
+}
+
+/* add user page css */
+.add_user_ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.add_user_active{
+    background-color: #cbdb61 !important;
+    color: #fff;
+}
+.add_user_li{
+    float: left;
+    /*padding: 5px 10px;*/
+    box-shadow: 1px 0px 3px -1px #000;
+    cursor: pointer;
+    background-color: #fff;
+}
+.add_user_ul li:hover{
+    background-color: #cbdb61;
+    color: #fff;
+}
+
+// search_result style
+#drk_timeline {
+  padding: 2em 1em;
+  position: relative;
+  background-color: #fafafa;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+#drk_timeline::before{
+  content: '';
+  display: inline-block;
+  height: 4px;
+  width: 100%;
+  background-color: #d7e4ed;
+}
+.line_item {
+  position: absolute;
+  top: 15%;
+  max-width: 7%;
+}
+.position1 {
+  left: 1%;
+}
+.position2 {
+  left: 11%;
+}
+.position3 {
+  left: 21%;
+}
+.position4 {
+  left: 31%;
+}
+.position5 {
+  left: 41%;
+}
+.position6 {
+  left: 51%;
+}
+.position7 {
+  left: 61%;
+}
+.position8 {
+  left: 71%;
+}
+.lint_point {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  position: relative;
+  z-index: 9;
+}
+.lint_point::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 46%;
+  display: inline-block;
+  height: 50px;
+  width: 2px;
+  background-color: #dfdfdf;
+  z-index: 40;
+
+}
+.bg_success {
+  background-color: #75ce66;
+}
+.bg_warning {
+  background-color: #f0ad4e;
+}
+.line_content {
+  position: relative;
+  padding: 0.5em;
+  margin-top: 15px;
+  background-color: #dfdfdf;
+  border-radius: 3px;
+}

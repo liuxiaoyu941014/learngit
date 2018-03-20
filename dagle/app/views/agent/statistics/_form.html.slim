@@ -1,0 +1,25 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+        i class="fa fa-times"
+    h4 agent_statistic
+  .panel-body
+    = form_for @agent_statistic, url: @agent_statistic.new_record? ? agent_statistics_path(@agent_statistic) : agent_statistic_path(@agent_statistic), html: { class: 'form-horizontal' } do |f|
+      - if @agent_statistic.errors.any?
+        #error_explanation
+          
+          ul
+            - @agent_statistic.errors.full_messages.each do |message|
+              li = message
+
+      .form-group
+        = f.label :index, class: 'col-md-3 control-label'
+        .col-md-9
+          = f.text_field :index, class: 'form-control'
+      .form-group
+        .col-md-2
+          = f.submit class: 'btn btn-success'

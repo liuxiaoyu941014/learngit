@@ -1,0 +1,4 @@
+h1 前台页面
+hello = current_user.try(:display_name) || 'Guest'
+- if true_user && current_user && true_user != current_user
+  = link_to "退出模仿(#{decorate(current_user).display_name})", stop_impersonating_sessions_path, method: :post

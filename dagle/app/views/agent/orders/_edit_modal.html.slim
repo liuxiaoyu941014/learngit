@@ -1,0 +1,36 @@
+.modal.fade#orderEdit.bs-example-modal-lg[tabindex="-1" role="dialog" rel="edit-modal" aria-labelledby="myModalLabel"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+        h4.modal-title#myModalLabel 订单修改
+      span.error_message
+        | 
+      = simple_form_for @order, url: agent_order_path(@order), method: :put, remote: true do |f|
+          .modal-body.p-30
+            .row
+              .col-xs-12
+                .form-group
+                  = f.input :price, input_html: { value: @order.price.to_f/100 }
+            .alert.alert-danger.hide[role="alert"]
+              strong 错误：
+              span
+          .modal-footer
+            button.btn.btn-default[type="button" data-dismiss="modal"] 取消
+            = f.submit '修改订单', class: 'btn btn-primary save-delivery'
+javascript:
+  $(function () {
+    var modal = $('#orderEdit')
+    modal.on('ajax:success', function (event, request) {
+      if(request.status == 'failed') {
+        modal.find('.alert.alert-danger').show().removeClass('hide').find('span').text(request.message)
+      } else {
+        window.location.href = window.location.href
+      }
+    })
+    modal.on('ajax:error', function (event, request) {
+      $.gritter.add({title: '错误', text: '网络错误'})
+    })
+  })
+  

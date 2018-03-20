@@ -1,0 +1,20 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      address_book: 联系人地址簿
+    attributes:
+      address_book:
+        user: 联系人
+        name: 联系人姓名
+        gender: 性别
+        mobile_phone: 手机号码
+        city: 所在城市
+        street: 街道地址
+        house_number: 门牌号
+        note: 备注
+    errors:
+      models:
+        address_book:
+  helpers:
+    address_book:

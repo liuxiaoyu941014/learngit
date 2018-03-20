@@ -1,0 +1,47 @@
+h1.page-header
+  | 查看商家套餐
+  .pull-right
+    => link_to '编辑', edit_admin_agent_plan_path(@agent_plan), class: 'btn btn-primary'
+    = link_to '返回', admin_agent_plans_path, class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          table.table.table-profile
+            tr
+              td.field
+                | 名称
+              td
+                a
+                  = @agent_plan.name
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | 价格
+              td
+                a
+                  = @agent_plan.price.to_f/100
+            tr
+              td.field
+                | 简要描述
+              td
+                a
+                  = @agent_plan.description
+            tr.divider
+              td[colspan='2']
+            tr
+              td.field
+                | 具体内容
+              td
+                = raw(@agent_plan.content)
+            tr.divider
+              td[colspan='2']

@@ -1,0 +1,92 @@
+h1.page-header
+  | #{Material.model_name.human}列表
+  .pull-right
+    = link_to "新建#{Material.model_name.human}", new_admin_material_path, class: 'btn btn-primary'
+
+.panel.panel-default
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+    = form_for :search, url:  admin_materials_path, method: :get, :html => {class: 'admin_material_search'} do |f|
+      h5 条件查询
+      .row.m-b-15
+        .col-md-4
+          input[type="text" value="#{params[:keywords]}" name="keywords" placeholder='物料名称/编码', class="form-control"]
+          - mc = MaterialCatalog.find_by(id: params['catalog_id'])
+        .col-md-4.catalog-list[data-catalog-name="#{mc.self_and_ancestors.pluck(:name).reverse.join('/') if mc}" data-catalog-id="#{mc.try(:id)}" data-catalog-ids="#{mc.self_and_ancestor_ids.reverse.join(',') if mc}"]
+          input[type="hidden" v-model="id" name="catalog_id"]
+          input.form-control[@click="showCatalog = true" :value="catalogs" placeholder="点击选择分类"]
+          modal[title="产品分类" :show.sync="showCatalog" @cancel="showCatalog = false"]
+            div
+              catalog-list[data-url=admin_material_catalogs_path :default="selecteDefault" @selected="selected" v-if='showCatalog' :show-confirm-buttons="true" @closed="showCatalog = false"]
+            div[slot="footer"]
+        .col-md-4
+          button.btn.btn-inverse 搜索
+          .btn-group.pull-right[data-toggle='tooltip'title='导出文件'data-placement='left']
+            button.btn.btn-default[type='submit'name='csv'value='csv'] csv
+  .panel-body
+    - if params[:search]
+      .alert.alert-success.m-b-15
+        strong
+          = "查询："
+        span
+          = @materials.total_count.to_s + "条记录"
+        span.close[data-dismiss="alert"]
+          | ×
+    .table-responsive.row.m-0
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th = Material.human_attribute_name(:name)
+            th = Material.human_attribute_name(:name_py)
+            th = Material.human_attribute_name(:catalog)
+            th = Material.human_attribute_name(:stock)
+            th = Material.human_attribute_name(:price)
+            th
+        tbody.material-list
+          - @materials.each do |material|
+            - stock = material.material_warehouse_items.map{|item| [item.material_warehouse.name+": "+item.stock.to_s]}
+            tr[class="warehouse-list" data-stock="#{stock}"]
+              td = material.name
+              td = material.name_py
+              th = material.catalog.try{name}
+              td = material.stock
+              td = material.price
+              td
+                => link_to '查看', admin_material_path(material), class: 'btn btn-xs btn-default'
+                => link_to '编辑', edit_admin_material_path(material), class: 'btn btn-xs btn-default'
+                = link_to '删除', admin_material_path(material), data: { confirm: '确定要删除吗?' }, method: :delete, class: 'btn btn-xs btn-danger'
+    = paginate @materials
+
+/ TODO: move this code to application.js
+javascript:
+  $(document).ready(function(){
+    bindRemoveLabel('.well.filter_search label.control-label');
+    $('form #search_column li a').on('click', function(){
+      if($('.well.filter_search .form-group').length == 0){
+        $('.well.form-horizontal.filter_search').removeClass('hidden').addClass('show');
+      }
+      var column_name = $(this).text();
+      var column_key = $(this).data('key');
+      var name = "filters["+ column_key +"]";
+      input_name = "input[name='" + name +"']";
+      if(!$('.well.filter_search').find(input_name).length > 0){
+        $('.well.filter_search hr').before("<div class='form-group'><label class='pull-left m-l-15 control-label'><i class='fa fa-trash-o m-r-5'></i><b>"+ column_name +"</b></label><div class='col-xs-5'><input class='form-control' name='"+ name +"' type='text'></div></div>");
+        $('.well.filter_search .control-label i.fa-trash-o').off();
+        bindRemoveLabel('.well.filter_search label.control-label');
+      }
+    })
+
+    function bindRemoveLabel(dom){
+      $(dom).on('click', function(){
+        $(this).parent('.form-group').remove();
+        if($('.well.filter_search .form-group').length == 0){
+          $('.well.filter_search').addClass('hidden');
+        }
+      })
+    }
+
+  })

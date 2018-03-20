@@ -1,0 +1,2 @@
+module Agent::MemberNotesHelper
+end

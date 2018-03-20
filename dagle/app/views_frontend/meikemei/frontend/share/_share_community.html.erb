@@ -1,0 +1,58 @@
+<!-- Preloader -->
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
+<!-- Preloader End -->
+<!-- Header -->
+<header style="background-image: url(/templetes/app-landing-tomoko/img/bg/big-images/1.jpg)" data-stellar-background-ratio="0.3">
+  <!-- Intro -->
+  <div id="intro" class="overlay-gradient" data-scroll-index="0">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a href="/" class="tomoko-header">
+              <img src="/templetes/app-landing-tomoko/logo.png" class="tomoko-logo" width="160px" height="60px"/>
+            </a>
+          </div>
+        </div>
+        <!-- .row End -->
+      </div>
+      <!-- .container End -->
+    </div>
+    <!-- Top Bar End -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Intro Heading -->
+          <div class="headline">
+
+            <div class="caption">
+                <p>
+                  <h1 class="wow fadeInDown">我在</h1>
+                  <span style="color: orange; font-size:1.4em;"><%= @share_obj.name %></span>
+                </p>
+                已有<%= rand(30..100) %>位美容师入驻该平台
+            </div>
+            <p class="wow fadeInDown" data-wow-delay="0.5s">
+              淘美客是一家提供在线美容预约服务的私享平台，专业打造优质舒适的社区美容服务，丰富多样的美容项目、各有所长的美容技师供您自由选择。</p>
+          </div>
+          <!-- Intro Heading End -->
+          <!-- Phone Carousel -->
+          <div class="download">
+            <ul class="dw-btns">
+              <li><a href="<%= @cms_site.value_for('ios')%>" title="下载ios版"><i class="fa fa-apple fa-lg"></i></a></li>
+              <li><a href="<%= @cms_site.value_for('android')%>" title="下载Android版" download="下载Android版" ><i class="fa fa-android fa-lg"></i></a></li>
+            </ul>
+          </div>
+          <!-- Phone Carousel End -->
+        </div>
+      </div>
+      <!-- .row End -->
+    </div>
+    <!-- .container End -->
+  </div>
+  <!-- Intro End -->
+</header>
+<!-- Header -->

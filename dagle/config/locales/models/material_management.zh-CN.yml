@@ -1,0 +1,20 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_management: 物料管理
+    attributes:
+      material_management:
+        note: 备注
+        operate_types:
+          output: 出库
+          input: 入库
+        operate_date: 日期
+        material_warehouse_id: 仓库
+        material_management_details: 物料清单
+        material_warehouse: 仓库
+    errors:
+      models:
+        material_management:
+  helpers:
+    material_management:

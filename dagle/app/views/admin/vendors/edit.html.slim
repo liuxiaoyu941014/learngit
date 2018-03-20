@@ -1,0 +1,7 @@
+h1 
+  | 编辑#{Vendor.model_name.human}
+  .pull-right
+    => link_to '查看', admin_vendor_path(@vendor), class: 'btn btn-primary'
+    = link_to '返回', admin_vendors_path, class: 'btn btn-primary'
+
+== render 'form'

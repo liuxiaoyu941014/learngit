@@ -1,0 +1,180 @@
+<div class="col-xs-8 left-form-content">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group">
+        <%= f.input :price %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <%= f.input :discount %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.input :address_line1, input_html: { value: '' } %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.input :address_line2, input_html: { value: '' } %>
+      </div>
+    </div>
+    <div class="col-xs-12">
+        <div rel="add_stock" >
+            <div class="form-group row">
+              <label class="col-xs-6">库存</label>
+              <label class="col-xs-6">库存单位</label>
+            </div>
+          <div class="additional-item form-group" v-for="(list, index) in lists">
+            <div class="row" :key="index">
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <input class="form-control" type="text" v-model="list.key" :name="'product[stock][' + list.name + ']'">
+                </div>
+              </div>
+              <div class="col-xs-8">
+                <input class="form-control" type="text" v-model="list.value" :name="'product[unit][' + list.name + ']'">
+              </div>
+              <div class="col-xs-1">
+                <button type="button" class="btn btn-danger delete btn-xs" @click="removeInputList3(index)">
+                  <i class="fa fa-trash"></i>
+                  <span>删除</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <span class="btn btn-success fileinput-button btn-xs" @click="addInputList3">
+            <i class="fa fa-plus"></i>
+            <span>添加其他库存选项</span>
+          </span>
+      </div>
+    </div>
+    <div class="col-md-12">
+        <div rel="additional-data" >
+            <div class="form-group row">
+              <label class="col-xs-6">演出日期</label>
+              <label class="col-xs-6">演出时间</label>
+            </div>
+            <div class="additional-item form-group" v-for="(list, index) in lists">
+              <div class="row" :key="index">
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <input class="form-control" type="text" v-model="list.key" :name="'product[date][' + list.name + ']'">
+                  </div>
+                </div>
+                <div class="col-xs-8">
+                  <input class="form-control" type="text" v-model="list.value" :name="'product[time][' + list.name + ']'">
+                </div>
+                <div class="col-xs-1">
+                  <button type="button" class="btn btn-danger delete btn-xs" @click="removeInputList1(index)">
+                    <i class="fa fa-trash"></i>
+                    <span>删除</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <span class="btn btn-success fileinput-button btn-xs" @click="addInputList1">
+              <i class="fa fa-plus"></i>
+              <span>添加其他日期选项</span>
+            </span>
+        </div>
+    </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= f.input :description, as: :text, input_html: {rows: 3} %>
+            <div class="form-group">
+              <%= f.input :note, as: :text, input_html: {rows: 3} %>
+            </div>
+          </div>
+     </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="form-group">
+        <%= f.input :phone, input_html: { value: '' } %>
+      </div>
+      <div class="form-group">
+        <%= f.input :status, collection: enum_options_for_select(Product, :status), as: :radio_buttons, label: false %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-6">
+      <p> <label for=""> 标签（可多选）:</label></p>
+      <div class="form-group check-group">
+         <%= f.collection_check_boxes :properties, Product::PROPERTIES, :first, :last, checked: @product.try(:properties) %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-6">
+      <div class="form-group">
+        <%= f.input :is_manager_recommend, as: :boolean %>
+        <%= f.input :is_shelves, as: :boolean %>
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-md-6">
+      <div class="form-group check-group col-xs-6">
+        <%= f.input :reserve_datetime, as: :datetime, html5: true, hint: "精确到时分秒" %>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-12 purchase_type">
+      <div class="form-group">
+        <p><label class="control-label string optional">购买方式:</label></p>
+        <%= f.collection_check_boxes :purchase_type, Product::PURCHASE_TYPE, :first, :last, checked: @product.try(:purchase_type)%>
+      </div>
+    </div>
+
+    <div class='signup_attributes'>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.input :maximum_for_one_account %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.input :maximum_for_one_order %>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <label class="control-label string optional"> 报名需要填写的属性:&nbsp;&nbsp;</label>
+            <div>
+              <% Product::MEMBER_ATTRIBUTES.each_pair do |key1, val1| %>
+                <label class="control-label string optional"><%= val1 %></label>
+                <input type="checkbox" value="<%= key1 %>" name="product[member_attributes][]" id="product_member_attributes_<%= key1 %>">
+                (
+                  <% Product::MEMBER_ATTRIBUTE_VALIDATES.each_pair do |key2, val2| %>
+                    <label class="control-label string optional"><%= val2 %></label>
+                    <input type="checkbox" value="<%= key2 %>" name="product[member_attribute_validates][<%=key1 %>][]" id="product_member_attributes_validates_<%= key1.to_s + '_' + key2.to_s %>">
+                  <% end %>
+                ) &nbsp;&nbsp;&nbsp;&nbsp;
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="input-group">
+            <label class="control-label input-group-addon string optional"> 其他附加属性:&nbsp;&nbsp;</label>
+            <input name="product[member_attributes_others]" class="form-control" placeholder="属性之间用逗号隔开" value=""/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='external_attributes'>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <%= f.input :external_purchase_url %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="form-group">
+        <%= f.input :content, as: :ckeditor %>
+      </div>
+    </div>
+
+  </div>
+
+</div>

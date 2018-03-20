@@ -1,0 +1,7 @@
+h1.page-header
+  | 编辑#{MarketTemplate.model_name.human}
+  .pull-right
+    => link_to '查看', admin_market_template_path(@market_template), class: 'btn btn-primary'
+    = link_to '返回', admin_market_templates_path, class: 'btn btn-primary'
+
+== render 'form'

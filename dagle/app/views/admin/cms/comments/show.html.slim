@@ -1,0 +1,74 @@
+h1.page-header
+  | 查看#{Cms::Comment.model_name.human}
+  .pull-right
+    = link_to '返回', admin_cms_comments_path, class: 'btn btn-primary'
+
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    .profile-container
+      .profile-info
+        .table-responsive
+          - if @cms_comment.user_id.present?
+            table.table.table-profile
+              tr
+                td.field 评论对象
+                td
+                  - if @cms_comment.source_type.to_s == 'Cms::Page'
+                    = Cms::Page.find(@cms_comment.source_id).title
+                  - elsif @cms_comment.source_type.to_s == 'Cms::Channel'
+                    = Cms::Channel.find(@cms_comment.source_id).title
+              tr
+                td.field 评论用户
+                td
+                  = User.find(@cms_comment.user_id).name
+              tr
+                td.field 评论内容
+                td
+                  = @cms_comment.content
+              tr
+                td.field 评论时间
+                td
+                  = @cms_comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+              tr
+                td.field 是否发布
+                td
+                  - if @cms_comment.is_published.to_s == 'true'
+                    span.label.label-success 已发布
+                  - else
+                    span.label.label-warning 未发布
+          - else
+            table.table.table-profile
+              tr
+                td.field 联系方式
+                td
+                  =@cms_comment.contact
+              tr
+                td.field 联系姓名
+                td
+                  =@cms_comment.name
+              tr
+                td.field 咨询对象
+                td
+                  =@cms_comment.gender
+              tr
+                td.field 入驻名称
+                td
+                  =@cms_comment.hobby
+              tr
+                td.field 入驻地址
+                td
+                  =@cms_comment.address
+              tr
+                td.field 咨询时间
+                td    
+                  =@cms_comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+              tr
+                td.field 留言内容
+                td
+                  =@cms_comment.content

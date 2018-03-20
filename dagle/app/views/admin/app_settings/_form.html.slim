@@ -1,0 +1,57 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @app_setting, url: @app_setting.new_record? ? admin_app_settings_path : admin_app_setting_path(@app_setting), validate: true do |f|
+      - if @app_setting.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@app_setting.errors.count, "error")} prohibited this app_setting from being saved:"
+          ul
+            - @app_setting.errors.full_messages.each do |message|
+              li = message
+      - if policy(AppSetting).create?
+        = f.input :name
+        = f.input :key_word
+        = f.input :site_share_url_pattern
+        = f.input :product_share_url_pattern
+        = f.input :article_share_url_pattern
+        = f.input :system_rooms, value: @app_setting.to_s
+        .alert.alert-danger
+          | 请注意系统房间的添加或修改格式：　['小区广场', '业委会', ...]
+        = f.input :app_version_message, as: :text, input_html: {rows: 5}
+        .alert.alert-danger
+          | 请注意APP版本的添加或修改格式：　(以---开始，后面依次写下参数)
+          br
+          | ---
+          br
+          | version_number: 2.1.3
+      .col-md-6
+        = f.input :auto_deliver_days, as: :float
+      .col-md-6
+        = f.input :auto_cancel_hours, as: :float
+      = f.input :main_banners, as: :text, input_html: {rows: 5}
+      .alert.alert-danger
+        | 请注意APP版本的添加或修改格式：　(以---开始，src和url为一组)
+        br
+        | ---
+        br
+        | - src: http://ot7w18mwp.bkt.clouddn.com/ban-3.jpg
+        br
+        | &nbsp;&nbsp;url:
+      = f.input :service_banners, as: :text, input_html: {rows: 5}
+      .alert.alert-danger
+        | 请注意APP版本的添加或修改格式：　(以---开始，src和url为一组)
+        br
+        | ---
+        br
+        | - src: http://ot7w18mwp.bkt.clouddn.com/ban-3.jpg
+        br
+        | &nbsp;&nbsp;url:
+
+
+
+      = f.submit class: 'btn btn-success btn-block'

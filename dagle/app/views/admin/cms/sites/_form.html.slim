@@ -1,0 +1,24 @@
+.panel
+  .panel-heading
+    .panel-heading-btn
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"
+        i class="fa fa-expand"
+      a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"
+        i class="fa fa-minus"
+  .panel-body
+    = simple_form_for @cms_site, url: @cms_site.new_record? ? admin_cms_sites_path : admin_cms_site_path(@cms_site), validate: true do |f|
+      - if @cms_site.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@cms_site.errors.count, "error")} prohibited this cms_site from being saved:"
+          ul
+            - @cms_site.errors.full_messages.each do |message|
+              li = message
+
+      = f.input :site_id
+      = f.input :template, collection: eval(Keystore.value_for('cms_template_names'))
+      = f.input :name
+      = f.input :domain
+      = f.input :root_domain, placeholder: 'tanmer.com'
+      = f.input :description
+      = f.input :is_published
+      = f.submit class: 'btn btn-success btn-block'

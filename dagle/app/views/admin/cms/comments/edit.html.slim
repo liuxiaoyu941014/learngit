@@ -1,0 +1,7 @@
+h1.page-header
+  | 编辑用户评论
+  .pull-right
+    => link_to '查看', admin_cms_comment_path(@cms_comment), class: 'btn btn-primary'
+    = link_to '返回', admin_cms_comments_path, class: 'btn btn-primary'
+
+== render 'form'

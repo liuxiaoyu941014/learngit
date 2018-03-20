@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      discover: Discover
+    attributes:
+      discover: {}
+    errors:
+      models:
+        discover: 
+  helpers:
+    discover: 

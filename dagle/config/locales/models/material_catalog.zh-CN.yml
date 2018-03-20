@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      material_catalog: 物料分类
+    attributes:
+      material_catalog: {}
+    errors:
+      models:
+        material_catalog: 
+  helpers:
+    material_catalog: 

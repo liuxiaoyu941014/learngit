@@ -1,0 +1,19 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      logistic: Logistic
+    attributes:
+      logistic:
+        order_delivery_id: 订单物流
+        delivery_id: 发货部
+        statuses:
+          in_transit: 运输中
+          completed: 已到达
+        create_by: 创建者
+        update_by: 更新者
+    errors:
+      models:
+        logistic:
+  helpers:
+    logistic:

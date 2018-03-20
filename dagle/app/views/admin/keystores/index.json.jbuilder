@@ -1,0 +1,1 @@
+json.array! @admin_keystores, partial: 'admin_keystores/admin_keystore', as: :admin_keystore

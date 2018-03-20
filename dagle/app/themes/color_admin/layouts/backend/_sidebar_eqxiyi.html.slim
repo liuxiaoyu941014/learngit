@@ -1,0 +1,43 @@
+li class=("#{'active' if page?('admin/home') }")
+  = link_to admin_root_path do
+    = fa_icon 'laptop', text: '首页'
+
+li class=("has-sub #{'active' if page?('admin/vendors', 'admin/sites','admin/users', 'admin/roles', 'admin/user/weixins')}")
+  = link_to dashboard_admin_users_path
+    b.caret.pull-right
+    i.fa.fa-inbox
+    span 账户角色分工
+  ul.sub-menu
+    li class=("#{'active' if page?('admin/users')}") = link_to '用户', admin_users_path
+    li class=("#{'active' if page?('admin/user/weixins')}") = link_to '微信用户', admin_user_weixins_path
+    li class=("#{'active' if page?('admin/roles')}") = link_to '角色', admin_roles_path
+    li[class=("active" if page?('admin/sites'))]
+      = link_to Site.model_name.human, admin_sites_path
+
+- if @site.present? && !@site.new_record?
+  li class=("has-sub #{'active' if page?('admin/products')}")
+    / = link_to dashboard_admin_products_path
+    /   b.caret.pull-right
+    /   i.fa.fa-inbox
+    /   span #{Site.find(params[:site_id]).try(:title)}管理
+    a href="javascript:;"
+      b.caret.pull-right
+      i.fa.fa-cube
+      span  #{@site.title}管理
+    ul.sub-menu
+      li[class=('active' if page?('admin/products'))]
+        = link_to "#{Product.model_name.human}列表", admin_site_products_path(@site)
+      /li[class=('active' if page?('admin/products#new'))]
+        = link_to "发布#{Product.model_name.human}", new_admin_product_path
+
+/ 订单管理
+li class=("has-sub #{'active' if page?('admin/orders', 'admin/produces', 'admin/orders/:order_id/produces/:id', 'admin/task_types', 'admin/deliveries', 'admin/order_deliveries')}")
+  a href="javascript:;"
+    b.caret.pull-right
+    i.fa.fa-cube
+    span 订单管理
+  ul.sub-menu
+    li[class=('active' if page?('admin/orders#new'))]
+      = link_to "创建#{Order.model_name.human}", new_admin_order_path
+    li[class=('active' if page?('admin/orders#index'))]
+      = link_to "#{Order.model_name.human}管理", admin_orders_path
