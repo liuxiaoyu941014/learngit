@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Student</title>
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="css/student.css">   
+  <link rel="stylesheet" href="css/nav-css/bootstrap.css">  
+  <link rel="stylesheet" href="css/nav-css/jquery-ui.css">  
+  <link rel="stylesheet" href="css/nav-css/style.css">  
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="js/nav-js/classie.js"></script>
+<script src="js/nav-js/uisearch.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+<body>
+          <div class="header">
+		 <div class="container">
+			<div class="logo">
+			            <h1><a href="index.html">市民艺术学校</a></h1>
+			</div>
+			<nav class="navbar navbar-default" role="navigation">
+			                <div class="navbar-header">
+			                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			                        <span class="sr-only">Toggle navigation</span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                    </button>
+			                </div>
+			                <!--/.navbar-header-->
+			                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			                    <ul class="nav navbar-nav"> 
+			                        <li ><a href="index.html">开课目录</a></li>
+			                        <li><a href="forms.html">个人选课情况</a></li>
+			                        <li><a href="blank.html">课程表</a></li>
+			                        <li><a href="contact.html">联系我们</a></li>
+			                        <li><a href="data.html">个人资料</a></li>
+			                        <li><a href="data.html">退出系统</a></li>
+			                    </ul>  
+			                </div>
+			                <!--/.navbar-collapse-->
+			                <div class="clearfix"></div>
+			</nav> 
+		 </div>
+	</div>
+	<div class="container margin-t">
+    <div class="person-list">
+        <h3 class="person-title">
+           个人资料 
+        </h3>
+        <div class="person-info">
+            <div class="info">
+               <ul>
+                  <li> 
+                    <span>用户名：</span>
+                    <input type="text" value="小明" disabled>
+                  </li>
+                  <li> 
+                  <span>邮箱：</span>
+                  <input type="email" value="180427@qq.com" disabled>
+                  <a href="">修改邮箱</a>
+                  </li>
+                  <li> 
+                  <span>手机：</span>
+                  <input type="nummber" value="1989843565" disabled>
+                  <a href="">修改手机</a>
+                  </li>
+                  <li> 
+                  <span>密码：</span>
+                  <input type="password" value="*****" disabled>
+                  <a href="">修改密码</a>
+                  </li>
+                  <li> 
+                  <span>真实姓名：</span>
+                  <input type="text" value="" name="name" class="input-st">
+                  </li>
+                  <li> 
+                  <span>身份证：</span>
+                  <input type="nummber" value=""  class="input-st">
+                  </li>
+                  <li> 
+                  <span>出生年月：</span>
+                      <input type="text" value="" class="input-st">
+                  </li>
+                  <li> 
+                  <span>所在城市：</span>
+                      <input type="text" value="" class="input-st" >
+                  </li>
+                  <li class="sex"> 
+                  <span>性别：</span>
+                    <label for="sex-0">
+                         <input type="radio" id="sex-0" name="sex" value="1" checked>男
+                    </label>
+                    <label for="sex-1">
+                         <input type="radio" id="sex-1" name="sex" value="2">女
+                    </label>
+                  </li>
+               </ul>
+               <botton class="btn btn-danger btn-right">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
