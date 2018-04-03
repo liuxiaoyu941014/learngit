@@ -1,0 +1,172 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>个人中心</h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible text-left" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>提示：</strong> <%= notice %>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 tr-sticky">
+          <div class="theiaStickySidebar">
+            <div class="tr-section">
+              <div class="quicknavBox">
+                <%= link_to( self_message_users_path, html_options={ class: 'quicknav' }) do %>
+                  <h4 class="quicuh4">
+                    <span class="fa fa-bell-o"></span>
+                    消息中心
+                    <% if Notification.where(user: current_user).unread.count > 0 %>
+                      <span class="badge mainBadge"><%= Notification.where(user: current_user).unread.count%></span>
+                    <% end %>
+                  </h4>
+                <% end %>
+                <%= link_to(edit_frontend_smuser_path(current_user.id), html_options={ class: 'quicknav' }) do %>
+                  <h4 class="quicuh4">
+                    <span class="fa fa-cogs"></span>
+                    账号设置
+                  </h4>
+                <% end %>            
+                <%= link_to( self_complaint_users_path, html_options={ class: 'quicknav' }) do %>
+                  <h4 class="quicuh4">
+                    <span class="fa fa-envelope-o"></span>
+                    意见反馈
+                  </h4>
+                <% end %>
+                <%= link_to( '/contact', html_options={ class: 'quicknav' }) do %>
+                  <h4 class="quicuh4">
+                    <span class="fa fa-search"></span>
+                    帮助中心
+                  </h4>
+                <% end %>
+                
+              </div>
+
+              <hr>
+             
+                <div class="col-md-4 col-xs-12">
+                  <div class="user-logo">
+                    <img src="<%= current_user.display_headshot %>" alt="" class="img-circle" width="150px">
+                    
+                  </div>
+                  <h3><%= current_user.nickname %></h3>
+                  <%= link_to '修改基本信息', edit_frontend_smuser_path(current_user.id), class: "btn btn-default btn-md", style: "display: inlin-block; margin: 80px 0px 15px -200px;" %>
+                </div> 
+               
+                <div class="col-md-8  col-xs-12">
+                  <div class="form-horizontal">
+
+                  <div class="form-group">
+                  <label class="col-sm-2 control-label label-xs" style='color:black'>真实姓名：</label>
+                  <div class="col-sm-10">
+                    <% if current_user.relname.present? %>
+                      <p class="form-control-static text-left p-xs"><%= current_user.relname %></p>
+                    <% else %>
+                      <p class="form-control-static text-left p-xs"><%= link_to '绑定真实姓名', edit_frontend_smuser_path(current_user.id) %></p>
+                    <% end %>
+                  </div>
+                </div>
+                   
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label label-xs " style='color:black'>身份证：</label>
+                    <div class="col-sm-10">
+                      <% if current_user.cardnu.present? %>
+                        <p class="form-control-static text-left p-xs"><%= current_user.cardnu %></p>
+                      <% else %>
+                        <p class="form-control-static text-left p-xs"><%= link_to '绑定身份证', edit_frontend_smuser_path(current_user.id) %></p>
+                      <% end %>
+                    </div>
+                  </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label label-xs" style='color:black'>邮箱：</label>
+                      <div class="col-sm-10">
+                        <% if current_user.email.present? %>
+                          <p class="form-control-static text-left p-xs"><%= current_user.email %></p>
+                        <% else %>
+                          <p class="form-control-static text-left p-xs"><%= link_to '绑定邮箱', edit_frontend_smuser_path(current_user.id) %></p>
+                        <% end %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label label-xs" style='color:black'>家庭地址：</label>
+                    <div class="col-sm-10">
+                      <% if current_user.locity.present? %>
+                        <p class="form-control-static text-left p-xs"><%= current_user.locity%></p>
+                      <% else %>
+                        <p class="form-control-static text-left p-xs"><%= link_to '绑定家庭地址', edit_frontend_smuser_path(current_user.id) %></p>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                  <label class="col-sm-2 control-label label-xs" style='color:black'>出生年月：</label>
+                  <div class="col-sm-10">
+                    <% if current_user.birth.present? %>
+                      <p class="form-control-static text-left p-xs"><%= current_user.birth%></p>
+                    <% else %>
+                      <p class="form-control-static text-left p-xs"><%= link_to '绑定出生年月', edit_frontend_smuser_path(current_user.id) %></p>
+                    <% end %>
+                  </div>
+                </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label label-xs" style='color:black'>电话：</label>
+                      <div class="col-sm-10">
+                        <% if current_user.try(:mobile).try(:phone_number).present? %>
+                          <p class="form-control-static text-left p-xs"><%= current_user.mobile.phone_number %> <%= link_to '重新绑定', binding_phone_users_path, style: "margin-left: 15px;" %> </p>
+                        <% else %>
+                          <p class="form-control-static text-left p-xs">暂无手机号 <%= link_to '立即绑定', binding_phone_users_path, style: "margin-left: 15px;" %> </p>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label label-xs" style='color:black'>微信：</label>
+                      <div class="col-sm-10">
+                        <p class="form-control-static text-left p-xs">
+                          <% if current_user.weixin %>
+                            <%= current_user.weixin.try(:name) || '匿名' %>
+                          <% else %>
+                            <%= link_to '立即绑定', binding_weixin_users_path, style: "margin-left: 15px;" %>
+                          <% end %>
+                        </p>
+                      </div>
+                    </div>
+                     
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label label-xs" style='color:black'>性别：</label>
+                    <div class="col-sm-10">
+                      <% if current_user.sex.present? %>
+                        <p class="form-control-static text-left p-xs"><%= current_user.sex%></p>
+                      <% else %>
+                        <p class="form-control-static text-left p-xs"><%= link_to '绑定性别', edit_frontend_smuser_path(current_user.id) %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                    
+
+                  </div>
+                </div>
+              
+
+
+            </div>
+          </div>
+        </div> 
+      </div>
+
+    </div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+</div>

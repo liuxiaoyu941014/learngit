@@ -1,0 +1,581 @@
+<%= render file: 'public/templetes/student2/_header.html.erb' %>
+<div class="container">
+<div  class="row">
+ <div class="class-table ">
+      <div class="col-xs-12">
+        <table class="table table-bordered">
+<caption style="text-align:center;">课程表</caption>
+  <thead>
+  <tr>
+      <td align="center" width="7%">时间</td>
+      <td align="center" width="10%">星期一</td>
+      <td align="center" width="10%">星期二</td>
+      <td align="center" width="10%">星期三</td>
+      <td align="center" width="10%">星期四</td>
+      <td align="center" width="10%">星期五</td>
+      <td align="center" width="10%">星期六</td>
+      <td align="center" width="10%">星期日</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td align="center">上午</td>
+        <td align="center">
+         <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期一"%>   
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key === key2 && key1 === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key === key3 && key1 === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%> 
+              <% end %>
+            <% end %>
+          <% end %><br>
+      <% end %>      
+       </td>
+     
+      
+        <td align="center">
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期二"%>
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+        </td>
+     
+     
+        <td align="center">
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期三"%>
+              
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                <br><%=classse.weeknu%>
+                  <%=value3%>
+                <%end%>
+                <%end%>              
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+         </td>
+      
+      
+        <td align="center">
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期四"%>
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3 && key === key3 %>
+                <br><%=classse.weeknu%>
+                  <%=value3%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+         </td>
+     
+    
+       <td align="center">
+       <% @class.each do |classse|%>
+       <% classse.class_day.each do |key,value|%>
+        <% classse.class_week.each do |key1,value1|%>
+            <% if value === "上午" && value1 === "星期五"%>
+             <% classse.class_time.each do |key2,value2|%>
+              <% if key1 === key2 && key === key2%>
+              <%=classse.name%><br>
+              <%=classse.teacher_name%><br>
+              <%=value2%>
+              <%end%>
+              <%end%>
+             <br> 
+             <% classse.class_place.each do |key3,value3|%>
+              <% if key1 === key3&& key === key3 %>
+                <%=value3%>
+                <br><%=classse.weeknu%>
+              <%end%>
+              <%end%>
+            <% end %>
+          <% end %>
+        <% end %><br>
+        <% end %>
+         </td>
+   
+      
+        <td align="center">
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期六"%>
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+         </td>
+         <td align="center">
+         <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "上午" && value1 === "星期日"%>   
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key === key2 && key1 === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key === key3 && key1 === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%> 
+              <% end %>
+            <% end %>
+          <% end %><br>
+      <% end %>      
+      </td>
+  </tr>
+   <tr>
+      <td align="center">下午</td>
+     
+        <td> 
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期一"%>  
+                <% classse.class_time.each do |key2,value2|%>
+                    <% if key === key2 && key1 === key2%>
+                    <%=classse.name%><br>
+                    <%=classse.teacher_name%><br>
+                    <%=value2%>
+                    <%end%>
+                  <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key === key3 && key1 === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>  
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+          </td>
+      
+      
+         <td align="center">
+         <% @class.each do |classse|%>
+         <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期二"%>
+               
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+          </td>
+     
+     
+        <td align="center"> 
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期三"%>
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+       <% end %>   
+          </td>
+      
+     
+        <td align="center"> 
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期四"%>
+             
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=value2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+          </td>
+   
+       <td align="center"> 
+       <% @class.each do |classse|%>
+       <% classse.class_day.each do |key,value|%>
+        <% classse.class_week.each do |key1,value1|%>
+            <% if value === "下午" && value1 === "星期五"%>
+             <% classse.class_time.each do |key2,value2|%>
+              <% if key1 === key2 && key === key2%>
+              <%=classse.name%><br>
+              <%=classse.teacher_name%><br>
+              <%=value2%>
+              <%end%>
+              <%end%>
+             <br> 
+             <% classse.class_place.each do |key3,value3|%>
+              <% if key1 === key3&& key === key3 %>
+                <%=value3%>
+                <br><%=classse.weeknu%>
+              <%end%>
+              <%end%>
+            <% end %>
+          <% end %>
+        <% end %><br>
+        <% end %>
+        </td>
+      
+      
+        <td align="center"> 
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期六"%> 
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+          </td>
+     
+      
+        <td align="center">
+        <% @class.each do |classse|%>
+        <% classse.class_day.each do |key,value|%>
+          <% classse.class_week.each do |key1,value1|%>
+              <% if value === "下午" && value1 === "星期天"%> 
+               <% classse.class_time.each do |key2,value2|%>
+                <% if key1 === key2 && key === key2%>
+                <%=classse.name%><br>
+                <%=classse.teacher_name%><br>
+                <%=value2%>
+                <%end%>
+                <%end%>
+               <br> 
+               <% classse.class_place.each do |key3,value3|%>
+                <% if key1 === key3&& key === key3 %>
+                  <%=value3%>
+                  <br><%=classse.weeknu%>
+                  <%=classse.teacher_name%><br>
+                <%end%>
+                <%end%>
+              <% end %>
+            <% end %>
+          <% end %><br>
+          <% end %>
+          </td>
+  
+  </tr>
+  <tr>
+  <td align="center">晚上</td>
+  
+     <td align="center"> 
+     <% @class.each do |classse|%>
+     <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期一"%>
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3&& key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>
+          <% end %>
+        <% end %>
+      <% end %><br>
+      <% end %>
+      </td>
+
+    <td align="center"> 
+    <% @class.each do |classse|%>
+    <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期二"%>
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3&& key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>
+          <% end %>
+        <% end %>
+      <% end %><br>
+        <% end %>
+      </td>
+
+ 
+      <td align="center"> 
+      <% @class.each do |classse|%>
+      <% classse.class_day.each do |key,value|%>
+        <% classse.class_week.each do |key1,value1|%>
+            <% if value === "晚上" && value1 === "星期三"%> 
+             <% classse.class_time.each do |key2,value2|%>
+              <% if key1 === key2 && key === key2%>
+              <%=classse.name%><br>
+              <%=classse.teacher_name%><br>
+              <%=value2%>
+              <%end%>
+              <%end%>
+             <br> 
+             <% classse.class_place.each do |key3,value3|%>
+              <% if key1 === key3 && key === key3 %>
+                <%=value3%>
+                <br><%=classse.weeknu%>
+              <%end%>
+              <%end%>
+            <% end %>
+          <% end %>
+        <% end %><br>
+        <% end %>
+        </td>
+  
+ 
+    <td align="center"> 
+    <% @class.each do |classse|%>
+    <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期四"%>
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3&& key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>  
+          <% end %>
+        <% end %>
+      <% end %><br>
+      <% end %>
+      </td>
+ 
+     <td align="center"> 
+     <% @class.each do |classse|%>
+     <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期五"%>
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3&& key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>
+          <% end %>
+        <% end %>
+      <% end %><br>
+      <% end %>
+      </td>
+  
+  
+    <td align="center"> 
+    <% @class.each do |classse|%>
+    <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期六"%> 
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3&& key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>
+          <% end %>
+        <% end %>
+      <% end %><br>
+      <% end %>
+      </td>
+  
+     <td align="center">
+     <% @class.each do |classse|%>
+      <% classse.class_day.each do |key,value|%>
+      <% classse.class_week.each do |key1,value1|%>
+          <% if value === "晚上" && value1 === "星期天"%>
+           <% classse.class_time.each do |key2,value2|%>
+            <% if key1 === key2 && key === key2%>
+            <%=classse.name%><br>
+            <%=classse.teacher_name%><br>
+            <%=value2%>
+            <%end%>
+            <%end%>
+           <br> 
+           <% classse.class_place.each do |key3,value3|%>
+            <% if key1 === key3 && key === key3 %>
+              <%=value3%>
+              <br><%=classse.weeknu%>
+            <%end%>
+            <%end%>
+          <% end %>
+        <% end %>
+      <% end %><br>
+      <% end %>
+      </td>
+</tr>
+  </tbody>
+</table>
+    </div>
+    
+</div>
+
+
+</div>
+</div>
+

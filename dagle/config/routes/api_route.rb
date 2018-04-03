@@ -12,7 +12,7 @@ module ApiRoute
         # end
       end
       namespace :api do
-        get '/', to: "home#index"
+        get '/', to: "home#index"     
         namespace :v1 do
           namespace :sessions do
             resource :sms, only: [:create]

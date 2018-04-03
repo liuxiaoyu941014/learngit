@@ -24,7 +24,7 @@ end
 
 unless User.find_by_phone_number('18080810818')
   puts "创建用户: 管理员"
-  _, admin = User::Create.(mobile_phone: '18080810818', nickname: '管理员', password: 'abcd1234')
+  _, admin = User::Create.(mobile_phone: '18080810818', nickname: '管理员', password: 'abcd1234', email: 'admin@tanmer.com', relname: '小红', cardnu: '511028199612126789', birth: '2010-10-12', locity: '四川成都', sex: '男')
   admin.save!
   raise "创建的第一个用户ID不等于1!!!" unless admin.id == 1
   admin.add_role :admin
@@ -33,23 +33,23 @@ end
 
 unless User.find_by_phone_number('15983288999')
   puts "创建用户: 商家"
-  _, agent = User::Create.(mobile_phone: '15983288999', nickname: '商家', password: 'abcd1234')
+  _, agent = User::Create.(mobile_phone: '15983288999', nickname: '商家', password: 'abcd1234', email: 'admin@tanmer.com', relname: '小红', cardnu: '511028199612126789', birth: '2010-10-12', locity: '四川成都', sex: '男')
   agent.add_role :agent
 end
 
 unless User.find_by_phone_number('15328077520')
   puts "创建用户: 用户"
-  _, user = User::Create.(mobile_phone: '15328077520', nickname: '用户', password: 'abcd1234')
+  _, user = User::Create.(mobile_phone: '15328077520', nickname: '用户', password: 'abcd1234', email: 'admin@tanmer.com', relname: '小红', cardnu: '511028199612126789', birth: '2010-10-12', locity: '四川成都', sex: '男')
 end
 
 # 测试账号，方便app审核时测试用，手机号验证码是000000，在settings.xx.yml中有设置
 unless User.find_by_phone_number('13900000000')
   puts "创建用户: 测试账号"
-  _, user = User::Create.(mobile_phone: '13900000000', nickname: '测试账号', password: 'xhkafhsafl')
+  _, user = User::Create.(mobile_phone: '13900000000', nickname: '测试账号', password: 'xhkafhsafl', email: 'admin@tanmer.com', relname: '小红', cardnu: '511028199612126789', birth: '2010-10-12', locity: '四川成都', sex: '男')
 end
 
 unless User.find_by_phone_number('11000000000')
-  flag, public_admin = User::Create.(mobile_phone: '11000000000', nickname: '超级管理员', email: 'admin@tanmer.com', password: 'tanmer.com')
+  flag, public_admin = User::Create.(mobile_phone: '11000000000', nickname: '超级管理员', email: 'admin@tanmer.com', password: 'tanmer.com', relname: '小红', cardnu: '511028199612126789', birth: '2010-10-12', locity: '四川成都', sex: '男' )
   if flag
     puts "创建用户: 超级管理员"
     public_admin.save!
@@ -74,7 +74,7 @@ if Settings.project.dagle?
 end
 
 #系统参数
-Keystore.put('cms_template_names', "['default','dagle','app-landing-spotlight','grand','eshop','newshub']")
+Keystore.put('cms_template_names', "['default','dagle','app-landing-spotlight','grand','eshop','newshub','student2']")
 
 # init Cms
 # visit: http://localhost:3000/cms_1/
@@ -86,6 +86,16 @@ create_if_not_exist Cms::Site.create_with(
   template: Settings.project.wgtong? ? 'newshub' : 'default',
   description: '这是用CMS搭建的官网'), site_id: site.id do |cms_site|
     puts "创建CMS官网"
+  # Cms::Site 在创建时，会自动执行模版中的db_init.rb文件，所以这里不需要在创建channel和page
+end
+
+create_if_not_exist Cms::Site.create_with(
+  name: '市民报名系统',
+  domain: 'www',
+  # 这里如果不是文广通，newshub模版中就缺少Product.hot方法，所以做个判断。
+  template: Settings.project.smxx? ? 'student2' : 'default',
+  description: '这是用CMS搭建的官网2'), site_id: site.id do |cms_site|
+    puts "创建CMS官网2"
   # Cms::Site 在创建时，会自动执行模版中的db_init.rb文件，所以这里不需要在创建channel和page
 end
 

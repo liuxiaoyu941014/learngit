@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      course: Course
+    attributes:
+      course:
+        name: Name
+        type: Type
+        features: Features
+    errors:
+      models:
+        course: 
+  helpers:
+    course: 

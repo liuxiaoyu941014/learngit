@@ -57,3 +57,163 @@
 .quicknavBox .quicknav .quicuh4 {
   margin: 0px;
 }
+.tr-breadcrumb{
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+}
+.tr-breadcrumb .breadcrumb{
+  margin-bottom: 0;
+  background-color: transparent;
+}
+.pull-right {
+  float: right!important;
+}
+.tr-section {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.form-control{
+	width:28% 
+}
+h3{
+  margin-top:31px; 
+  margin-left:139px
+}
+.tr-section .h-margin{
+  margin-top: 2px;
+  margin-left: 22px;
+}
+hr{
+  margin-top:32px 
+}
+.topbar-right{
+  position: relative;
+  
+  text-align: right;
+  float: right;
+}
+.topbar-right .user{
+  display: inline-block;
+  position: relative;
+}
+.user .dropdown {
+  position: static;
+  text-align: left;
+}
+.user-dropdown {
+  display: inline-block;
+}
+.white-text {
+  color: #fff !important;
+}
+.text-left {
+  text-align: left;
+}
+.topbar-right .sub-menu a {
+  font-size: 14px;
+  font-weight: 400;
+}
+.topbar-right .user a {
+  color: #fff;
+  
+}
+.topbar-two .sub-menu {
+  background-color: #e81a1b;
+  border-color: #fff;
+}
+
+ul.sub-menu{
+  background-color: #e81a1b;
+  position: absolute;
+  top:100%;  
+  z-index:1000 ;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  min-width: 100% ;
+  display: none;
+}
+.user:hover{
+  .sub-menu{
+    display: block;
+  }
+}
+ul.sub-menu li a:hover{
+  color:#e81a1b ;
+  background-color:white; 
+}
+.sub-menu li a{
+  padding:10px 20px;
+  border-top:1px solid #f0f3f5;
+  display:block 
+}
+.dropdown:hover .sub-menu, .topbar-right .user:hover .sub-menu{
+  z-index:1000 ;
+}
+.course-title h3{
+  margin-top: 6px;
+  margin-left: -15px;
+  
+}
+.detail-title{
+  margin-left:0px 
+}
+.person-info{
+  margin-bottom:10px 
+}
+.person-info .info ul li{
+  font-size:17px;
+ 
+}
+.person-info .info ul li span{
+  color:black 
+}
+
+.person-info .info ul li input{
+  font-size:15px;
+  margin-left:15px;
+  width:11% 
+}
+
+.person-info .info{
+ margin:0 auto 
+}
+.text-black{
+  color :black
+}
+
+@media (max-width:375px) {
+ .topbar-right{
+   position: relative;
+   top:-83px;
+   left:-82px ;
+   
+ }
+ .person-info .info{
+   position: relative;
+   left:41px;
+ }
+.label-xs{
+  position:relative;
+  left:-56px !important;
+ }
+ .p-xs{
+   position: relative;
+   left:129px ;
+   top:-28px
+ }
+ .input-xs{
+   position: relative;
+   left:144px;
+   top:-24px;
+   width:190%!important
+ }
+ .h-margin{
+   margin-left:92px !important
+ }
+}

@@ -1,0 +1,82 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<div class="box-content">
+    <div class="class-detail">
+        <h3 class="detail-title">课程介绍</h3>
+        
+        <div class="detail-content">
+            <div class="row">
+            <div class="col-xs-5  col-md-12">
+                <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                <img src="image/2119946900.jpg" class="img2">
+               
+                </p>
+            </div>
+            </div>
+            <div class="row">
+                    <div class="col-xs-5  col-md-12">
+                        <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                    <span class="span-sm"><%=@course.features["introduction"]%></span>
+                        </p>
+                    </div>	
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                   <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                    <span class="span-lg">授课老师</span>
+                   <!-- <span class="span-lg"><%=@course.features["teacher_name"]%></span>-->
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5">
+                     <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                    <span class="span-lg">学员须知</span>
+                     </p>
+                </div>
+            </div>
+                <div class="row">
+                <div class="col-xs-5  col-md-12">
+                    <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                <span class="span-sm">每个学生能在一个学年中报2门不同的学习课程</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                    <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                        <span class="span-sm">老师可以根据学生的报名二维码来统计和监督学生出勤情况</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                    <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                    <span class="span-sm">如果学生一门课程有3次及以上缺课，则取消下一年的报名资格</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                    <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                <span class="span-sm">如果你在第一学年学习了基础课程，那么你在下一学年中可以选择相应的提高课程，但是如果你是零基础学员，只能报基础课程</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                    <p style="padding:0px 20px;line-height:normal;margin-top:10px;margin-bottom:20px">
+                <span class="span-lg">限报人数：<%=@course.features["limit_number"]%></span>
+                    </p> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5  col-md-12">
+                
+                    <div class="btn-p"><a href="<%= new_frontend_classorder_path(course_id: @course.id)%>" ><button type="button" class="btn btn-danger ">马上报名</button></a></div>
+                </div>
+            </div>  
+        </div>
+      
+    </div>
+</div>
+<%= render file: 'public/templetes/student2/_footer.html.erb' %>

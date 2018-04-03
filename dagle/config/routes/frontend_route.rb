@@ -53,6 +53,10 @@ module FrontendRoute
         post "binding_weixin"
         post "binding_phone"
       end
+
+
+      
+      
       # [ 商家, 产品, 新闻 ] 查询路由配置
       get :search_result, to: 'frontend/search#search_result'
       # 文广痛微场馆路由配置
@@ -71,10 +75,14 @@ module FrontendRoute
         get 'wechat_new/:id', action: 'wechat_new', as: 'wechat_new'
       end
 
-      namespace :frontend do
-        get 'home/index'
+      namespace :frontend do 
+       
+        get 'courses/index'
+        get 'classorders/showtable'
+        resources :courses, :classorders  
+        resources :smusers   
+        get 'home/index'       
         match 'share/(:class/:id)', to: "share#index", via: :get
-
         resources :orders do
           collection do
             get "search"
@@ -102,6 +110,9 @@ module FrontendRoute
         resources :product_catalogs do
           resources :products
         end
+       
+       
+       
 
       end
     end

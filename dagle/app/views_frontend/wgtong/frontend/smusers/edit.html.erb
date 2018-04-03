@@ -1,0 +1,152 @@
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<div id="wrap">
+  <section id="start" class="padding-top-bottom text-center">
+    <div class="container">
+
+      <div class="tr-breadcrumb">
+  			<div class="title pull-left">
+  				<h1>个人中心</h1>
+  			</div>
+        <ol class="breadcrumb pull-right">
+          <li><a href="/">首页</a></li>
+        </ol>
+  		</div>
+
+
+        <div class="row">
+          <div class="col-sm-12 col-md-12 tr-sticky">
+            <div class="theiaStickySidebar">
+              <div class="tr-section">
+                <h3 class="h-margin">帐号设置</h3>
+                <hr>
+                <%= simple_form_for current_user, url: frontend_smuser_path, method: :put, validate: true do |f| %>
+                 
+                    <div class="col-md-12  col-xs-12">
+                      <div class="form-horizontal clearfix">
+                      <div class="row">
+                        <!-- 头像 -->
+                        
+                          <div class="col-md-2 col-md-offset-1 col-xs-12">
+                            <div class="user-logo">
+                              <div class="slim br-5"
+                                  data-label="选择图片"
+                                  data-button-cancel-label = "取消"
+                                  data-button-confirm-label = "确认"
+                                  data-will-save="upload"
+                                  data-will-remove="imageWillBeRemoved"
+                                  data-save-initial-image="true"
+                                  data-label-loading="true"
+                                  data-push="true"
+                                  data-did-upload="imageUpload"
+                                  data-service="<%= headshot_users_url %>"
+                                  data-ratio="1:1">
+                                <!-- <input type="file" name="slim[]"/> -->
+                                <img src="<%= @current_user.display_headshot %>" alt="" >
+                                <%= f.file_field :attachments %>
+                              </div>
+                            </div>
+                              <div>
+                              <h3 class="h-margin">修改头像</h3><br>
+                              <p style="margin-top: 10px;">建议头像尺寸为300*300像素，格式为jpg、jpeg、png,大小不超过2M</p>
+                               </div>
+                          </div>
+                      
+
+                        <div class="col-md-8 col-md-offset-1">
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">昵称</label>
+                            <div class="col-sm-10 input-xs">
+                              <%= f.input :nickname, label: false%>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">邮箱</label>
+                            <div class="col-sm-10 input-xs">
+                            <%= f.input :email, label: false%>
+                            </div>
+                          </div>
+                         
+                          <div class="form-group">
+                          <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">真实姓名</label>
+                          <div class="col-sm-10 input-xs">
+                          <%= f.input :relname, label: false%>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">身份证号</label>
+                        <div class="col-sm-10 input-xs">
+                        <%= f.input :cardnu, label: false%>
+                        </div>
+                       </div>
+
+                       <div class="form-group">
+                       <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">家庭住址</label>
+                       <div class="col-sm-10 input-xs">
+                       <%= f.input :locity, label: false%>
+                       </div>
+                      </div>
+                      <div class="form-group">
+                      <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">出生年月</label>
+                      <div class="col-sm-10 input-xs">
+                      <%= f.input :birth, label: false%>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                     <label for="inputName" class="col-sm-2 control-label label-xs" style="color:black">性别</label>
+                     <div class="col-sm-10 input-xs">
+                     <%= f.input :sex, label: false%>
+                     </div>
+                    </div>
+                        </div>
+                        </div>
+                  <%= link_to '返回', frontend_smusers_path, class:'btn btn-default', type:'button'%>
+                  <%= f.button :submit, '提交修改' %>
+                <% end %>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>
+    </div>
+
+          
+  </div>
+
+</div>
+  </section>
+  <%= render file: @cms_site.template_dir + '_footer.html' %>
+  <script>
+    function imageUpload(error, data, response) {
+      if (response.success == true) {
+        document.getElementById("navbarImg").setAttribute("src", response.url);
+        document.getElementById("sidebarImg").setAttribute("src", response.url);
+      }
+    }
+    var inp = document.getElementById("user_cardnu")
+    var inp1 = document.getElementById("user_relname")
+    var inp2 = document.getElementById("user_birth")
+    inp.onchange=function(){
+    var reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+      if(reg.test(this.value) ===false)
+          {
+            alert("身份证输入不合法");  
+                return  false;  
+            }
+    }
+    inp1.onchange=function(){
+              var regName =/^[\u4e00-\u9fa5]{2,4}$/;  
+if(!regName.test(this.value)){  
+    alert('真实姓名填写有误');  
+     return false;  
+ }  
+    }
+    inp2.onchange=function(){
+              var regName1 = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;  
+if(!regName1.test(this.value)){  
+    alert('出生年月填写有误');  
+     return false;  
+ }  
+    }
+  </script>
+</div>

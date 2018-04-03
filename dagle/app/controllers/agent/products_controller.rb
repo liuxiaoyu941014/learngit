@@ -112,6 +112,7 @@ class Agent::ProductsController < Agent::BaseController
   end
 
   def create
+   
     if params[:product][:member_attributes].present? || params[:product][:member_attributes_others].present?
       params[:product][:member_attributes] = params[:product][:member_attributes] + params[:product][:member_attributes_others].split(/,/)
       params[:product][:member_attributes] = params[:product][:member_attributes].delete_if{|ma| ma.blank?}

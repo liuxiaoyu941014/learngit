@@ -5,7 +5,7 @@ class Frontend::UsersController < Frontend::BaseController
   end
 
   def edit
-    authorize current_user
+    authorize @current_user
   end
   def update
     authorize @current_user

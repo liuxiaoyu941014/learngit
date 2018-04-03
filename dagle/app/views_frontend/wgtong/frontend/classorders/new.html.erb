@@ -1,0 +1,60 @@
+
+<%= render file: @cms_site.template_dir + '_header.html' %>
+<%=form_for(@class, url: frontend_classorders_path) do |f|%>
+<div class="container margin-t">
+    <div class="person-list">
+        <div class="person-info">
+            <div class="info">
+            <%= f.hidden_field(:course_id, value:@course.id ) %>
+            <%= f.hidden_field(:user_id, value:current_user.id )%>
+            <%= f.hidden_field(:class_week, value:"#{@course.features["class_week"]}")%>
+            <%= f.hidden_field(:class_time, value:"#{@course.features["class_time"]}")%>
+            <%= f.hidden_field(:class_day, value:"#{@course.features["class_day"]}")%>
+            <%= f.hidden_field(:class_place, value:"#{@course.features["class_place"]}")%>
+                <ul>
+                    <li> 
+                        <span>课程名称:</span>
+                        <%= f.text_field :name, value:@course.features["name"] %>
+                    </li>
+                    <li> 
+                    <span>任教老师:</span>
+                    <%= f.text_field :teacher_name, value:@course.features["teacher_name"] %> 
+                   
+                    
+                    </li>
+                    <li> 
+                    <span>周次:</span>
+                    <%= f.text_field :weeknu,value:"1-15" %> 
+                   
+                    </li>
+                    <li> 
+                    <span>上课时间:</span>
+                    <% @course.features["class_week"].each do |key1,value1| %>
+                        <% @course.features["class_time"].each do |key,value| %>
+                            <%if key === key1%>
+                             <%=value1 + value%>
+                         <%end%>
+                       <%end%>
+                     <% end %>
+                    </li>
+                    <li> 
+                    <span>上课地方:</span>
+                    <% @course.features["class_place"].each do |key,value| %>
+                        <%=value%>
+                    <% end %>
+                    </li>
+                </ul>
+                <%= f.submit "立即选课", class:"btn btn-danger btn-right"%>
+               
+                
+                </div>
+            </div>
+        </div>
+</div>
+<% end %>
+<%= render file: 'public/templetes/student2/_footer.html.erb' %>
+
+ 
+  
+  
+ 

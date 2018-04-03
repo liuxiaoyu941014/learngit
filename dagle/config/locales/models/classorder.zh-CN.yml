@@ -1,0 +1,19 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      classorder: Classorder
+    attributes:
+      classorder:
+        name: Name
+        teacher_name: Teacher name
+        weeknu: Weeknu
+        class_day: Class day
+        class_time: Class time
+        class_place: Class place
+        class_week: Class week
+    errors:
+      models:
+        classorder: 
+  helpers:
+    classorder: 

@@ -1,0 +1,2 @@
+module Frontend::CoursesHelper
+end
