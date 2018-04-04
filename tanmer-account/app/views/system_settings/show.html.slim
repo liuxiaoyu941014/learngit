@@ -1,0 +1,9 @@
+h1 系统配置
+table.table
+  tr
+    th Key
+    th Value
+  - Figaro.application.configuration.each_pair do |k, v|
+    tr
+      td = k
+      td = v

@@ -1,0 +1,10 @@
+zh-CN:
+  btn:
+    new: '新建%{resource_name}'
+    show: '查看'
+    edit: '编辑'
+    destroy: '删除'
+    destroy-confirm: '确认要删除吗？'
+    back-to-list: '返回列表'
+    login: 登录
+    logout: 注销

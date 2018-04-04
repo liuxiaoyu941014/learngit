@@ -1,0 +1,79 @@
+/*
+*= require bootstrap_override
+*= require_self
+*= require '_themes'
+*/
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.sessions.new,
+.registrations.new {
+  color: rgb(115, 115, 115);
+  .btn {
+    font-size: 16px;
+    height: 44px;
+    padding: 10px 18px;
+  }
+
+  .form-control, .input-group-addon {
+    height: 44px;
+    padding: 6px 18px;
+    font-size: 16px;
+  }
+
+  .slogan {
+    border-radius: 6px;
+    margin: 6.5rem -2rem 0rem 2rem;
+    padding: 3rem;
+    background-color: rgba(255, 255, 255, 0.79);
+    .text {
+      color: black;
+      font-weight: bold;
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
+    .image{}
+
+    @media screen and (max-width: 768px) {
+      margin: 0rem;
+      padding: 2rem;
+    }
+  }
+
+  .login-box-container,
+  .registration-box-container {
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.4);
+    padding: 2rem 3rem 5rem 3rem;
+    margin-top: 10rem;
+    border-radius:5px;
+    background-color: #fff;
+    @media screen and (max-width: 768px) {
+      margin: 0rem;
+    }
+  }
+
+  .login-body,
+  .registration-body {
+    // margin-top: 80px;
+  }
+
+  .login-box,
+  .registration-box {
+    // margin-top: 50px;
+    // min-height: 22.8rem;
+    // max-height: 22.8rem;
+    > h1.title {
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-align: center
+    }
+  }
+
+  .footer{
+    margin-top: 3rem;
+    height: 40px;
+    bottom: 0;
+    width: 100%;
+    color: #333;
+  }
+}

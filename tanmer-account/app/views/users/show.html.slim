@@ -1,0 +1,47 @@
+.page-header
+  h3
+    = t('.title')
+    .pull-right
+      => link_to t_btn(:edit), edit_user_path(@user), class: 'btn btn-primary'
+      = link_to t_btn('back-to-list'), users_path, class: 'btn btn-default'
+.pannel
+  row.table-responsive
+    table.table.table-striped
+      tr
+        th.col-md-3 = User.human_attribute_name(:mobile_phone)
+        td.col-md-9 = @user.mobile_phone
+      tr
+        th.col-md-3 = User.human_attribute_name(:email)
+        td.col-md-9 = @user.email
+      tr
+        th.col-md-3 = User.human_attribute_name(:name)
+        td.col-md-9 = @user.name
+      tr
+        th.col-md-3 = User.human_attribute_name(:username)
+        td.col-md-9 = @user.username
+      tr
+        th.col-md-3 = User.human_attribute_name(:roles)
+        td.col-md-9
+          - @user.roles.each do |role|
+            span.label.label-default> = role.name
+      tr
+        th = User.human_attribute_name(:sign_in_count)
+        td = "#{@user.sign_in_count}次"
+      tr
+        th = User.human_attribute_name(:current_sign_in_at)
+        td = @user.current_sign_in_at ? "#{time_ago_in_words(@user.current_sign_in_at)}前" : '-'
+      tr
+        th = User.human_attribute_name(:current_sign_in_ip)
+        td = @user.current_sign_in_ip || '-'
+      tr
+        th = User.human_attribute_name(:last_sign_in_at)
+        td = @user.last_sign_in_at ? "#{time_ago_in_words(@user.last_sign_in_at)}前" : '-'
+      tr
+        th = User.human_attribute_name(:last_sign_in_ip)
+        td = @user.last_sign_in_ip || '-'
+      tr
+        th = User.human_attribute_name(:created_at)
+        td = "#{time_ago_in_words(@user.created_at)}前"
+      tr
+        th = User.human_attribute_name(:updated_at)
+        td = "#{time_ago_in_words(@user.created_at)}前"

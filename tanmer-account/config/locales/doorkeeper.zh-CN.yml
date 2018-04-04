@@ -1,0 +1,23 @@
+zh-CN:
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        source_urls: '跨域访问URL'
+        oauth_expiration: 'Token有效期'
+        is_sso: 单点登录
+  doorkeeper:
+    applications:
+      index:
+        source_urls: '跨域访问URL'
+      show:
+        oauth_expiration: 'Token有效期'
+        source_urls: '跨域访问URL'
+        is_sso: 单点登录
+      help:
+        source_urls: '允许访问本服务的网址，用分号(;)隔开'
+        oauth_expiration: 不填表示长期有效，单位（秒）
+        is_sso: 所有单点登录的应用共用一个用户验证信息。一处登录，多处登录；一处退出，多处退出。
+    flash:
+      applications:
+        destroy:
+          cannot_destroy_main_app: '不能删除默认APP'

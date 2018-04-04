@@ -1,0 +1,10 @@
+@import './variables';
+@import './login';
+@import './sidebar';
+
+.theme.tamigos {
+  .btn.btn-primary {
+    background-color: $theme-color;
+    border-color: $theme-color;
+  }
+}

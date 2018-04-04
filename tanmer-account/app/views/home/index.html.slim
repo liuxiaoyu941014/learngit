@@ -1,0 +1,39 @@
+h1 Projects
+ul
+  li
+    = link_to 'Gitlab', 'https://gitlab.tanmer.com'
+    | 代码版本控制，工作任务分配系统
+  li
+    = link_to 'Rancher', 'https://rancher.corp.tanmer.com'
+    | Docker服务部署工具
+  li
+    = link_to 'Tanmer Gems', 'https://gems.tanmer.com'
+    | Gem库
+  li
+    = link_to '短网址', 'http://s.tanmer.cn/create-url'
+    | 需要把长网址变短，就用这个
+  li
+    = link_to '短网址管理', 'http://s.tanmer.cn/allowed_hosts'
+    | 要生成短网址，需要先添加允许授权的域名
+  li
+    = link_to '附件管理', 'http://attachments.tanmer.com'
+    | 附件管理服务，所有的附件都又本服务管理，统一上传到七牛云
+  li
+    = link_to 'Pg Web', 'http://pgweb.corp.tanmer.com'
+    | PostgreSQL 数据库查看工具
+  li
+    = link_to 'MySQL Web', 'http://mysql.corp.tanmer.com'
+    | MySQL 数据库查看工具
+  li
+    = link_to 'HTTPbin', 'http://ip.tanmer.cn/'
+    | HTTP 调试工具
+  li
+    = link_to 'Elastic Search Kibana', 'http://es-cluster-kibana-1.rancher.internal:5601/', target: '_blank'
+    | 搜索引擎后台分析工具  
+  li
+    = link_to 'Elastic Search Cerebro', 'http://es-cluster-cerebro-2.rancher.internal:9000/', target: '_blank'
+    | 搜索引擎监控工具，进入后，输入http://es-cluster-es-client-1.rancher.internal:9200
+  li
+    | VPN，用openvpn客户端导入配置文件后，用账号的用户名密码即可登录，然后能够与所有Docker服务组成局域网，
+    = link_to '下载', '/downloads/tanmer-docker-vpn.ovpn', target: '_blank'
+    |配置文件

@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      doorkeeper/application: 应用
+    attributes:
+      doorkeeper/application: {}
+    errors:
+      models:
+        application: 
+  helpers:
+    application: 

@@ -1,0 +1,56 @@
+<style media="screen">
+
+  .tamigo_log{
+    width:10rem;
+    height:10rem;
+    transition:width 1s, height 1s;
+    -moz-transition:width 1s, height 1s, -moz-transform 1s; /* Firefox 4 */
+    -webkit-transition:width 1s, height 1s, -webkit-transform 1s; /* Safari and Chrome */
+    -o-transition:width 1s, height 1s, -o-transform 1s; /* Opera */
+  }
+
+  .tamigo_log:hover{
+    transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+  }
+
+  .change_btn{
+    padding: 10px 30px;
+    margin-bottom:4rem;
+    margin-top: 4rem;
+    border-radius:50px;
+  }
+  .content{
+    margin-top: 10rem;
+    width: 60%;
+    background: rgba(255,255,255, 0.6);
+  }
+  .content p{
+    margin: 4rem 0rem;
+  }
+  @media screen and (max-width: 768px) {
+    .content{
+      margin-top: 2rem;
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container">
+  <p class="pull-right">
+    <%= link_to t_btn('logout'), logout_path, data: { turbolinks: false } %>
+  </p>
+  <section class="container content">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p><a href="javascript:;"> <%= image_tag 'tamigos/tamigo_01.png', class:'tamigo_log img-circle' %></a></p>
+        <p class="">作为北京产权交所在金融科技的先行者和探路者，依托产权交易市场，北交金科一直努力在金融信息服务方面进行探索和创新。我们希望结合北交所在产权行业的深刻理解及沉淀，利用技术手段，设计出一款能够解决当前并购市场及投融资界信息不完整、不对称、不透明、缺乏客观分析与评价等行业痛点的金融信息产品，降低金融服务成本，提升金融服务效率。</p>
+        <p>
+          <a href="http://www.tamigos.com" class="btn btn-danger change_btn">进入网站</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

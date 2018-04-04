@@ -1,0 +1,4 @@
+zh-CN:
+  menu:
+    manage: '%{resource_name}管理'
+    new: '新建%{resource_name}'

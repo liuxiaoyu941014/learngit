@@ -1,0 +1,6 @@
+tmp/
+log/
+test/
+yarn-error.log
+config/application.yml
+node_modules/

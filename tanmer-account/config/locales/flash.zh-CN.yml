@@ -1,0 +1,9 @@
+zh-CN:
+  flash:
+    update:
+      notice: 更新成功
+    create:
+      notice: 创建成功
+    destroy:
+      notice: 删除成功
+      alert: '删除失败: %{reason}'

@@ -1,0 +1,8 @@
+= simple_form_for(@role) do |f|
+  = simple_form_error_messages(f)
+  = f.input :name
+  = f.input :description
+  .form-group
+    = f.label :permissions
+    == render 'permissions_table', permissions: Permission.all, simple_form: f
+  = f.submit class: 'btn btn-primary'

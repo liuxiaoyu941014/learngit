@@ -1,0 +1,23 @@
+.page-header
+  h3
+    = t('.title')
+    .pull-right
+      => link_to t_btn(:edit), edit_role_path(@role), class: 'btn btn-primary'
+      => link_to t_btn('back-to-list'), roles_path(@role), class: 'btn btn-default'
+row.table-responsive
+  table.table.table-striped
+    tr
+      th.col-md-3 = Role.human_attribute_name(:name)
+      td.col-md-9 = @role.name
+    tr
+      th = Role.human_attribute_name(:description)
+      td = @role.description
+    tr
+      th = Role.human_attribute_name(:permissions)
+      td = render('permissions_table', permissions: @role.permissions)
+    tr
+      th = Role.human_attribute_name(:created_at)
+      td = time_ago_in_words @role.created_at
+    tr
+      th = Role.human_attribute_name(:updated_at)
+      td = time_ago_in_words @role.updated_at

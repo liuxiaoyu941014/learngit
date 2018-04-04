@@ -1,0 +1,14 @@
+<registration-box
+  data-title="<%= ENV['REGISTRATION_TITLE'] %>"
+  <%- if ENV['ENABLE_REGISTERATION_WITH_MOBILE'] == 'true' %>
+  data-enable-mobile-reg="true"
+  data-sms-auth-code-length=<%= ENV['SMS_AUTH_CODE_LENGTH'] %>
+  <% end -%>
+  <%- if ENV['ENABLE_REGISTERATION_WITH_EMAIL'] == 'true' %>
+  data-enable-email-reg="true"
+  <% end -%>
+  <%- if ENV['ENABLE_REGISTERATION_WITH_USERNAME'] == 'true' %>
+  data-enable-username-reg="true"
+  <% end -%>
+  data-login-url="<%= login_url(params.as_json(except: [:controller, :action])) %>"
+></registration-box>

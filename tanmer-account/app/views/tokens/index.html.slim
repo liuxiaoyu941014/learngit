@@ -1,0 +1,23 @@
+.page-header
+  h1
+    | Token列表
+    = link_to '新建', new_token_path, class: 'btn btn-success pull-right'
+
+table.table
+  thead
+    tr
+      th 名字
+      th Token
+      th 过期时间
+      th
+
+  tbody
+    - @tokens.each do |token|
+      tr
+        td = token.name
+        td = token.token
+        td = token.expires_in.blank? ? '永久' : (time_ago_in_words(token.expires_at) + (token.expires_at > Time.now ? '后': '前'))
+        td
+          => link_to 'Show', token_path(token), class: 'btn btn-default'
+          => link_to 'Edit', edit_token_path(token), class: 'btn btn-default'
+          => link_to 'Destroy', token_path(token), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'

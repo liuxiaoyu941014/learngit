@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= ENV['project_name'] %></title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="theme <%= controller_name %> <%= action_name %> <%= ENV['PROJECT_TEMPLATE_NAME'] %>">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to ENV['project_name'], root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li><%= link_to t_btn('logout'), logout_path, data: { turbolinks: false } %></li>
+          <% else %>
+            <li><%= link_to t_btn('login'), login_path, data: { turbolinks: false } %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <%= render('layouts/sidebar') %>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <%- if flash[:notice].present? %>
+          <div class="alert alert-info global">
+            <%= flash[:notice] %>
+          </div>
+        <% end -%>
+        <%- if flash[:alert].present? %>
+          <div class="alert alert-danger global">
+            <%= flash[:alert] %>
+          </div>
+        <% end -%>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

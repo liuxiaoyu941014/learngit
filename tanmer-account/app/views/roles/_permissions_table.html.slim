@@ -1,0 +1,38 @@
+ruby:
+  simple_form = nil unless defined?(simple_form)
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th = Permission.human_attribute_name(:app)
+      th = Permission.human_attribute_name(:group_name)
+      th = Permission.human_attribute_name(:name)
+  tbody
+    - permissions.group_by(&:app).each_pair do |app, perms_all|
+      - show_app = true
+      - name_groups = perms_all.group_by(&:group_name)
+      - name_groups.each_pair do |group_name, perms|
+        - show_group_name = true
+        - if simple_form
+          tr
+            - if show_app
+              td.col-md-3[rowspan=name_groups.size]
+                = app.name
+            td.col-md-3
+              = group_name
+              p.mute = perms.first.subject_class
+            td.col-md-6 = simple_form.association :permissions, collection: perms, as: :check_boxes, label: false, label_method: :name_with_action
+          - show_app = false
+        - else
+          - perms.each do |perm|
+            tr
+              - if show_app
+                td.col-md-3[rowspan=perms_all.size]
+                  = app.name
+              - if show_group_name
+                td.col-md-3[rowspan=perms.size]
+                  = group_name
+                  p.mute = perms.first.subject_class
+              td.col-md-6
+                = perm.name_with_action
+            - show_group_name = false
+            - show_app = false

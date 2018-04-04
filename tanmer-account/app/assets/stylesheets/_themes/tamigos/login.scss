@@ -1,0 +1,72 @@
+@import './variables';
+.theme.tamigos {
+    // background-image: image-url('tamigos/bg2.png');
+    // background-size: cover;
+  &.sessions.new, &.registrations.new {
+    background-image: image-url('tamigos/bg1.png');
+    background-size: cover;
+
+    .login-body {
+      margin-top: 40px;
+    }
+
+    .btn {
+      &.btn-default {
+        background-color: rgb(208, 208, 208);
+        color: rgb(116, 116, 116);
+        // background-color: $theme-color;
+        // color: white;
+        &[disabled]{
+          background-color: rgb(208, 208, 208);
+          color: rgb(116, 116, 116);
+        }
+      }
+      &[type="submit"] {
+        background-color: $theme-color;
+        color: white;
+      }
+    }
+
+    .row.top-help {
+      padding: 20px 20px 0px ;
+    }
+
+    .login-box {
+      .form {
+        .btn-success {
+          @extend .btn-default;
+          border: none;
+        }
+        .btn-primary {
+          border: none;
+        }
+      }
+      .login-type-container {
+        .btn-default{
+          background-color: white;
+        }
+      }
+    }
+    .registration-box {
+      .registration-type-container {
+        margin-bottom: 10px;
+        .btn-default {
+          background-color: white;
+        }
+        .btn-primary {
+          @extend .btn-default;
+          border: none;
+        }
+      }
+      .form {
+        .btn-success {
+          @extend .btn-default;
+          border: none;
+        }
+        .btn-default {
+          border: none;
+        }
+      }
+    }
+  }
+}

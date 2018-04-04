@@ -1,0 +1,25 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      user: 用户
+    attributes:
+      user:
+        name: 昵称
+        username: 用户名
+        mobile_phone: 手机号
+        email: 电子邮件
+        password: 密码
+        password_confirmation: 密码确认
+        roles: 角色
+        created_at: 注册时间
+        sign_in_count: 登录次数
+        current_sign_in_at: 登录时间
+        last_sign_in_at: 上次登录时间
+        last_sign_in_ip: 上次登录IP
+        current_sign_in_ip: 登录IP
+    errors:
+      models:
+        user: 
+  helpers:
+    user: 

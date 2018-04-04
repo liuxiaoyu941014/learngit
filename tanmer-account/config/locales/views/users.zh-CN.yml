@@ -1,0 +1,21 @@
+---
+zh-CN:
+  users:
+    index:
+      title: 用户列表
+    show:
+      title: 查看用户信息
+    edit:
+      title: 编辑用户
+    new:
+      title: 新增用户
+  # flash:
+  #   users:
+  #     create:
+  #       notice: "%{resource_name} was successfully created."
+  #     update:
+  #       notice: "%{resource_name}更新成功"
+  #       alert: "%{resource_name}更新失败"
+  #     destroy:
+  #       notice: "%{resource_name} was successfully deleted."
+  #       alert: "%{resource_name} could not be deleted."

@@ -1,0 +1,34 @@
+<login-box
+  data-title="<%= ENV['LOGIN_TITLE'] %>"
+  data-default-login-type="<%= ENV['DEFAULT_LOGIN_TYPE'] %>"
+  data-url-on-success="<%= root_url %>"
+  data-login-url="<%= login_with_token_url %>"
+
+  <%- if ENV['ENABLE_PASSWORD_LOGIN'] == 'true' %>
+  data-enable-password-login="true"
+  <% end -%>
+
+  <%- if ENV['ENABLE_MOBILE_LOGIN'] == 'true' %>
+  data-enable-mobile-login="true"
+  <% end -%>
+
+  <%- if ENV['ENABLE_GITLAB_OAUTH'] == 'true' %>
+  data-gitlab-login-url="<%= user_gitlab_omniauth_authorize_url(origin: request.url, appid: Rails.application.secrets.appid) %>"
+  <% end -%>
+
+  <%- if ENV['ENABLE_WXMP_LOGIN'] == 'true' %>
+  data-wechat-appid="<%= ENV['LOGIN_WXMP_APPID'] %>"
+  <% end -%>
+
+  <%- if ENV['ENABLE_REGISTERATION'] == 'true' %>
+  data-register-url="<%= sign_up_url(params.as_json(except: [:controller, :action])) %>"
+  <% end -%>
+
+  <%- if ENV['USER_AGREEMENT_URL'].present? %>
+  data-agreement-url="<%= ENV['USER_AGREEMENT_URL'] %>"
+  <% end -%>
+
+  <%- if ENV['USER_PRIVACY_URL'].present? %>
+  data-privacy-url="<%= ENV['USER_PRIVACY_URL'] %>"
+  <% end -%>
+></login-box>

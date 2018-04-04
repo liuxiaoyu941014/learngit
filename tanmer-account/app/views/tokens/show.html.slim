@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @token.name
+p
+  strong Token:
+  = @token.token
+p
+  strong 过期时间:
+  = @token.expires_at.to_s(:local)
+
+= link_to 'Edit', edit_token_path(@token)
+'  |
+= link_to 'Back', tokens_path

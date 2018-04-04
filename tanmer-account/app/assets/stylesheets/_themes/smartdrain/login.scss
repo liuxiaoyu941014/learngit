@@ -1,0 +1,12 @@
+@import './variables';
+.theme.smartdrain {
+    // background-image: image-url('tamigos/bg2.png');
+    // background-size: cover;
+  &.sessions.new, &.registrations.new {
+    background-image: image-url('smartdrain/login_bg.jpg');
+    background-size: cover;
+    .footer {
+      color: white;
+    }
+  }
+}

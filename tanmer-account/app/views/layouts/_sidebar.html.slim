@@ -1,0 +1,10 @@
+.sidebar-header
+  = link_to profile_path do
+    == avatar_image_tag(current_user)
+    span = current_user.email
+= render_navigation renderer: :bootstrap, expand_all: true
+/ ul.nav.nav-sidebar
+  = sidebar_link_tag 'Dashboard', root_path
+  = sidebar_link_tag 'Applications', oauth_applications_path
+  = sidebar_link_tag 'Users', users_path
+  = sidebar_link_tag 'API Keys', api_keys_path

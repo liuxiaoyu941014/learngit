@@ -1,0 +1,23 @@
+@import "bootstrap-sprockets"
+@import 'my-bootstrap-variables'
+@import "bootstrap"
+
+.bs-callout
+  padding: 20px
+  margin: 20px 0
+  border: 1px solid #eee
+  border-left-width: 5px
+  border-radius: 3px
+  &.bs-callout-info
+    border-left-color: $brand-info
+  &.bs-callout-danger
+    border-left-color: $brand-danger
+  &.bs-callout-success
+    border-left-color: $brand-success
+  &.bs-callout-warning
+    border-left-color: $brand-warning
+
+@media screen and (max-width: 768px)
+  .row
+    [class^="col-md"]
+      margin-top: 10px

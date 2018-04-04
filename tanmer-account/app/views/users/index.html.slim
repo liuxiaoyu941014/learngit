@@ -1,0 +1,30 @@
+.page-header
+  h2
+    = t('.title')
+    = link_to t_btn(:new, resource_name: User.model_name.human), new_user_path, class: 'btn btn-success pull-right' if can? :create, User
+
+table.table
+  thead
+    tr
+      th = User.human_attribute_name(:name)
+      th = User.human_attribute_name(:mobile_phone)
+      th = User.human_attribute_name(:email)
+      th = User.human_attribute_name(:roles)
+      th = User.human_attribute_name(:current_sign_in_at)
+      th = User.human_attribute_name(:sign_in_count)
+      th
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.name
+        td = user.mobile_phone
+        td = user.email
+        td
+          - user.roles.each do |role|
+            span.label.label-default> = role.name
+        td = user.current_sign_in_at ? time_ago_in_words(user.current_sign_in_at) : 'never'
+        td = user.sign_in_count
+        td
+          => link_to t_btn(:show), user, class: 'btn btn-default'
+          => link_to t_btn(:edit), edit_user_path(user), class: 'btn btn-default' if can? :update, user
+          => link_to t_btn(:destroy), user, data: { confirm: t_btn('destroy-confirm') }, method: :delete, class: 'btn btn-danger' if can? :destroy, user

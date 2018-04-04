@@ -1,0 +1,10 @@
+= simple_form_for @user do |f|
+  = simple_form_error_messages(f)
+  = f.input :mobile_phone
+  = f.input :email
+  = f.input :name
+  = f.input :username
+  = f.input :password
+  = f.input :password_confirmation
+  = f.association :roles, as: :check_boxes
+  = f.button :submit, class: 'btn btn-primary'

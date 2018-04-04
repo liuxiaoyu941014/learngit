@@ -1,0 +1,7 @@
+.page-header
+  h2
+    = t('.title')
+    = link_to t_btn('back-to-list'), users_path, class: 'btn btn-default pull-right'
+
+.pannel
+  == render 'form'

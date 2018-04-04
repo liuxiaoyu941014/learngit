@@ -1,0 +1,102 @@
+{{- if .Values.jobs.initdb -}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: initdb
+spec:
+  # parallelism: 0
+  template:
+    spec:
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{ toYaml .Values.image.pullSecrets | indent 10 }}
+      {{- end}}
+      containers:
+      - name: initdb
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+        - name: railsconfig
+          mountPath: /etc/railsconfig
+          readOnly: true
+        env:
+        - name: RAILS_ENV
+          value: production
+        command: ['./entrypoint.sh', 'bundle', 'exec', 'rails', 'db:setup']
+      restartPolicy: Never
+      volumes:
+      - name: railsconfig
+        secret:
+          secretName: {{ .Values.rails_config }}
+  backoffLimit: 4
+{{- end -}}
+
+{{- if .Values.jobs.migrate -}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate
+spec:
+  # parallelism: 0
+  template:
+    spec:
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{ toYaml .Values.image.pullSecrets | indent 10 }}
+      {{- end}}
+      containers:
+      - name: migrate
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+        - name: railsconfig
+          mountPath: /etc/railsconfig
+          readOnly: true
+        env:
+        - name: RAILS_ENV
+          value: production
+        command: ['./entrypoint.sh', 'bundle', 'exec', 'rails', 'db:migrate']
+      restartPolicy: Never
+      volumes:
+      - name: railsconfig
+        secret:
+          secretName: {{ .Values.rails_config }}
+  backoffLimit: 4
+
+{{- end -}}
+
+{{- if .Values.jobs.seed -}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seed
+spec:
+  # parallelism: 0
+  template:
+    spec:
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{ toYaml .Values.image.pullSecrets | indent 10 }}
+      {{- end}}
+      containers:
+      - name: seed
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+        - name: railsconfig
+          mountPath: /etc/railsconfig
+          readOnly: true
+        env:
+        - name: RAILS_ENV
+          value: production
+        command: ['./entrypoint.sh', 'bundle', 'exec', 'rails', 'db:seed']
+      restartPolicy: Never
+      volumes:
+      - name: railsconfig
+        secret:
+          secretName: {{ .Values.rails_config }}
+  backoffLimit: 4
+{{- end -}}

@@ -1,0 +1,23 @@
+@import './variables';
+.theme.tamigos {
+  .sidebar {
+    a,
+    ul.nav-sidebar .sub-menu > li > a.active,
+    ul.nav-sidebar .sub-menu > li > a:hover{
+      color: $link-color;
+    }
+    ul.nav-sidebar .sub-menu > li.active > a:before {
+      color: $theme-color;
+    }
+    .sidebar-header {
+      border-bottom: 3px solid $theme-color;
+    }
+    .nav-sidebar > .active > a,
+    .nav-sidebar > .active > a:hover,
+    .nav-sidebar > .active > a:focus {
+      background-color: $theme-color;
+      border-right: 1px solid #eee;
+      color: white;
+    }
+  }
+}

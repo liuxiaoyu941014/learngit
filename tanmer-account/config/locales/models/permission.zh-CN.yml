@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      permission: 权限
+    attributes:
+      permission:
+        app: 应用
+        group_name: 分组
+        name: 功能
+    errors:
+      models:
+        permission: 
+  helpers:
+    permission: 

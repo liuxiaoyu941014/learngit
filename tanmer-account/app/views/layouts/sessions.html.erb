@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ENV['project_name']%></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <%= stylesheet_link_tag "login" %>
+  </head>
+
+  <body class="theme <%= controller_name %> <%= action_name %> <%= ENV['PROJECT_TEMPLATE_NAME'] %>">
+    <%= yield %>
+    <div class="contaner text-center footer">
+        <%= ENV['COPYRIGHT_YEAR_FROM']%>-<%= Time.now.year %> &copy; <%= ENV['COPYRIGHT_NAME']%>
+    </div>
+    <%= javascript_pack_tag 'login' %>
+    <%= stylesheet_pack_tag 'login' %>
+  </body>
+</html>

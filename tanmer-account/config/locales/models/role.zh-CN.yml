@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      role: 角色
+    attributes:
+      role:
+        name: 名称
+        description: 说明
+        permissions: 权限
+    errors:
+      models:
+        role: 
+  helpers:
+    role: 
