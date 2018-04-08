@@ -14,50 +14,53 @@
                 <div class="row">
                         <div class="ul-margin clearfix ">
                         <%
-                        doc = Nokogiri::HTML(course.try(:content))
+                        doc = Nokogiri::HTML(@course.try(:content))
                         img_srcs = doc.css('img').map{ |i| i['src'] }
                           %>
-                        <% @course.each do |course| %>
-                                <div class="col-xs-12  col-md-3">
-                                    <li> 
-                                        
-                                        <a href="<%= frontend_course_path(course) %>" class="cover_img_a" title="<%=course.name %>">
-                                        <div class="cover_img img1" style="background: no-repeat center url('<%= img_srcs[0].present? ? img_srcs[0] : course.first_image %>')">
-                                        </div>
-                                            
-                                            </a>
+                            <% if Classorder.where(user_id: current_user.id).count>=2%>
+                            <h3>每人每学期最多选两门课</h3>
+                            <% else %>
+                            <% @course.each do |course| %>
+                            <div class="col-xs-12  col-md-3">
+                            <li>    
+                                <a href="<%= frontend_course_path(course) %>" class="cover_img_a" title="<%=course.name %>">
+                                <div class="cover_img img1" style="background: no-repeat center url('<%= img_srcs[0].present? ? img_srcs[0] : course.first_image %>')">
+                                </div>   
+                                    </a>
 
-                                        <div class="text-box" style="height:120px">
-                                                <div class="title">
-                                                <%= link_to  course.features["name"], frontend_course_path(course) %>
-                                                <span class="tag-item text-black"><%= course.features["class_level"]%></span>
-                                                </div>
-                                                <div class="clearfix margin-t">
-                                                    <div class="left">
-                                                        <span class="tag-item">课程类型</span>
-                                                        <span class="tag-item"><%= course.features["course_type"]%></span>
-                                                    </div>
-                                                    <div class="right">
-                                                        <span class="tag-item">年龄限制</span>
-                                                        <span class="tag-item"><%= course.features["age_range"]%></span>
-                                                    </div>
-                                                </div>
-                                            <div class="clearfix margin-t">
-                                                <div class="left">
-                                                    <span class="tag-item">任课老师</span>
-                                                    <span class="tag-item"><%=course.features["teacher_name"]%></span>
-                                                    
-                                                </div>
-                                                <div class="right">
-                                                    
-                                                    <span class="tag-item">性别限制</span>
-                                                    <span class="tag-item"><%=course.features["sex_limit"]%></span>
-                                                    
-                                                </div>
-                                            </div>	 
+                                <div class="text-box" style="height:120px">
+                                        <div class="title">
+                                        <%= link_to  course.features["name"], frontend_course_path(course) %>
+                                        <span class="tag-item text-black"><%= course.features["class_level"]%></span>
                                         </div>
-                                    </li>
+                                        <div class="clearfix margin-t">
+                                            <div class="left">
+                                                <span class="tag-item">课程类型</span>
+                                                <span class="tag-item"><%= course.features["course_type"]%></span>
+                                            </div>
+                                            <div class="right">
+                                                <span class="tag-item">年龄限制</span>
+                                                <span class="tag-item"><%= course.features["age_range"]%></span>
+                                            </div>
+                                        </div>
+                                    <div class="clearfix margin-t">
+                                        <div class="left">
+                                            <span class="tag-item">任课老师</span>
+                                            <span class="tag-item"><%=course.features["teacher_name"]%></span>
+                                            
+                                        </div>
+                                        <div class="right">
+                                            
+                                            <span class="tag-item">性别限制</span>
+                                            <span class="tag-item"><%=course.features["sex_limit"]%></span>
+                                            
+                                        </div>
+                                    </div>	 
                                 </div>
+                            </li>
+                        </div>
+                            <% end %>
+                                
                                
                             <%end%>        
                         </div>
